@@ -16,20 +16,24 @@
             repositories = new UnitOfWork(new DAL.ProgramDatabaseModel());
         }
 
-        void NotifyUser(Message message)
+        public void CheckUser(string login, string password)
         {
+            message.UserMessage = new UserMessage()
+            {
+                Message = repositories.UserRepository.CheckUser(login, password).ToString(),
+                Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
+            };
             message.UserMessage.Callback.UserExist(message.UserMessage.Message);
         }
 
-        public void CheckUser(string login, string password)
+        public void CheckLogin(string login)
         {
-            bool exists = repositories.UserRepository.CheckUser(login, password);
             message.UserMessage = new UserMessage()
             {
-                Message = exists.ToString(),
+                Message = repositories.UserRepository.CheckLogin(login).ToString(),
                 Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
             };
-            NotifyUser(message);
+            message.UserMessage.Callback.LoginExist(message.UserMessage.Message);
         }
     }
 }

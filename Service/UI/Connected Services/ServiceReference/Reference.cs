@@ -20,6 +20,12 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckUser")]
         System.Threading.Tasks.Task CheckUserAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckLogin")]
+        void CheckLogin(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckLogin")]
+        System.Threading.Tasks.Task CheckLoginAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -27,6 +33,9 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UserExist")]
         void UserExist(string exists);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/LoginExist")]
+        void LoginExist(string exists);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,6 +72,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task CheckUserAsync(string login, string password) {
             return base.Channel.CheckUserAsync(login, password);
+        }
+        
+        public void CheckLogin(string login) {
+            base.Channel.CheckLogin(login);
+        }
+        
+        public System.Threading.Tasks.Task CheckLoginAsync(string login) {
+            return base.Channel.CheckLoginAsync(login);
         }
     }
 }

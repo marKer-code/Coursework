@@ -44,5 +44,9 @@
             => context.Users.FirstOrDefault
                 (u => u.Login == login && u.HashPassword == password) == null ?
                 false : true;
+        public bool CheckLogin(string login)
+            => context.Users.FirstOrDefault
+                (u => u.Login == login) == null ?
+                false : true;
     }
 }

@@ -126,7 +126,53 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_CheckLogin_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_UserExist_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_LoginExist_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -158,15 +204,27 @@
   <wsdl:message name="IProgramService_CheckUser_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckUser" />
   </wsdl:message>
+  <wsdl:message name="IProgramService_CheckLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckLogin" />
+  </wsdl:message>
   <wsdl:message name="IProgramService_UserExist_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UserExist" />
+  </wsdl:message>
+  <wsdl:message name="IProgramService_LoginExist_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:LoginExist" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/CheckUser" message="tns:IProgramService_CheckUser_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/CheckLogin" message="tns:IProgramService_CheckLogin_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UserExist">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/UserExist" message="tns:IProgramService_UserExist_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginExist">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/LoginExist" message="tns:IProgramService_LoginExist_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -179,10 +237,24 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/CheckLogin" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_CheckLogin_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="UserExist">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/UserExist" style="document" />
       <wsdl:output>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_UserExist_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginExist">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/LoginExist" style="document" />
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_LoginExist_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -1,6 +1,5 @@
 ﻿namespace Service
 {
-    using System.Runtime.Serialization;
     using System.ServiceModel;
 
     [ServiceContract(CallbackContract = typeof(ICallback))]
@@ -8,11 +7,15 @@
     {
         [OperationContract(IsOneWay = true)]
         void CheckUser(string login, string password);
+        [OperationContract(IsOneWay = true)]
+        void CheckLogin(string login);
     }
     public interface ICallback
     {
         [OperationContract(IsOneWay = true)]
         void UserExist(string exists);
+        [OperationContract(IsOneWay = true)]
+        void LoginExist(string exists);
     }
 
     class UserMessage

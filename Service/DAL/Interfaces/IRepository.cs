@@ -8,5 +8,6 @@
         void Delete(TEntity entityToDelete);
         void Delete(int id);
         bool CheckUser(string login, string password);
+        bool CheckLogin(string login);
     }
 }
