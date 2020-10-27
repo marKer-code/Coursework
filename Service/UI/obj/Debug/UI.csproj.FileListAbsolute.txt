@@ -1,0 +1,15 @@
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\UI.exe.config
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\UI.exe
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\UI.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\MainWindow.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\App.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI_MarkupCompile.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI_MarkupCompile.lref
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\MainWindow.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.g.resources
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.Properties.Resources.resources
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csproj.GenerateResource.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.exe
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.pdb
