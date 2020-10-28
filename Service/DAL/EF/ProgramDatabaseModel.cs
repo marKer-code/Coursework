@@ -11,7 +11,6 @@ namespace DAL
             => Database.SetInitializer(new Initializer());
 
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserIP> UserIPs { get; set; }
         public virtual DbSet<UserInfo> UserInfos { get; set; }
         public virtual DbSet<Couple> Couples { get; set; }
         public virtual DbSet<Message> Messages { get; set; }

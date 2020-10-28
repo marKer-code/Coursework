@@ -48,5 +48,8 @@
             => context.Users.FirstOrDefault
                 (u => u.Login == login) == null ?
                 false : true;
+
+        public int GetUserId(string login)
+            => context.Users.First(u => u.Login == login).Id;
     }
 }

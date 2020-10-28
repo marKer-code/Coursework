@@ -40,14 +40,12 @@
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
-
-            //programServiceClient.CheckUser("MarKer", "qq4");
         }
         string wantedLogin, wantedPassword;
         private void LoginExist(string exists)
         {
             if (Convert.ToBoolean(exists))
-                programServiceClient.CheckUser(wantedLogin, wantedPassword);
+                programServiceClient.CheckUserAsync(wantedLogin, wantedPassword);
             else MessageBox.Show("< No user with such login >");
         }
 
@@ -56,6 +54,7 @@
             if (Convert.ToBoolean(exists))
             {
                 // the main window open
+                MessageBox.Show("< Bingo >");
             }
             else MessageBox.Show("< Uncorrect password >");
         }
@@ -80,8 +79,6 @@
         }
 
         private void B_SignUp_Click(object sender, RoutedEventArgs e)
-        {
-            // the sign up window open
-        }
+            => insomable.OpenWindow(new SignUp(), this);
     }
 }

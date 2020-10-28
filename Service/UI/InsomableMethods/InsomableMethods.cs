@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace UI.InsomableMethods_
+﻿namespace UI.InsomableMethods_
 {
+    using System.Windows.Controls;
+    using System.Windows;
+
     class InsomableMethods : IInsomableMethods
     {
+        public void OpenWindow(Window toOpen, Window toClose)
+        {
+            toOpen.Show();
+            toClose.Close();
+        }
+
         public void PasswordAppearance(TextBox textBox, PasswordBox passwordBox, ref bool passwordBoxActive)
         {
             if (textBox.Visibility == Visibility.Hidden)

@@ -11,7 +11,6 @@
         IRepository<Request> RequestRepository { get; }
         IRepository<User> UserRepository { get; }
         IRepository<UserInfo> UserInfoRepository { get; }
-        IRepository<UserIP> UserIPRepository { get; }
 
         void Save();
     }

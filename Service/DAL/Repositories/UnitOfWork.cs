@@ -13,7 +13,6 @@
         private GenericRepository<Request> requestRepository;
         private GenericRepository<User> userRepository;
         private GenericRepository<UserInfo> userInfoRepository;
-        private GenericRepository<UserIP> userIPRepository;
 
         public UnitOfWork(ProgramDatabaseModel context)
             => this.context = context;
@@ -76,16 +75,6 @@
                     userInfoRepository =
                         new GenericRepository<UserInfo>(context);
                 return userInfoRepository;
-            }
-        }
-        public IRepository<UserIP> UserIPRepository
-        {
-            get
-            {
-                if (userIPRepository == null)
-                    userIPRepository =
-                        new GenericRepository<UserIP>(context);
-                return userIPRepository;
             }
         }
 

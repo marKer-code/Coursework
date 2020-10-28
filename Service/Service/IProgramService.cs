@@ -1,5 +1,6 @@
 ﻿namespace Service
 {
+    using System;
     using System.ServiceModel;
 
     [ServiceContract(CallbackContract = typeof(ICallback))]
@@ -9,6 +10,10 @@
         void CheckUser(string login, string password);
         [OperationContract(IsOneWay = true)]
         void CheckLogin(string login);
+        [OperationContract(IsOneWay = true)]
+        void AddUser(string login, string nickname,
+            string password, byte[] img,
+            bool online, DateTime lastOnline);
     }
     public interface ICallback
     {

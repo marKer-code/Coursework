@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-
-namespace UI.InsomableMethods_
+﻿namespace UI.InsomableMethods_
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     interface IInsomableMethods
     {
-        //void OpenWindow(Window toOpen, Window toClose);
+        void OpenWindow(Window toOpen, Window toClose);
         void PasswordAppearance(TextBox textBox, PasswordBox passwordBox, ref bool passwordBoxActive);
         //IPAddress GetLocalIPAddress();
         //int FreeTcpPort();

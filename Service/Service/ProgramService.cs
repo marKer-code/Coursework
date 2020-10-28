@@ -1,7 +1,10 @@
 ﻿namespace Service
 {
+    using DAL;
+    using DAL.Entities;
     using DAL.Interfaces;
     using DAL.Repositories;
+    using System;
     using System.ServiceModel;
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
@@ -20,7 +23,7 @@
         {
             message.UserMessage = new UserMessage()
             {
-                Message = repositories.UserRepository.CheckUser(login, password).ToString(),
+                Message = repositories.UserRepository.CheckUser(login, new Utils().ComputeSha256Hash(password)).ToString(),
                 Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
             };
             message.UserMessage.Callback.UserExist(message.UserMessage.Message);
@@ -34,6 +37,26 @@
                 Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
             };
             message.UserMessage.Callback.LoginExist(message.UserMessage.Message);
+        }
+
+        public void AddUser(string login, string nickname,
+            string password, byte[] img, bool online, DateTime lastOnline)
+        {
+            repositories.UserRepository.Insert(new User()
+            {
+                Login = login,
+                HashPassword = new Utils().ComputeSha256Hash(password)
+            });
+            repositories.Save();
+            repositories.UserInfoRepository.Insert(new UserInfo()
+            {
+                Nickname = nickname,
+                LastOnline = lastOnline,
+                Online = online,
+                Photo = img,
+                UserId = repositories.UserRepository.GetUserId(login)
+            });
+            repositories.Save();
         }
     }
 }
