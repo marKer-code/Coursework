@@ -59,7 +59,6 @@
     <Compile Include="Configurations\Request.cs" />
     <Compile Include="Configurations\User.cs" />
     <Compile Include="Configurations\UserInfo.cs" />
-    <Compile Include="DAL_Class.cs" />
     <Compile Include="EF\Initializer.cs" />
     <Compile Include="EF\ProgramDatabaseModel.cs" />
     <Compile Include="Entities\Couple.cs" />
