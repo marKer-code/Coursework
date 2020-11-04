@@ -31,6 +31,8 @@
         {
             InitializeComponent();
 
+            //var userInfo = 
+
             login_ = login;
             password_ = paswword;
             nickname_ = nickname;
@@ -40,8 +42,8 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
-            //callbackHandler.UserExistEvent += UserExist;
-            //callbackHandler.LoginExistEvent += LoginExist;
+            callbackHandler.UserExistEvent += UserExist;
+            callbackHandler.LoginExistEvent += LoginExist;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
@@ -90,6 +92,24 @@
             //});
         }
 
+        private void LoginExist(string exists)
+        {
+            if (Convert.ToBoolean(exists))
+                programServiceClient.CheckUserAsync(login_, password_);
+            else MessageBox.Show("< No user with such login >");
+        }
+
+        private void UserExist(string exists)
+        {
+            if (Convert.ToBoolean(exists))
+            {
+                // the main window open
+                MessageBox.Show("< Bingo >");
+            }
+            else MessageBox.Show("< Uncorrect password >");
+        }
+
+
         private void Update(Message msg)
         {
             MessageBox.Show("Message");
@@ -104,6 +124,8 @@
             }
             else
             {
+
+
                 tb_login.Text = login_;
                 tb_password.Text = password_;
                 tb_nickname.Text = nickname_;

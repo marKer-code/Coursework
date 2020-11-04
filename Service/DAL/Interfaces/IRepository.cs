@@ -1,4 +1,6 @@
-﻿namespace DAL.Interfaces
+﻿using DAL.Entities;
+
+namespace DAL.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
@@ -10,5 +12,7 @@
         bool CheckUser(string login, string password);
         bool CheckLogin(string login);
         int GetUserId(string login);
+
+        UserInfo GetUserInfoByLogin(string login);
     }
 }

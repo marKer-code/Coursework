@@ -1,5 +1,6 @@
 ﻿namespace DAL.Repositories
 {
+    using DAL.Entities;
     using DAL.Interfaces;
     using System.Data.Entity;
     using System.Linq;
@@ -51,5 +52,9 @@
 
         public int GetUserId(string login)
             => context.Users.First(u => u.Login == login).Id;
+
+        public UserInfo GetUserInfoByLogin(string login)
+            => context.UserInfos.First(u => u.UserId == GetUserId(login));
+        
     }
 }
