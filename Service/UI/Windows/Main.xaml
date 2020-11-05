@@ -89,7 +89,7 @@
             </ListBoxItem>
         </ListBox>
 
-        <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden"/>
+        <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden" SelectionChanged="lb_contacts_SelectionChanged"/>
         
         <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_contactInfo">
             <Grid.RowDefinitions>
@@ -132,8 +132,8 @@
             </Grid>
         </Grid>
 
-        <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden"/>
-        <ListBox Grid.Column="1" x:Name="lb_requests" Visibility="Hidden"/>
+        <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden" SelectionChanged="lb_chats_SelectionChanged" />
+        <ListBox Grid.Column="1" x:Name="lb_requests" Visibility="Hidden" />
 
         <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
                       Width="5" Grid.Column="2" Background="#FF232323" IsEnabled="false"

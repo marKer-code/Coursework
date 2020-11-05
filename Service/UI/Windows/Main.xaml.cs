@@ -181,79 +181,133 @@
 
         enum SELECTION { ACCOUNTINFO = 0, ALLCHATS = 1, CONTACTS = 2 };
 
+        enum BUTTON { PROFILE = 0, CHATS = 1, ALLCONTACTS = 2, ADDFRIENDS = 3 };
+
+        private void Hiden(BUTTON btn)
+        {
+            switch (btn)
+            {
+                case BUTTON.PROFILE:
+                    if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Visible)
+                        hiddenElement();
+                    else
+                    {
+                        tb_login.Text = login_;
+                        Flipper_b.Content = "Save";
+
+                        l_nicname.Visibility = Visibility.Visible;
+                        l_pass.Visibility = Visibility.Visible;
+
+                        lb_requests.Visibility = Visibility.Hidden;
+
+                        tb_password.Visibility = Visibility.Visible;
+                        tb_nickname.Visibility = Visibility.Visible;
+                        Avatar.Visibility = Visibility.Visible;
+                        hiddenElement_();
+                    }
+                    break;
+
+                case BUTTON.CHATS:
+                    hiddenElement();
+                    lb_chats.Visibility = Visibility.Visible;
+                    break;
+
+                case BUTTON.ALLCONTACTS:
+                    hidenChatInfo();
+                    lb_contacts.Visibility = Visibility.Visible;
+                    lb_requests.Visibility = Visibility.Hidden;
+                    flipper.IsEnabled = false;
+                    flipper.Visibility = Visibility.Hidden;
+                    break;
+
+                case BUTTON.ADDFRIENDS:
+                    if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Hidden)
+                        hiddenElement();
+                    else
+                    {
+                        tb_login.Text = null;
+                        Flipper_b.Content = "Search";
+
+                        l_nicname.Visibility = Visibility.Hidden;
+                        l_pass.Visibility = Visibility.Hidden;
+
+                        lb_requests.Visibility = Visibility.Visible;
+
+                        tb_password.Visibility = Visibility.Hidden;
+                        tb_nickname.Visibility = Visibility.Hidden;
+                        Avatar.Visibility = Visibility.Hidden;
+                        hiddenElement_();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void hiddenElement()
+        {
+            hidenContactInfo();
+            hidenChatInfo();
+            lb_contacts.Visibility = Visibility.Hidden;
+            lb_requests.Visibility = Visibility.Hidden;
+            flipper.IsEnabled = false;
+            flipper.Visibility = Visibility.Collapsed;
+        }
+
+        private void hiddenElement_()
+        {
+            hidenContactInfo();
+            hidenChatInfo();
+            lastLogin = login_;
+            lb_contacts.Visibility = Visibility.Hidden;
+            flipper.IsEnabled = true;
+            flipper.Visibility = Visibility.Visible;
+
+            lb_chats.Visibility = Visibility.Hidden;
+        }
+        private void hidenContactInfo()
+        {
+            gr_contactInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void hidenChatInfo()
+        {
+            gr_chatInfo.Visibility = Visibility.Hidden;
+            chat_lb.Visibility = Visibility.Hidden;
+        }
+
         private void I_Profile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Visible)
-            {
-                lb_contacts.Visibility = Visibility.Hidden;
-                lb_requests.Visibility = Visibility.Hidden;
-                flipper.IsEnabled = false;
-                flipper.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                l_nicname.Visibility = Visibility.Visible;
-                l_pass.Visibility = Visibility.Visible;
-
-                lb_contacts.Visibility = Visibility.Hidden;
-                lb_requests.Visibility = Visibility.Hidden;
-
-                tb_login.Text = login_;
-                tb_password.Visibility = Visibility.Visible;
-                tb_nickname.Visibility = Visibility.Visible;
-                Avatar.Visibility = Visibility.Visible;
-                Flipper_b.Content = "Save";
-
-
-                lastLogin = login_;
-                flipper.IsEnabled = true;
-                flipper.Visibility = Visibility.Visible;
-            }
+            Hiden(BUTTON.PROFILE);
         }
 
         private void chat_badged_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            lb_contacts.Visibility = Visibility.Hidden;
-            lb_requests.Visibility = Visibility.Hidden;
-            flipper.IsEnabled = false;
-            flipper.Visibility = Visibility.Hidden;
+            Hiden(BUTTON.CHATS);
         }
 
         private void allContacts_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            lb_contacts.Visibility = Visibility.Visible;
-            lb_requests.Visibility = Visibility.Hidden;
-            flipper.IsEnabled = false;
-            flipper.Visibility = Visibility.Hidden;
+            Hiden(BUTTON.ALLCONTACTS);
         }
 
         private void addFriend_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (flipper.Visibility == Visibility.Visible &&
-                Avatar.Visibility == Visibility.Hidden)
-            {
-                lb_contacts.Visibility = Visibility.Hidden;
-                lb_requests.Visibility = Visibility.Hidden;
-                flipper.IsEnabled = false;
-                flipper.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                l_nicname.Visibility = Visibility.Hidden;
-                l_pass.Visibility = Visibility.Hidden;
-
-                lb_contacts.Visibility = Visibility.Hidden;
-                lb_requests.Visibility = Visibility.Visible;
-
-                tb_login.Text = null;
-                tb_password.Visibility = Visibility.Hidden;
-                tb_nickname.Visibility = Visibility.Hidden;
-                Avatar.Visibility = Visibility.Hidden;
-                Flipper_b.Content = "Search";
-
-                flipper.IsEnabled = true;
-                flipper.Visibility = Visibility.Visible;
-            }
+            Hiden(BUTTON.ADDFRIENDS);
         }
+
+        private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            hidenContactInfo();
+            gr_chatInfo.Visibility = Visibility.Visible;
+            chat_lb.Visibility = Visibility.Visible;
+        }
+
+        private void lb_contacts_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            hidenChatInfo();
+            gr_contactInfo.Visibility = Visibility.Visible;
+        }
+
     }
 }
