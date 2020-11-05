@@ -222,6 +222,8 @@
                         hidenChatInfo();
                         lb_contacts.Visibility = Visibility.Visible;
                         lb_requests.Visibility = Visibility.Hidden;
+                        gr_requestInfo.Visibility = Visibility.Hidden;
+
                         flipper.IsEnabled = false;
                         flipper.Visibility = Visibility.Hidden;
                         break;
@@ -239,6 +241,7 @@
                             l_pass.Visibility = Visibility.Hidden;
 
                             lb_requests.Visibility = Visibility.Visible;
+                            gr_requestInfo.Visibility = Visibility.Visible;
 
                             tb_password.Visibility = Visibility.Hidden;
                             tb_nickname.Visibility = Visibility.Hidden;
@@ -256,6 +259,7 @@
             hidenChatInfo();
             lb_contacts.Visibility = Visibility.Hidden;
             lb_requests.Visibility = Visibility.Hidden;
+            gr_requestInfo.Visibility = Visibility.Hidden;
             flipper.IsEnabled = false;
             flipper.Visibility = Visibility.Collapsed;
         }
