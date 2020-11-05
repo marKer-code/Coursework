@@ -44,17 +44,6 @@
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        public bool CheckUser(string login, string password)
-            => context.Users.FirstOrDefault
-                (u => u.Login == login && u.HashPassword == password) == null ?
-                false : true;
-        public bool CheckLogin(string login)
-            => context.Users.FirstOrDefault
-                (u => u.Login == login) == null ?
-                false : true;
-        public int GetUserId(string login)
-            => context.Users.First(u => u.Login == login).Id;
-
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")

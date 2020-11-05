@@ -58,7 +58,6 @@
             </materialDesign:Flipper.FrontContent>
         </materialDesign:Flipper>
 
-
         <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
             <ListBoxItem>
                 <Image Height="30" Margin="15,0" x:Name="i_profile" 
@@ -91,7 +90,8 @@
         </ListBox>
 
         <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden"/>
-        <Grid Grid.Column="2" Visibility="Hidden">
+        
+        <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_contactInfo">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="*"/>
@@ -108,7 +108,7 @@
                         Content="Remove" Foreground="White"/>
         </Grid>
 
-        <Grid Grid.Column="2" x:Name="grid" Visibility="Hidden">
+        <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
@@ -132,7 +132,7 @@
             </Grid>
         </Grid>
 
-        <ListBox Grid.Column="1" x:Name="lb_chat" Visibility="Hidden"/>
+        <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden"/>
         <ListBox Grid.Column="1" x:Name="lb_requests" Visibility="Hidden"/>
 
         <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"

@@ -14,32 +14,40 @@
     public class ProgramService : IProgramService
     {
         private readonly IUnitOfWork repositories;
-        private Message message;
 
         public ProgramService()
+            => repositories = new UnitOfWork(new DAL.ProgramDatabaseModel());
+
+        public bool CheckUser(string login, string password)
         {
-            message = new Message();
-            repositories = new UnitOfWork(new DAL.ProgramDatabaseModel());
+            string pass = new Utils().ComputeSha256Hash(password);
+            try
+            {
+                User user = repositories.UserRepository
+                            .Get(u => u.Login == login &&
+                                 u.HashPassword == pass)
+                            .First();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void CheckUser(string login, string password)
+        public bool CheckLogin(string login)
         {
-            message.UserMessage = new UserMessage()
+            try
             {
-                Message = repositories.UserRepository.CheckUser(login, new Utils().ComputeSha256Hash(password)).ToString(),
-                Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
-            };
-            message.UserMessage.Callback.UserExist(message.UserMessage.Message);
-        }
-
-        public void CheckLogin(string login)
-        {
-            message.UserMessage = new UserMessage()
+                User user = repositories.UserRepository
+                                .Get(u => u.Login == login)
+                                .First();
+                return true;
+            }
+            catch
             {
-                Message = repositories.UserRepository.CheckLogin(login).ToString(),
-                Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
-            };
-            message.UserMessage.Callback.LoginExist(message.UserMessage.Message);
+                return false;
+            }
         }
 
         public void AddUser(string login, string nickname,
@@ -51,20 +59,28 @@
                 HashPassword = new Utils().ComputeSha256Hash(password)
             });
             repositories.Save();
+
+            User user = repositories.UserRepository
+                .Get(u => u.Login == login).First();
+            int id = user.Id;
+
             repositories.UserInfoRepository.Insert(new UserInfo()
             {
                 Nickname = nickname,
                 LastOnline = lastOnline,
                 Online = online,
                 Photo = img,
-                UserId = repositories.UserRepository.GetUserId(login)
+                UserId = id
             });
             repositories.Save();
         }
 
         public List<byte[]> LoadUserInfo(string login)
         {
-            int id = repositories.UserRepository.GetUserId(login);
+            User user = repositories.UserRepository
+                .Get(u => u.Login == login).First();
+            int id = user.Id;
+
             IEnumerable<UserInfo> userInfo = repositories
                 .UserInfoRepository.Get(ui => ui.UserId == id);
             List<byte[]> infoes = new List<byte[]>();

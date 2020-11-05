@@ -16,8 +16,5 @@ namespace DAL.Interfaces
         void Insert(TEntity entity);
         void Delete(TEntity entityToDelete);
         void Delete(int id);
-        bool CheckUser(string login, string password);
-        bool CheckLogin(string login);
-        int GetUserId(string login);
     }
 }

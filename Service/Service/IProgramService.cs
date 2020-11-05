@@ -7,10 +7,10 @@
     [ServiceContract(CallbackContract = typeof(ICallback))]
     public interface IProgramService
     {
-        [OperationContract(IsOneWay = true)]
-        void CheckUser(string login, string password);
-        [OperationContract(IsOneWay = true)]
-        void CheckLogin(string login);
+        [OperationContract]
+        bool CheckUser(string login, string password);
+        [OperationContract]
+        bool CheckLogin(string login);
         [OperationContract(IsOneWay = true)]
         void AddUser(string login, string nickname,
             string password, byte[] img,
@@ -20,10 +20,6 @@
     }
     public interface ICallback
     {
-        [OperationContract(IsOneWay = true)]
-        void UserExist(string exists);
-        [OperationContract(IsOneWay = true)]
-        void LoginExist(string exists);
     }
 
     class UserMessage

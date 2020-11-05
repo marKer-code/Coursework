@@ -10,7 +10,6 @@
     using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
-    using System.ServiceModel;
     using UI.InsomableMethods_;
     using UI.ServiceReference;
     public partial class SignUp : Window
@@ -31,29 +30,10 @@
             insomable = new InsomableMethods();
             Tb_Password.Visibility = Visibility.Hidden;
 
-            CallbackHandler callbackHandler = new CallbackHandler();
-
-            callbackHandler.UserExistEvent += UserExist;
-            callbackHandler.LoginExistEvent += LoginExist;
-
-            programServiceClient = new ProgramServiceClient
-                (new InstanceContext(callbackHandler));
+            programServiceClient = new ProgramServiceClient();
         }
 
         string loginToAdd, passwordToAdd, nicknameToAdd;
-        private void LoginExist(string exists)
-        {
-            if (!Convert.ToBoolean(exists))
-            {
-                programServiceClient.AddUser(loginToAdd,
-                    nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
-                new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
-                this.Close();
-            }
-            else MessageBox.Show("< Login already busy >");
-        }
-
-        private void UserExist(string obj) { }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
             => insomable.OpenWindow(new Initial(), this);
@@ -146,7 +126,20 @@
                     fileData = new byte[fs.Length];
                     fs.Read(fileData, 0, fileData.Length);
                 }
-                programServiceClient.CheckLoginAsync(loginToAdd);
+
+                if (!programServiceClient.CheckLogin(loginToAdd))
+                    try
+                    {
+                        programServiceClient.AddUser(loginToAdd,
+                        nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
+                        new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
+                        Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Too big a photo");
+                    }
+                else MessageBox.Show("< Login already busy >");
             }
             else
             {

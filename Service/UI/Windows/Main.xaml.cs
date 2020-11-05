@@ -2,13 +2,10 @@
 {
     using Microsoft.Win32;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
     using System.Linq;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Text;
     using System.Windows;
     using System.Windows.Input;
@@ -31,14 +28,10 @@
             InitializeComponent();
 
             insomable = new InsomableMethods();
+            programServiceClient = new ProgramServiceClient();
 
-            CallbackHandler callbackHandler = new CallbackHandler();
-
-            callbackHandler.LoginExistEvent += LoginExist;
-            callbackHandler.UserInfoEvent += UserInfo;
-
-            programServiceClient = new ProgramServiceClient
-                (new InstanceContext(callbackHandler));
+            if (!programServiceClient.CheckLogin(login))
+                insomable.OpenWindow(new SignUp(), this);
 
             login_ = login;
             password_ = password;
@@ -59,23 +52,6 @@
 
                 Inizialize();
             }
-
-        }
-
-        private void UserInfo(string nickname, bool online,
-            DateTime lastOnline, byte[] photo)
-        {
-            MessageBox.Show("");
-            nickname_ = nickname;
-            photo_ = photo;
-            Inizialize();
-        }
-
-        private void LoginExist(string exists)
-        {
-            if (Convert.ToBoolean(exists))
-                programServiceClient.CheckUserAsync(login_, password_);
-            else MessageBox.Show("< No user with such login >");
         }
 
         private void Inizialize()
@@ -241,8 +217,6 @@
             lb_requests.Visibility = Visibility.Hidden;
             flipper.IsEnabled = false;
             flipper.Visibility = Visibility.Hidden;
-
-            //MessageBox.Show("");
         }
 
         private void allContacts_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -255,7 +229,8 @@
 
         private void addFriend_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Hidden)
+            if (flipper.Visibility == Visibility.Visible &&
+                Avatar.Visibility == Visibility.Hidden)
             {
                 lb_contacts.Visibility = Visibility.Hidden;
                 lb_requests.Visibility = Visibility.Hidden;
@@ -280,6 +255,5 @@
                 flipper.Visibility = Visibility.Visible;
             }
         }
-
     }
 }

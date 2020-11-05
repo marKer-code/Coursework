@@ -12,20 +12,20 @@ namespace UI.ServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IProgramService", CallbackContract=typeof(UI.ServiceReference.IProgramServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IProgramService")]
     public interface IProgramService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckUser")]
-        void CheckUser(string login, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckUser", ReplyAction="http://tempuri.org/IProgramService/CheckUserResponse")]
+        bool CheckUser(string login, string password);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckUser")]
-        System.Threading.Tasks.Task CheckUserAsync(string login, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckUser", ReplyAction="http://tempuri.org/IProgramService/CheckUserResponse")]
+        System.Threading.Tasks.Task<bool> CheckUserAsync(string login, string password);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckLogin")]
-        void CheckLogin(string login);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckLogin", ReplyAction="http://tempuri.org/IProgramService/CheckLoginResponse")]
+        bool CheckLogin(string login);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/CheckLogin")]
-        System.Threading.Tasks.Task CheckLoginAsync(string login);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckLogin", ReplyAction="http://tempuri.org/IProgramService/CheckLoginResponse")]
+        System.Threading.Tasks.Task<bool> CheckLoginAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
         void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
@@ -41,56 +41,45 @@ namespace UI.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProgramServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UserExist")]
-        void UserExist(string exists);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/LoginExist")]
-        void LoginExist(string exists);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IProgramServiceChannel : UI.ServiceReference.IProgramService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProgramServiceClient : System.ServiceModel.DuplexClientBase<UI.ServiceReference.IProgramService>, UI.ServiceReference.IProgramService {
+    public partial class ProgramServiceClient : System.ServiceModel.ClientBase<UI.ServiceReference.IProgramService>, UI.ServiceReference.IProgramService {
         
-        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public ProgramServiceClient() {
         }
         
-        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public ProgramServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public ProgramServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public ProgramServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public ProgramServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
-        public void CheckUser(string login, string password) {
-            base.Channel.CheckUser(login, password);
+        public bool CheckUser(string login, string password) {
+            return base.Channel.CheckUser(login, password);
         }
         
-        public System.Threading.Tasks.Task CheckUserAsync(string login, string password) {
+        public System.Threading.Tasks.Task<bool> CheckUserAsync(string login, string password) {
             return base.Channel.CheckUserAsync(login, password);
         }
         
-        public void CheckLogin(string login) {
-            base.Channel.CheckLogin(login);
+        public bool CheckLogin(string login) {
+            return base.Channel.CheckLogin(login);
         }
         
-        public System.Threading.Tasks.Task CheckLoginAsync(string login) {
+        public System.Threading.Tasks.Task<bool> CheckLoginAsync(string login) {
             return base.Channel.CheckLoginAsync(login);
         }
         
