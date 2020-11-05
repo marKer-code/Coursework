@@ -218,6 +218,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SaveUserInfo_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_LoadUserInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -264,6 +287,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_AddRequest_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -286,11 +332,17 @@
   <wsdl:message name="IProgramService_AddUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUser" />
   </wsdl:message>
+  <wsdl:message name="IProgramService_SaveUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveUserInfo" />
+  </wsdl:message>
   <wsdl:message name="IProgramService_LoadUserInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:LoadUserInfo" />
   </wsdl:message>
   <wsdl:message name="IProgramService_LoadUserInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoadUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProgramService_AddRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRequest" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -304,9 +356,15 @@
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/AddUser" message="tns:IProgramService_AddUser_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SaveUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/SaveUserInfo" message="tns:IProgramService_SaveUserInfo_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="LoadUserInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/LoadUserInfo" message="tns:IProgramService_LoadUserInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/LoadUserInfoResponse" message="tns:IProgramService_LoadUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/AddRequest" message="tns:IProgramService_AddRequest_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -341,6 +399,13 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SaveUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/SaveUserInfo" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SaveUserInfo_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="LoadUserInfo">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/LoadUserInfo" style="document" />
       <wsdl:input>
@@ -351,6 +416,13 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_LoadUserInfo_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRequest">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/AddRequest" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_AddRequest_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ProgramService">

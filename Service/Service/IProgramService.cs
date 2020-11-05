@@ -15,8 +15,13 @@
         void AddUser(string login, string nickname,
             string password, byte[] img,
             bool online, DateTime lastOnline);
+        [OperationContract(IsOneWay = true)]
+        void SaveUserInfo(string lastLogin, string login, string nickname,
+            string password, byte[] img);
         [OperationContract]
         List<byte[]> LoadUserInfo(string login);
+        [OperationContract(IsOneWay = true)]
+        void AddRequest(string sender, string receiver);
     }
     public interface ICallback
     {

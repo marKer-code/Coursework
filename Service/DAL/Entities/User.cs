@@ -10,6 +10,5 @@
 
         public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
     }
 }

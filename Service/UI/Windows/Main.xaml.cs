@@ -104,19 +104,23 @@
                 return;
             }
 
-            if (!String.IsNullOrWhiteSpace(tb_login.Text) &&
-                !String.IsNullOrEmpty(tb_nickname.Text) &&
-                !String.IsNullOrEmpty(tb_password.Text))
+            if (tb_login.Text != login_)
             {
-                if (tb_login.Text != login_)
-                    login_ = tb_login.Text;
-                if (tb_password.Text != password_)
-                    password_ = tb_password.Text;
-                if (tb_nickname.Text != nickname_)
-                    nickname_ = tb_nickname.Text;
-
-                //save
+                if (programServiceClient.CheckLogin(tb_login.Text))
+                {
+                    MessageBox.Show("< Login already busy >");
+                    return;
+                }
+                lastLogin = login_;
+                login_ = tb_login.Text;
             }
+            if (tb_password.Text != password_)
+                password_ = tb_password.Text;
+            if (tb_nickname.Text != nickname_)
+                nickname_ = tb_nickname.Text;
+
+            programServiceClient.SaveUserInfoAsync(lastLogin,
+                login_, nickname_, password_, photo_);
 
             MessageBox.Show("< Saved >");
         }
@@ -138,12 +142,12 @@
                 return;
             }
 
-            if (!String.IsNullOrWhiteSpace(tb_login.Text))
+            if (programServiceClient.CheckLogin(tb_login.Text))
             {
-                //Search for a user by >
-                //send him a friend request > 
-                //add his login to the list of requests for the window
+                programServiceClient.AddRequestAsync(login_, tb_login.Text);
+                lb_requests.Items.Add(tb_login.Text);
             }
+            else MessageBox.Show("< No user with such login >");
         }
 
         bool ing = false;
@@ -180,7 +184,6 @@
         }
 
         enum SELECTION { ACCOUNTINFO = 0, ALLCHATS = 1, CONTACTS = 2 };
-
         enum BUTTON { PROFILE = 0, CHATS = 1, ALLCONTACTS = 2, ADDFRIENDS = 3 };
 
         private void Hiden(BUTTON btn)
@@ -188,59 +191,62 @@
             switch (btn)
             {
                 case BUTTON.PROFILE:
-                    if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Visible)
-                        hiddenElement();
-                    else
                     {
-                        tb_login.Text = login_;
-                        Flipper_b.Content = "Save";
+                        if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Visible)
+                            hiddenElement();
+                        else
+                        {
+                            tb_login.Text = login_;
+                            Flipper_b.Content = "Save";
 
-                        l_nicname.Visibility = Visibility.Visible;
-                        l_pass.Visibility = Visibility.Visible;
+                            l_nicname.Visibility = Visibility.Visible;
+                            l_pass.Visibility = Visibility.Visible;
 
-                        lb_requests.Visibility = Visibility.Hidden;
+                            lb_requests.Visibility = Visibility.Hidden;
 
-                        tb_password.Visibility = Visibility.Visible;
-                        tb_nickname.Visibility = Visibility.Visible;
-                        Avatar.Visibility = Visibility.Visible;
-                        hiddenElement_();
+                            tb_password.Visibility = Visibility.Visible;
+                            tb_nickname.Visibility = Visibility.Visible;
+                            Avatar.Visibility = Visibility.Visible;
+                            hiddenElement_();
+                        }
+                        break;
                     }
-                    break;
-
                 case BUTTON.CHATS:
-                    hiddenElement();
-                    lb_chats.Visibility = Visibility.Visible;
-                    break;
-
-                case BUTTON.ALLCONTACTS:
-                    hidenChatInfo();
-                    lb_contacts.Visibility = Visibility.Visible;
-                    lb_requests.Visibility = Visibility.Hidden;
-                    flipper.IsEnabled = false;
-                    flipper.Visibility = Visibility.Hidden;
-                    break;
-
-                case BUTTON.ADDFRIENDS:
-                    if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Hidden)
-                        hiddenElement();
-                    else
                     {
-                        tb_login.Text = null;
-                        Flipper_b.Content = "Search";
-
-                        l_nicname.Visibility = Visibility.Hidden;
-                        l_pass.Visibility = Visibility.Hidden;
-
-                        lb_requests.Visibility = Visibility.Visible;
-
-                        tb_password.Visibility = Visibility.Hidden;
-                        tb_nickname.Visibility = Visibility.Hidden;
-                        Avatar.Visibility = Visibility.Hidden;
-                        hiddenElement_();
+                        hiddenElement();
+                        lb_chats.Visibility = Visibility.Visible;
+                        break;
                     }
-                    break;
-                default:
-                    break;
+                case BUTTON.ALLCONTACTS:
+                    {
+                        hidenChatInfo();
+                        lb_contacts.Visibility = Visibility.Visible;
+                        lb_requests.Visibility = Visibility.Hidden;
+                        flipper.IsEnabled = false;
+                        flipper.Visibility = Visibility.Hidden;
+                        break;
+                    }
+                case BUTTON.ADDFRIENDS:
+                    {
+                        if (flipper.Visibility == Visibility.Visible && Avatar.Visibility == Visibility.Hidden)
+                            hiddenElement();
+                        else
+                        {
+                            tb_login.Text = null;
+                            Flipper_b.Content = "Search";
+
+                            l_nicname.Visibility = Visibility.Hidden;
+                            l_pass.Visibility = Visibility.Hidden;
+
+                            lb_requests.Visibility = Visibility.Visible;
+
+                            tb_password.Visibility = Visibility.Hidden;
+                            tb_nickname.Visibility = Visibility.Hidden;
+                            Avatar.Visibility = Visibility.Hidden;
+                            hiddenElement_();
+                        }
+                        break;
+                    }
             }
         }
 
@@ -266,9 +272,7 @@
             lb_chats.Visibility = Visibility.Hidden;
         }
         private void hidenContactInfo()
-        {
-            gr_contactInfo.Visibility = Visibility.Hidden;
-        }
+            => gr_contactInfo.Visibility = Visibility.Hidden;
 
         private void hidenChatInfo()
         {
@@ -277,14 +281,10 @@
         }
 
         private void I_Profile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Hiden(BUTTON.PROFILE);
-        }
+            => Hiden(BUTTON.PROFILE);
 
         private void chat_badged_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Hiden(BUTTON.CHATS);
-        }
+            => Hiden(BUTTON.CHATS);
 
         private void allContacts_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -292,9 +292,7 @@
         }
 
         private void addFriend_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Hiden(BUTTON.ADDFRIENDS);
-        }
+            => Hiden(BUTTON.ADDFRIENDS);
 
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

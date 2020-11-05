@@ -90,5 +90,66 @@
             infoes.Add(Encoding.Default.GetBytes(userInfo.First().Online.ToString()));
             return infoes;
         }
+
+        public void SaveUserInfo(string lastLogin,
+            string login, string nickname,
+            string password, byte[] img)
+        {
+            User newUser = repositories.UserRepository
+                .Get(u => u.Login == lastLogin)
+                .First();
+
+            int id = newUser.Id;
+            repositories.UserRepository.Delete(id);
+            repositories.UserInfoRepository.Delete(id);
+            repositories.Save();
+
+            repositories.UserRepository.Insert(
+                new User
+                {
+                    Login = login,
+                    HashPassword = new Utils().ComputeSha256Hash(password)
+                });
+            repositories.Save();
+
+            id = repositories.UserRepository
+                .Get(u => u.Login == login)
+                .First()
+                .Id;
+
+            repositories.UserInfoRepository.Insert(
+                new UserInfo
+                {
+                    Nickname = nickname,
+                    UserId = id,
+                    Online = true,
+                    LastOnline = DateTime.Now,
+                    Photo = img
+                });
+            repositories.Save();
+        }
+
+        public void AddRequest(string sender, string receiver)
+        {
+            int idSender = repositories.UserRepository
+                .Get(u => u.Login == sender)
+                .First()
+                .Id,
+
+                idReceiver = repositories.UserRepository
+                .Get(u => u.Login == receiver)
+                .First()
+                .Id;
+
+            repositories.RequestRepository.Insert(
+                new Request
+                {
+                    SenderId = idSender,
+                    ReceiverId = idReceiver,
+                    SendTime = DateTime.Now
+                });
+
+            repositories.Save();
+        }
     }
 }

@@ -109,43 +109,33 @@
                 return;
             }
 
-            if (!String.IsNullOrWhiteSpace(Tb_Login.Text) &&
-                !String.IsNullOrWhiteSpace(Tb_Nickname.Text) &&
-                !String.IsNullOrWhiteSpace(passwordToAdd))
-            {
-                loginToAdd = Tb_Login.Text;
-                nicknameToAdd = Tb_Nickname.Text;
+            loginToAdd = Tb_Login.Text;
+            nicknameToAdd = Tb_Nickname.Text;
 
+            if (!ing) img = File.ReadAllBytes(path);
+
+            byte[] fileData;
+            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
                 if (!ing) img = File.ReadAllBytes(path);
 
-                byte[] fileData;
-                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                fileData = new byte[fs.Length];
+                fs.Read(fileData, 0, fileData.Length);
+            }
+
+            if (!programServiceClient.CheckLogin(loginToAdd))
+                try
                 {
-                    if (!ing) img = File.ReadAllBytes(path);
-
-                    fileData = new byte[fs.Length];
-                    fs.Read(fileData, 0, fileData.Length);
+                    programServiceClient.AddUserAsync(loginToAdd,
+                    nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
+                    new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
+                    Close();
                 }
-
-                if (!programServiceClient.CheckLogin(loginToAdd))
-                    try
-                    {
-                        programServiceClient.AddUser(loginToAdd,
-                        nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
-                        new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
-                        Close();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Too big a photo");
-                    }
-                else MessageBox.Show("< Login already busy >");
-            }
-            else
-            {
-                MessageBox.Show("< Enter all data >");
-                passwordToAdd = null;
-            }
+                catch
+                {
+                    MessageBox.Show("< Too big a photo >");
+                }
+            else MessageBox.Show("< Login already busy >");
         }
     }
 }
