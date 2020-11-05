@@ -34,7 +34,7 @@
                     </Grid.RowDefinitions>
                     <Image x:Name="Avatar" Margin="0,10" MouseDown="Avatar_MouseDown"/>
                     <DockPanel Grid.Row="1" Margin="10,0">
-                        <Label Content="Nicname &gt; " DockPanel.Dock="Left"
+                        <Label Name="l_nicname" Content="Nicname &gt; " DockPanel.Dock="Left"
                                VerticalAlignment="Center"/>
                         <TextBox x:Name="tb_nickname"
                                  VerticalAlignment="Center"/>
@@ -46,7 +46,7 @@
                                  VerticalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Grid.Row="3" Margin="10,0">
-                        <Label Content="Password &gt; " DockPanel.Dock="Left"
+                        <Label Name="l_pass" Content="Password &gt; " DockPanel.Dock="Left"
                                VerticalAlignment="Center"/>
                         <TextBox x:Name="tb_password"
                                  VerticalAlignment="Center"/>
