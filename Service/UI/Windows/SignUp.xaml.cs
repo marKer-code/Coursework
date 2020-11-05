@@ -47,8 +47,8 @@
             {
                 programServiceClient.AddUserAsync(loginToAdd,
                     nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
-                // the main window open
-                MessageBox.Show("Login up");
+                new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
+                this.Close();
             }
             else MessageBox.Show("< Login already busy >");
         }

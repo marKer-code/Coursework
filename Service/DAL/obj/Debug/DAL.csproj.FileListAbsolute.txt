@@ -9,3 +9,4 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Deb
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.dll
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

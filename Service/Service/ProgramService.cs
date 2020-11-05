@@ -5,7 +5,10 @@
     using DAL.Interfaces;
     using DAL.Repositories;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.ServiceModel;
+    using System.Text;
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ProgramService : IProgramService
@@ -57,6 +60,19 @@
                 UserId = repositories.UserRepository.GetUserId(login)
             });
             repositories.Save();
+        }
+
+        public string[] LoadUserInfo(string login)
+        {
+            int id = repositories.UserRepository.GetUserId(login);
+            IEnumerable<UserInfo> userInfo = repositories
+                .UserInfoRepository.Get(ui => ui.UserId == id);
+            string[] infoes = new string[4];
+            infoes[0] = userInfo.First().Nickname;
+            infoes[1] = userInfo.First().Online.ToString();
+            infoes[2] = userInfo.First().LastOnline.ToString();
+            infoes[3] = Encoding.Default.GetString(userInfo.First().Photo);
+            return infoes;
         }
     }
 }

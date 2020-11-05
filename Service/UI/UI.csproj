@@ -112,6 +112,9 @@
     <None Include="Connected Services\ServiceReference\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReference\ProgramService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

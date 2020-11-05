@@ -22,3 +22,5 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.g.cs
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Main.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Main.baml

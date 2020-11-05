@@ -2,6 +2,7 @@
 {
     using System;
     using System.ServiceModel;
+    using System.Text;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
@@ -11,12 +12,16 @@
     {
         public event Action<string> UserExistEvent;
         public event Action<string> LoginExistEvent;
+        public event Action<string, bool, DateTime, byte[]> UserInfoEvent;
 
         public void LoginExist(string exists)
             => LoginExistEvent?.Invoke(exists);
 
         public void UserExist(string exists)
             => UserExistEvent?.Invoke(exists);
+
+        public void UserInfo(string nickname, bool online, DateTime lastOnline, byte[] photo)
+            => UserInfoEvent?.Invoke(nickname, online, lastOnline, photo);
     }
 
     public partial class Initial : Window
@@ -52,10 +57,7 @@
         private void UserExist(string exists)
         {
             if (Convert.ToBoolean(exists))
-            {
-                // the main window open
-                MessageBox.Show("< Bingo >");
-            }
+                insomable.OpenWindow(new Main(wantedLogin, wantedPassword, null, Encoding.Default.GetBytes("0")), this);
             else MessageBox.Show("< Uncorrect password >");
         }
 

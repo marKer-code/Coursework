@@ -14,6 +14,8 @@
         void AddUser(string login, string nickname,
             string password, byte[] img,
             bool online, DateTime lastOnline);
+        [OperationContract]
+        string[] LoadUserInfo(string login);
     }
     public interface ICallback
     {

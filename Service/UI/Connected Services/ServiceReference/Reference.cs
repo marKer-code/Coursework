@@ -32,6 +32,12 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
         System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
+        string[] LoadUserInfo(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
+        System.Threading.Tasks.Task<string[]> LoadUserInfoAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -94,6 +100,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
             return base.Channel.AddUserAsync(login, nickname, password, img, online, lastOnline);
+        }
+        
+        public string[] LoadUserInfo(string login) {
+            return base.Channel.LoadUserInfo(login);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> LoadUserInfoAsync(string login) {
+            return base.Channel.LoadUserInfoAsync(login);
         }
     }
 }
