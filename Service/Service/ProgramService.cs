@@ -62,16 +62,16 @@
             repositories.Save();
         }
 
-        public string[] LoadUserInfo(string login)
+        public List<byte[]> LoadUserInfo(string login)
         {
             int id = repositories.UserRepository.GetUserId(login);
             IEnumerable<UserInfo> userInfo = repositories
                 .UserInfoRepository.Get(ui => ui.UserId == id);
-            string[] infoes = new string[4];
-            infoes[0] = userInfo.First().Nickname;
-            infoes[1] = userInfo.First().Online.ToString();
-            infoes[2] = userInfo.First().LastOnline.ToString();
-            infoes[3] = Encoding.Default.GetString(userInfo.First().Photo);
+            List<byte[]> infoes = new List<byte[]>();
+            infoes.Add(Encoding.Default.GetBytes(userInfo.First().Nickname));
+            infoes.Add(Encoding.Default.GetBytes(userInfo.First().LastOnline.ToString()));
+            infoes.Add(userInfo.First().Photo);
+            infoes.Add(Encoding.Default.GetBytes(userInfo.First().Online.ToString()));
             return infoes;
         }
     }

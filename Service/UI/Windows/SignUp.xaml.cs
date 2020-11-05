@@ -45,7 +45,7 @@
         {
             if (!Convert.ToBoolean(exists))
             {
-                programServiceClient.AddUserAsync(loginToAdd,
+                programServiceClient.AddUser(loginToAdd,
                     nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
                 new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
                 this.Close();

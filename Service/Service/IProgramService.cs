@@ -1,6 +1,7 @@
 ﻿namespace Service
 {
     using System;
+    using System.Collections.Generic;
     using System.ServiceModel;
 
     [ServiceContract(CallbackContract = typeof(ICallback))]
@@ -15,7 +16,7 @@
             string password, byte[] img,
             bool online, DateTime lastOnline);
         [OperationContract]
-        string[] LoadUserInfo(string login);
+        List<byte[]> LoadUserInfo(string login);
     }
     public interface ICallback
     {

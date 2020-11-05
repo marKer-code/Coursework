@@ -52,10 +52,10 @@
             }
             else
             {
-                List<string> infoes = programServiceClient.LoadUserInfo(login_).ToList();
+                byte[][] infoes = programServiceClient.LoadUserInfo(login_);
 
-                nickname_ = infoes[0];
-                photo_ = Encoding.Default.GetBytes(infoes[3]);
+                nickname_ = Encoding.Default.GetString(infoes[0]);
+                photo_ = infoes[2];
 
                 Inizialize();
             }
