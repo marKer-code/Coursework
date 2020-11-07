@@ -119,9 +119,22 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image x:Name="avatar_r" Margin="10"/>
-            <TextBlock x:Name="login_r" Margin="0,10" Grid.Row="1"/>
-            <TextBlock x:Name="nickname_r" Margin="0,10" Grid.Row="2"/>
-            <TextBlock x:Name="status_r" Margin="0,10" Grid.Row="3"/>
+            
+            <StackPanel Grid.Row="1">
+                <Label Name="l_login_r" Content="Login:"/>
+                <TextBlock x:Name="login_r" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <Label Name="l_nickname_r" Content="Nickname:"/>
+                <TextBlock x:Name="nickname_r" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <Label Name="l_status_r" Content="Status:"/>
+                <TextBlock x:Name="status_r" />
+            </StackPanel>
+
             <Button Visibility="Hidden" x:Name="bt_accept_r" Margin="10" Grid.Row="4" 
                         Content="Accept" Foreground="White"/>
             <Button Visibility="Hidden" x:Name="bt_reject_r" Margin="10" Grid.Row="5" 

@@ -327,9 +327,14 @@
 
             nickname_r.Visibility = Visibility.Hidden;
             login_r.Visibility = Visibility.Hidden;
+            status_r.Visibility = Visibility.Hidden;
 
-            lb_requests.SelectedItem = -1;
-            lb_requests_Send.SelectedItem = -1;
+            l_login_r.Visibility = Visibility.Hidden;
+            l_nickname_r.Visibility = Visibility.Hidden;
+            l_status_r.Visibility = Visibility.Hidden;
+
+            lb_requests.SelectedItem = 0;
+            lb_requests_Send.SelectedItem = 0;
         }
 
         private void I_Profile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -355,8 +360,14 @@
             bt_reject_r.Visibility = Visibility.Visible;
             bt_accept_r.Visibility = Visibility.Visible;
 
+            l_login_r.Visibility = Visibility.Visible;
+            l_nickname_r.Visibility = Visibility.Visible;
+            l_status_r.Visibility = Visibility.Visible;
+
             nickname_r.Visibility = Visibility.Visible;
             login_r.Visibility = Visibility.Visible;
+            status_r.Visibility = Visibility.Visible;
+
 
             avatar_r.Visibility = Visibility.Visible;
             flipper.IsEnabled = false;
@@ -367,6 +378,11 @@
                 login_r.Text = listBox.SelectedItem.ToString();
 
                 byte[][] infoes = programServiceClient.LoadUserInfo(login_r.Text);
+
+                if (Encoding.Default.GetString(infoes[3]) == "true")
+                    status_r.Text = Encoding.Default.GetString(infoes[3]);
+                else
+                    status_r.Text = Encoding.Default.GetString(infoes[1]);
 
                 nickname_r.Text = Encoding.Default.GetString(infoes[0]);
                 byte[] ph = infoes[2];
@@ -379,10 +395,21 @@
         }
 
         private void lb_requests_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-          => ShowInfoRequests(lb_requests);
+        {
+            bt_accept_r.IsEnabled = true;
+            bt_reject_r.IsEnabled = true;
+
+            ShowInfoRequests(lb_requests);
+        }
+
 
         private void lb_requests_Send_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-           => ShowInfoRequests(lb_requests_Send);
+        {
+            bt_accept_r.IsEnabled = false;
+            bt_reject_r.IsEnabled = false;
+
+            ShowInfoRequests(lb_requests_Send);
+        }
 
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
