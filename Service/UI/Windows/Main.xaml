@@ -122,9 +122,9 @@
             <TextBlock x:Name="login_r" Margin="0,10" Grid.Row="1"/>
             <TextBlock x:Name="nickname_r" Margin="0,10" Grid.Row="2"/>
             <TextBlock x:Name="status_r" Margin="0,10" Grid.Row="3"/>
-            <Button x:Name="bt_accept_r" Margin="10" Grid.Row="5" 
+            <Button Visibility="Hidden" x:Name="bt_accept_r" Margin="10" Grid.Row="4" 
                         Content="Accept" Foreground="White"/>
-            <Button x:Name="bt_reject_r" Margin="10" Grid.Row="5" 
+            <Button Visibility="Hidden" x:Name="bt_reject_r" Margin="10" Grid.Row="5" 
                         Content="Reject" Foreground="White"/>
         </Grid>
 
@@ -153,7 +153,14 @@
         </Grid>
 
         <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden" SelectionChanged="lb_chats_SelectionChanged" />
-        <ListBox Grid.Column="1" x:Name="lb_requests" Visibility="Hidden" />
+        <StackPanel x:Name="sp_Requests" Grid.Column="1" Visibility="Hidden">
+            <Label Name="l_send" FontSize="14">Send requests:</Label>
+            <ListBox  x:Name="lb_requests_Send" SelectionChanged="lb_requests_Send_SelectionChanged" />
+
+            <Label Name="l_receipt" FontSize="14">Receipt requests:</Label>
+            <ListBox Grid.Column="1" x:Name="lb_requests" SelectionChanged="lb_requests_SelectionChanged" />
+
+        </StackPanel>
 
         <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
                       Width="5" Grid.Column="2" Background="#FF232323" IsEnabled="false"

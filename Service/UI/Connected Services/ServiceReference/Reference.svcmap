@@ -22,11 +22,12 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Service/AppService/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="f1b446fb-0e19-421e-ba06-1a11c6a14f38" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd1" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="afcb0065-cc8d-4f85-a857-20a700b60b5c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd2" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="c2f70ecc-c562-4929-b722-fddddf125f24" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?disco" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="330bf070-a903-4694-8942-46edfd49a9ff" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd3" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="f4917b49-87d4-4393-aca1-3cab56c22527" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd0" />
     <MetadataFile FileName="ProgramService.wsdl" MetadataType="Wsdl" ID="ad0e4546-99ea-46eb-9557-4f62fcee1010" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="afcb0065-cc8d-4f85-a857-20a700b60b5c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd2" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="f1b446fb-0e19-421e-ba06-1a11c6a14f38" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

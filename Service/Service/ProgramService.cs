@@ -91,6 +91,46 @@
             return infoes;
         }
 
+        public void SaveUserPhoto(string login, byte[] img)
+        {
+            User newUser = repositories.UserRepository
+               .Get(u => u.Login == login)
+               .First();
+
+            string nickname = repositories.UserInfoRepository
+               .Get(u => u.UserId == newUser.Id)
+               .First().Nickname;
+
+            int id = newUser.Id;
+            repositories.UserRepository.Delete(id);
+            repositories.UserInfoRepository.Delete(id);
+            repositories.Save();
+
+            repositories.UserRepository.Insert(
+                new User
+                {
+                    Login = login,
+                    HashPassword = newUser.HashPassword
+                });
+            repositories.Save();
+
+            id = repositories.UserRepository
+                .Get(u => u.Login == login)
+                .First()
+                .Id;
+
+            repositories.UserInfoRepository.Insert(
+                new UserInfo
+                {
+                    Nickname = nickname,
+                    UserId = id,
+                    Online = true,
+                    LastOnline = DateTime.Now,
+                    Photo = img
+                });
+            repositories.Save();
+        }
+
         public void SaveUserInfo(string lastLogin,
             string login, string nickname,
             string password, byte[] img)
@@ -151,5 +191,67 @@
 
             repositories.Save();
         }
+
+        public IEnumerable<User> GetAllContact(string login)
+        {
+            List<User> users = null;
+            int idUser = repositories.UserRepository
+                .Get(u => u.Login == login)
+                .First()
+                .Id;
+
+            List<Couple> couples = repositories.CoupleRepository.Get(c => c.UserId1 == idUser || c.UserId2 == idUser).ToList();
+
+            foreach (var c in couples)
+            {
+                if (c.UserId1 != idUser)
+                    users.Add(repositories.UserRepository
+                .Get(u => u.Id == c.UserId1)
+                .First());
+                if(c.UserId2 != idUser)
+                    users.Add(repositories.UserRepository
+                .Get(u => u.Id == c.UserId2)
+                .First());
+            }
+
+            return users;
+        }
+
+        public IEnumerable<Request> GetAllRequests(string login,bool isSend)
+        {
+            if (!isSend)
+            {
+                int idResiver = repositories.UserRepository
+                    .Get(u => u.Login == login)
+                    .First()
+                    .Id;
+                return repositories.RequestRepository.Get(r => r.ReceiverId == idResiver).ToList();
+            }
+            else
+            {
+                int idResiver = repositories.UserRepository
+                    .Get(u => u.Login == login)
+                    .First()
+                    .Id;
+                return repositories.RequestRepository.Get(r => r.SenderId == idResiver).ToList();
+            }
+
+        }
+
+        public string GetLoginUserById(int id)
+        {
+            return repositories.UserRepository.GetById(id).Login;
+        }
+
+        public void DeletedRequest(string sender, string receiver)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCouple(string user1, string ser2)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

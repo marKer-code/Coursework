@@ -1,5 +1,6 @@
 ﻿namespace Service
 {
+    using DAL.Entities;
     using System;
     using System.Collections.Generic;
     using System.ServiceModel;
@@ -22,6 +23,20 @@
         List<byte[]> LoadUserInfo(string login);
         [OperationContract(IsOneWay = true)]
         void AddRequest(string sender, string receiver);
+
+        [OperationContract]
+        void DeletedRequest(string sender, string receiver);
+        [OperationContract]
+        void AddCouple(string user1, string ser2);
+        [OperationContract]
+        void SaveUserPhoto(string login, byte[] img);
+        [OperationContract]
+        IEnumerable<User> GetAllContact(string login);
+        [OperationContract]
+        IEnumerable<Request> GetAllRequests(string login, bool isSend);
+        [OperationContract]
+        string GetLoginUserById(int id);
+
     }
     public interface ICallback
     {

@@ -27,6 +27,7 @@
         {
             InitializeComponent();
 
+
             insomable = new InsomableMethods();
             programServiceClient = new ProgramServiceClient();
 
@@ -52,6 +53,13 @@
 
                 Inizialize();
             }
+
+            lb_contacts.ItemsSource = programServiceClient.GetAllContact(login_);
+
+            foreach (var request in programServiceClient.GetAllRequests(login_, false))
+                lb_requests.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.SenderId).Result);
+            foreach (var request in programServiceClient.GetAllRequests(login_, true))
+                lb_requests_Send.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.ReceiverId).Result);
         }
 
         private void Inizialize()
@@ -119,8 +127,11 @@
             if (tb_nickname.Text != nickname_)
                 nickname_ = tb_nickname.Text;
 
-            programServiceClient.SaveUserInfoAsync(lastLogin,
-                login_, nickname_, password_, photo_);
+            if (ing)
+                programServiceClient.SaveUserPhotoAsync(lastLogin, photo_);
+            else
+                programServiceClient.SaveUserInfoAsync(lastLogin,
+                    login_, nickname_, password_, photo_);
 
             MessageBox.Show("< Saved >");
         }
@@ -145,7 +156,7 @@
             if (programServiceClient.CheckLogin(tb_login.Text))
             {
                 programServiceClient.AddRequestAsync(login_, tb_login.Text);
-                lb_requests.Items.Add(tb_login.Text);
+                lb_requests_Send.Items.Add(tb_login.Text);
             }
             else MessageBox.Show("< No user with such login >");
         }
@@ -181,6 +192,8 @@
             var handle = bitmap1.GetHbitmap();
             Avatar.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
                 IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+
+            ing = true;
         }
 
         enum SELECTION { ACCOUNTINFO = 0, ALLCHATS = 1, CONTACTS = 2 };
@@ -196,11 +209,14 @@
                             hiddenElement();
                         else
                         {
+                            hiddenElement();
                             tb_login.Text = login_;
                             Flipper_b.Content = "Save";
 
                             l_nicname.Visibility = Visibility.Visible;
                             l_pass.Visibility = Visibility.Visible;
+
+                            gr_requestInfo.Visibility = Visibility.Hidden;
 
                             lb_requests.Visibility = Visibility.Hidden;
 
@@ -219,6 +235,7 @@
                     }
                 case BUTTON.ALLCONTACTS:
                     {
+                        hiddenElement();
                         hidenChatInfo();
                         lb_contacts.Visibility = Visibility.Visible;
                         lb_requests.Visibility = Visibility.Hidden;
@@ -226,6 +243,7 @@
 
                         flipper.IsEnabled = false;
                         flipper.Visibility = Visibility.Hidden;
+
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
@@ -234,13 +252,21 @@
                             hiddenElement();
                         else
                         {
+                            hiddenReqestsInfo();
+
                             tb_login.Text = null;
                             Flipper_b.Content = "Search";
+
+                            l_receipt.Visibility = Visibility.Visible;
+                            l_send.Visibility = Visibility.Visible;
 
                             l_nicname.Visibility = Visibility.Hidden;
                             l_pass.Visibility = Visibility.Hidden;
 
+                            sp_Requests.Visibility = Visibility.Visible;
+
                             lb_requests.Visibility = Visibility.Visible;
+                            lb_requests_Send.Visibility = Visibility.Visible;
                             gr_requestInfo.Visibility = Visibility.Visible;
 
                             tb_password.Visibility = Visibility.Hidden;
@@ -255,9 +281,17 @@
 
         private void hiddenElement()
         {
+            lb_requests.ItemsSource = null;
             hidenContactInfo();
             hidenChatInfo();
             lb_contacts.Visibility = Visibility.Hidden;
+
+            sp_Requests.Visibility = Visibility.Hidden;
+            hiddenReqestsInfo();
+
+            l_receipt.Visibility = Visibility.Hidden;
+            l_send.Visibility = Visibility.Hidden;
+
             lb_requests.Visibility = Visibility.Hidden;
             gr_requestInfo.Visibility = Visibility.Hidden;
             flipper.IsEnabled = false;
@@ -284,6 +318,14 @@
             chat_lb.Visibility = Visibility.Hidden;
         }
 
+        private void hiddenReqestsInfo()
+        {
+            gr_requestInfo.Visibility = Visibility.Hidden;
+            bt_accept_r.Visibility = Visibility.Hidden;
+            bt_reject_r.Visibility = Visibility.Hidden;
+            avatar_r.Visibility = Visibility.Hidden;
+        }
+
         private void I_Profile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
             => Hiden(BUTTON.PROFILE);
 
@@ -291,15 +333,50 @@
             => Hiden(BUTTON.CHATS);
 
         private void allContacts_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Hiden(BUTTON.ALLCONTACTS);
-        }
+            => Hiden(BUTTON.ALLCONTACTS);
 
         private void addFriend_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
             => Hiden(BUTTON.ADDFRIENDS);
 
+
+        private void ShowInfoRequests(System.Windows.Controls.ListBox listBox)
+        {
+
+            hidenChatInfo();
+            hidenContactInfo();
+            sp_Requests.Visibility = Visibility.Visible;
+            gr_requestInfo.Visibility = Visibility.Visible;
+            bt_reject_r.Visibility = Visibility.Visible;
+            bt_accept_r.Visibility = Visibility.Visible;
+            avatar_r.Visibility = Visibility.Visible;
+            flipper.IsEnabled = false;
+            flipper.Visibility = Visibility.Collapsed;
+
+            if (listBox.SelectedItems != null)
+            {
+                login_r.Text = listBox.SelectedItem.ToString();
+
+                byte[][] infoes = programServiceClient.LoadUserInfo(login_r.Text);
+
+                nickname_r.Text = Encoding.Default.GetString(infoes[0]);
+                byte[] ph = infoes[2];
+                TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+                Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
+                var handle = bitmap1.GetHbitmap();
+                avatar_r.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
+                IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            }
+        }
+
+        private void lb_requests_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+          => ShowInfoRequests(lb_requests);
+
+        private void lb_requests_Send_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+           => ShowInfoRequests(lb_requests_Send);
+
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            hiddenReqestsInfo();
             hidenContactInfo();
             gr_chatInfo.Visibility = Visibility.Visible;
             chat_lb.Visibility = Visibility.Visible;
@@ -307,6 +384,7 @@
 
         private void lb_contacts_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            hiddenReqestsInfo();
             hidenChatInfo();
             gr_contactInfo.Visibility = Visibility.Visible;
         }
