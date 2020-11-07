@@ -155,10 +155,10 @@
         <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden" SelectionChanged="lb_chats_SelectionChanged" />
         <StackPanel x:Name="sp_Requests" Grid.Column="1" Visibility="Hidden">
             <Label Name="l_send" FontSize="14">Send requests:</Label>
-            <ListBox  x:Name="lb_requests_Send" SelectionChanged="lb_requests_Send_SelectionChanged" />
+            <ListBox MaxHeight="200"  x:Name="lb_requests_Send" SelectionChanged="lb_requests_Send_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 
             <Label Name="l_receipt" FontSize="14">Receipt requests:</Label>
-            <ListBox Grid.Column="1" x:Name="lb_requests" SelectionChanged="lb_requests_SelectionChanged" />
+            <ListBox MaxHeight="200" Grid.Column="1" x:Name="lb_requests" SelectionChanged="lb_requests_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 
         </StackPanel>
 

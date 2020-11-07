@@ -324,6 +324,12 @@
             bt_accept_r.Visibility = Visibility.Hidden;
             bt_reject_r.Visibility = Visibility.Hidden;
             avatar_r.Visibility = Visibility.Hidden;
+
+            nickname_r.Visibility = Visibility.Hidden;
+            login_r.Visibility = Visibility.Hidden;
+
+            lb_requests.SelectedItem = -1;
+            lb_requests_Send.SelectedItem = -1;
         }
 
         private void I_Profile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -348,6 +354,10 @@
             gr_requestInfo.Visibility = Visibility.Visible;
             bt_reject_r.Visibility = Visibility.Visible;
             bt_accept_r.Visibility = Visibility.Visible;
+
+            nickname_r.Visibility = Visibility.Visible;
+            login_r.Visibility = Visibility.Visible;
+
             avatar_r.Visibility = Visibility.Visible;
             flipper.IsEnabled = false;
             flipper.Visibility = Visibility.Collapsed;

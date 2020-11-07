@@ -97,37 +97,11 @@
                .Get(u => u.Login == login)
                .First();
 
-            string nickname = repositories.UserInfoRepository
-               .Get(u => u.UserId == newUser.Id)
-               .First().Nickname;
+            UserInfo info = repositories.UserInfoRepository
+                .Get(i => i.UserId == newUser.Id)
+                .First();
 
-            int id = newUser.Id;
-            repositories.UserRepository.Delete(id);
-            repositories.UserInfoRepository.Delete(id);
-            repositories.Save();
-
-            repositories.UserRepository.Insert(
-                new User
-                {
-                    Login = login,
-                    HashPassword = newUser.HashPassword
-                });
-            repositories.Save();
-
-            id = repositories.UserRepository
-                .Get(u => u.Login == login)
-                .First()
-                .Id;
-
-            repositories.UserInfoRepository.Insert(
-                new UserInfo
-                {
-                    Nickname = nickname,
-                    UserId = id,
-                    Online = true,
-                    LastOnline = DateTime.Now,
-                    Photo = img
-                });
+            info.Photo = img;
             repositories.Save();
         }
 
@@ -139,33 +113,15 @@
                 .Get(u => u.Login == lastLogin)
                 .First();
 
-            int id = newUser.Id;
-            repositories.UserRepository.Delete(id);
-            repositories.UserInfoRepository.Delete(id);
-            repositories.Save();
+            UserInfo info = repositories.UserInfoRepository
+               .Get(i => i.UserId == newUser.Id)
+               .First();
 
-            repositories.UserRepository.Insert(
-                new User
-                {
-                    Login = login,
-                    HashPassword = new Utils().ComputeSha256Hash(password)
-                });
-            repositories.Save();
+            newUser.Login = login;
+            newUser.HashPassword = new Utils().ComputeSha256Hash(password);
+            info.Nickname = nickname;
+            info.Photo = img;
 
-            id = repositories.UserRepository
-                .Get(u => u.Login == login)
-                .First()
-                .Id;
-
-            repositories.UserInfoRepository.Insert(
-                new UserInfo
-                {
-                    Nickname = nickname,
-                    UserId = id,
-                    Online = true,
-                    LastOnline = DateTime.Now,
-                    Photo = img
-                });
             repositories.Save();
         }
 

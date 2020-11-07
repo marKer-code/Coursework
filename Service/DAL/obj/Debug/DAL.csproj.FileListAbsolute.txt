@@ -21,4 +21,3 @@ D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.dll
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.pdb
-D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
