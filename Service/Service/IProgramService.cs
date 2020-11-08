@@ -24,11 +24,11 @@
         [OperationContract(IsOneWay = true)]
         void AddRequest(string sender, string receiver);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void DeletedRequest(string sender, string receiver);
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void AddCouple(string user1, string ser2);
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void SaveUserPhoto(string login, byte[] img);
         [OperationContract]
         IEnumerable<User> GetAllContact(string login);
@@ -36,10 +36,12 @@
         IEnumerable<Request> GetAllRequests(string login, bool isSend);
         [OperationContract]
         string GetLoginUserById(int id);
-
+        [OperationContract(IsOneWay = true)]
+        void UpdateOnline(string login, bool loginIn);
     }
     public interface ICallback
     {
+        
     }
 
     class UserMessage

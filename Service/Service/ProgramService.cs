@@ -164,7 +164,7 @@
                     users.Add(repositories.UserRepository
                 .Get(u => u.Id == c.UserId1)
                 .First());
-                if(c.UserId2 != idUser)
+                if (c.UserId2 != idUser)
                     users.Add(repositories.UserRepository
                 .Get(u => u.Id == c.UserId2)
                 .First());
@@ -173,7 +173,7 @@
             return users;
         }
 
-        public IEnumerable<Request> GetAllRequests(string login,bool isSend)
+        public IEnumerable<Request> GetAllRequests(string login, bool isSend)
         {
             if (!isSend)
             {
@@ -209,5 +209,17 @@
             throw new NotImplementedException();
         }
 
+        public void UpdateOnline(string login, bool loginIn)
+        {
+            UserInfo userInfo = repositories.UserInfoRepository
+                .Get(u => u.User.Login == login)
+                .First();
+
+            int idUser = userInfo.UserId;
+
+            userInfo.Online = loginIn;
+            if (!loginIn)
+                userInfo.LastOnline = DateTime.Now;
+        }
     }
 }

@@ -7,6 +7,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interop;
@@ -26,7 +27,6 @@
         public Main(string login, string password, string nickname, byte[] photo)
         {
             InitializeComponent();
-
 
             insomable = new InsomableMethods();
             programServiceClient = new ProgramServiceClient();
@@ -60,6 +60,9 @@
                 lb_requests.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.SenderId).Result);
             foreach (var request in programServiceClient.GetAllRequests(login_, true))
                 lb_requests_Send.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.ReceiverId).Result);
+
+            programServiceClient.UpdateOnlineAsync(login, true);
+            lastLogin = login_;
         }
 
         private void Inizialize()
@@ -409,6 +412,12 @@
             bt_reject_r.IsEnabled = false;
 
             ShowInfoRequests(lb_requests_Send);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            programServiceClient.UpdateOnline(login_, false);
+            Thread.Sleep(10000);
         }
 
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

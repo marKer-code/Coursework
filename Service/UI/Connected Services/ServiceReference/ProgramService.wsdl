@@ -333,29 +333,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_DeletedRequest_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_AddCouple_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -379,53 +356,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_AddCouple_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SaveUserPhoto_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SaveUserPhoto_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -586,6 +517,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_UpdateOnline_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -624,20 +578,11 @@
   <wsdl:message name="IProgramService_DeletedRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:DeletedRequest" />
   </wsdl:message>
-  <wsdl:message name="IProgramService_DeletedRequest_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeletedRequestResponse" />
-  </wsdl:message>
   <wsdl:message name="IProgramService_AddCouple_InputMessage">
     <wsdl:part name="parameters" element="tns:AddCouple" />
   </wsdl:message>
-  <wsdl:message name="IProgramService_AddCouple_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddCoupleResponse" />
-  </wsdl:message>
   <wsdl:message name="IProgramService_SaveUserPhoto_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveUserPhoto" />
-  </wsdl:message>
-  <wsdl:message name="IProgramService_SaveUserPhoto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveUserPhotoResponse" />
   </wsdl:message>
   <wsdl:message name="IProgramService_GetAllContact_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllContact" />
@@ -656,6 +601,9 @@
   </wsdl:message>
   <wsdl:message name="IProgramService_GetLoginUserById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLoginUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProgramService_UpdateOnline_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOnline" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -681,15 +629,12 @@
     </wsdl:operation>
     <wsdl:operation name="DeletedRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/DeletedRequest" message="tns:IProgramService_DeletedRequest_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/DeletedRequestResponse" message="tns:IProgramService_DeletedRequest_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddCouple">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/AddCouple" message="tns:IProgramService_AddCouple_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/AddCoupleResponse" message="tns:IProgramService_AddCouple_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveUserPhoto">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/SaveUserPhoto" message="tns:IProgramService_SaveUserPhoto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/SaveUserPhotoResponse" message="tns:IProgramService_SaveUserPhoto_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllContact">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/GetAllContact" message="tns:IProgramService_GetAllContact_InputMessage" />
@@ -702,6 +647,9 @@
     <wsdl:operation name="GetLoginUserById">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/GetLoginUserById" message="tns:IProgramService_GetLoginUserById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/GetLoginUserByIdResponse" message="tns:IProgramService_GetLoginUserById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOnline">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/UpdateOnline" message="tns:IProgramService_UpdateOnline_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -767,10 +715,6 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_DeletedRequest_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_DeletedRequest_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddCouple">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/AddCouple" style="document" />
@@ -778,10 +722,6 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_AddCouple_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_AddCouple_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SaveUserPhoto">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/SaveUserPhoto" style="document" />
@@ -789,10 +729,6 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SaveUserPhoto_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SaveUserPhoto_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAllContact">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/GetAllContact" style="document" />
@@ -826,6 +762,13 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_GetLoginUserById_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOnline">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/UpdateOnline" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_UpdateOnline_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ProgramService">

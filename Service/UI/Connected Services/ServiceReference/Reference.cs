@@ -489,22 +489,22 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
         System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/DeletedRequest", ReplyAction="http://tempuri.org/IProgramService/DeletedRequestResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeletedRequest")]
         void DeletedRequest(string sender, string receiver);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/DeletedRequest", ReplyAction="http://tempuri.org/IProgramService/DeletedRequestResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeletedRequest")]
         System.Threading.Tasks.Task DeletedRequestAsync(string sender, string receiver);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/AddCouple", ReplyAction="http://tempuri.org/IProgramService/AddCoupleResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddCouple")]
         void AddCouple(string user1, string ser2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/AddCouple", ReplyAction="http://tempuri.org/IProgramService/AddCoupleResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddCouple")]
         System.Threading.Tasks.Task AddCoupleAsync(string user1, string ser2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/SaveUserPhoto", ReplyAction="http://tempuri.org/IProgramService/SaveUserPhotoResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserPhoto")]
         void SaveUserPhoto(string login, byte[] img);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/SaveUserPhoto", ReplyAction="http://tempuri.org/IProgramService/SaveUserPhotoResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserPhoto")]
         System.Threading.Tasks.Task SaveUserPhotoAsync(string login, byte[] img);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllContact", ReplyAction="http://tempuri.org/IProgramService/GetAllContactResponse")]
@@ -524,6 +524,12 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetLoginUserById", ReplyAction="http://tempuri.org/IProgramService/GetLoginUserByIdResponse")]
         System.Threading.Tasks.Task<string> GetLoginUserByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
+        void UpdateOnline(string login, bool loginIn);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
+        System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -647,6 +653,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task<string> GetLoginUserByIdAsync(int id) {
             return base.Channel.GetLoginUserByIdAsync(id);
+        }
+        
+        public void UpdateOnline(string login, bool loginIn) {
+            base.Channel.UpdateOnline(login, loginIn);
+        }
+        
+        public System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn) {
+            return base.Channel.UpdateOnlineAsync(login, loginIn);
         }
     }
 }
