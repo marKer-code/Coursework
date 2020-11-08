@@ -6,6 +6,7 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.ServiceModel;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interop;
@@ -30,7 +31,10 @@
             insomable = new InsomableMethods();
             Tb_Password.Visibility = Visibility.Hidden;
 
-            programServiceClient = new ProgramServiceClient();
+            CallbackHandler callbackHandler = new CallbackHandler();
+
+            programServiceClient = new ProgramServiceClient
+                (new InstanceContext(callbackHandler));
         }
 
         string loginToAdd, passwordToAdd, nicknameToAdd;

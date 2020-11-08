@@ -1,14 +1,19 @@
 ﻿namespace UI.Windows
 {
     using System;
+    using System.ServiceModel;
     using System.Text;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
     using UI.ServiceReference;
 
-    public class CallbackHandler// : IProgramServiceCallback
+    public class CallbackHandler : IProgramServiceCallback
     {
+        public event Action<string> MessageEvent;
+
+        public void Message_(string message)
+            => MessageEvent?.Invoke(message);
     }
 
     public partial class Initial : Window
@@ -23,7 +28,11 @@
             InitializeComponent();
 
             insomable = new InsomableMethods();
-            programServiceClient = new ProgramServiceClient();
+
+            CallbackHandler callbackHandler = new CallbackHandler();
+
+            programServiceClient = new ProgramServiceClient
+                (new InstanceContext(callbackHandler));
 
             Tb_Password.Visibility = Visibility.Hidden;
         }

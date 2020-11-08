@@ -41,7 +41,8 @@
     }
     public interface ICallback
     {
-        
+        [OperationContract(IsOneWay = true)]
+        void Message_(string message);
     }
 
     class UserMessage

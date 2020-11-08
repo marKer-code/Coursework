@@ -199,6 +199,8 @@
             return repositories.UserRepository.GetById(id).Login;
         }
 
+        Dictionary<string, UserMessage> sub =
+            new Dictionary<string, UserMessage>();
         public void UpdateOnline(string login, bool loginIn)
         {
             UserInfo userInfo = repositories.UserInfoRepository
@@ -209,7 +211,31 @@
 
             userInfo.Online = loginIn;
             if (!loginIn)
+            {
                 userInfo.LastOnline = DateTime.Now;
+
+                UserMessage user = new UserMessage();
+
+                foreach (var item in sub.Keys)
+                    if (item == login)
+                    {
+                        user.Message = "pidor exit";
+                        user.Callback = sub[item].Callback;
+                        break;
+                    }
+                sub.Remove(login);
+                user.Callback.Message_(user.Message);
+            }
+            else
+            {
+                UserMessage user = new UserMessage()
+                {
+                    Message = "",
+                    Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
+                };
+                sub.Add(login, user);
+                user.Callback.Message_(user.Message);
+            }
         }
 
         public void AceptRequest(string sender, string receiver)

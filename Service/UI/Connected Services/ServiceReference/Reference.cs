@@ -107,7 +107,7 @@ namespace UI.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IProgramService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IProgramService", CallbackContract=typeof(UI.ServiceReference.IProgramServiceCallback))]
     public interface IProgramService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckUser", ReplyAction="http://tempuri.org/IProgramService/CheckUserResponse")]
@@ -190,30 +190,38 @@ namespace UI.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IProgramServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/Message_")]
+        void Message_(string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IProgramServiceChannel : UI.ServiceReference.IProgramService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProgramServiceClient : System.ServiceModel.ClientBase<UI.ServiceReference.IProgramService>, UI.ServiceReference.IProgramService {
+    public partial class ProgramServiceClient : System.ServiceModel.DuplexClientBase<UI.ServiceReference.IProgramService>, UI.ServiceReference.IProgramService {
         
-        public ProgramServiceClient() {
+        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public ProgramServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public ProgramServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ProgramServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ProgramServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public ProgramServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public bool CheckUser(string login, string password) {

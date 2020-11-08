@@ -7,6 +7,7 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.ServiceModel;
     using System.Text;
     using System.Threading;
     using System.Windows;
@@ -30,7 +31,13 @@
             InitializeComponent();
 
             insomable = new InsomableMethods();
-            programServiceClient = new ProgramServiceClient();
+
+            CallbackHandler callbackHandler = new CallbackHandler();
+
+            callbackHandler.MessageEvent += GetMessage;
+
+            programServiceClient = new ProgramServiceClient
+                (new InstanceContext(callbackHandler));
 
             if (!programServiceClient.CheckLogin(login))
                 insomable.OpenWindow(new SignUp(), this);
@@ -69,6 +76,11 @@
 
             programServiceClient.UpdateOnlineAsync(login, true);
             lastLogin = login_;
+        }
+
+        private void GetMessage(string obj)
+        {
+            MessageBox.Show("");
         }
 
         private void Inizialize()
@@ -354,7 +366,10 @@
             => Hiden(BUTTON.PROFILE);
 
         private void chat_badged_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-            => Hiden(BUTTON.CHATS);
+        {
+            Hiden(BUTTON.CHATS);
+            programServiceClient.UpdateOnline(login_, false);
+        }
 
         private void allContacts_badget_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
             => Hiden(BUTTON.ALLCONTACTS);
@@ -451,8 +466,6 @@
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            programServiceClient.UpdateOnline(login_, false);
-            Thread.Sleep(10000);
         }
 
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
