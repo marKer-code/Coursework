@@ -31,7 +31,7 @@
         [OperationContract(IsOneWay = true)]
         void SaveUserPhoto(string login, byte[] img);
         [OperationContract]
-        IEnumerable<User> GetAllContact(string login);
+        List<int> GetAllContact(string login);
         [OperationContract]
         IEnumerable<Request> GetAllRequests(string login, bool isSend);
         [OperationContract]

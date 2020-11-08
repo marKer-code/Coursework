@@ -148,26 +148,26 @@
             repositories.Save();
         }
 
-        public IEnumerable<User> GetAllContact(string login)
+        public List<int> GetAllContact(string login)
         {
-            List<User> users = null;
+            List<int> users = new List<int>();
             int idUser = repositories.UserRepository
                 .Get(u => u.Login == login)
                 .First()
                 .Id;
 
-            List<Couple> couples = repositories.CoupleRepository.Get(c => c.UserId1 == idUser || c.UserId2 == idUser).ToList();
+            List<Couple> couples
+                = repositories.CoupleRepository
+                .Get(c => c.UserId1 == idUser ||
+                c.UserId2 == idUser)
+                .ToList();
 
             foreach (var c in couples)
             {
                 if (c.UserId1 != idUser)
-                    users.Add(repositories.UserRepository
-                .Get(u => u.Id == c.UserId1)
-                .First());
+                    users.Add(c.UserId1);
                 if (c.UserId2 != idUser)
-                    users.Add(repositories.UserRepository
-                .Get(u => u.Id == c.UserId2)
-                .First());
+                    users.Add(c.UserId2);
             }
 
             return users;

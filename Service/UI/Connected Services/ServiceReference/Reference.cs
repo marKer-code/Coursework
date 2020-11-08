@@ -15,349 +15,6 @@ namespace UI.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/DAL.Entities")]
-    [System.SerializableAttribute()]
-    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UI.ServiceReference.Group[] GroupsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HashPasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LoginField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UI.ServiceReference.UserInfo UserInfoField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public UI.ServiceReference.Group[] Groups {
-            get {
-                return this.GroupsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GroupsField, value) != true)) {
-                    this.GroupsField = value;
-                    this.RaisePropertyChanged("Groups");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HashPassword {
-            get {
-                return this.HashPasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.HashPasswordField, value) != true)) {
-                    this.HashPasswordField = value;
-                    this.RaisePropertyChanged("HashPassword");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login {
-            get {
-                return this.LoginField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
-                    this.LoginField = value;
-                    this.RaisePropertyChanged("Login");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public UI.ServiceReference.UserInfo UserInfo {
-            get {
-                return this.UserInfoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserInfoField, value) != true)) {
-                    this.UserInfoField = value;
-                    this.RaisePropertyChanged("UserInfo");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserInfo", Namespace="http://schemas.datacontract.org/2004/07/DAL.Entities")]
-    [System.SerializableAttribute()]
-    public partial class UserInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime LastOnlineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NicknameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool OnlineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] PhotoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UI.ServiceReference.User UserField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime LastOnline {
-            get {
-                return this.LastOnlineField;
-            }
-            set {
-                if ((this.LastOnlineField.Equals(value) != true)) {
-                    this.LastOnlineField = value;
-                    this.RaisePropertyChanged("LastOnline");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nickname {
-            get {
-                return this.NicknameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
-                    this.NicknameField = value;
-                    this.RaisePropertyChanged("Nickname");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Online {
-            get {
-                return this.OnlineField;
-            }
-            set {
-                if ((this.OnlineField.Equals(value) != true)) {
-                    this.OnlineField = value;
-                    this.RaisePropertyChanged("Online");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Photo {
-            get {
-                return this.PhotoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhotoField, value) != true)) {
-                    this.PhotoField = value;
-                    this.RaisePropertyChanged("Photo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public UI.ServiceReference.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Group", Namespace="http://schemas.datacontract.org/2004/07/DAL.Entities")]
-    [System.SerializableAttribute()]
-    public partial class Group : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CreatorIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UI.ServiceReference.User[] UsersField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CreatorId {
-            get {
-                return this.CreatorIdField;
-            }
-            set {
-                if ((this.CreatorIdField.Equals(value) != true)) {
-                    this.CreatorIdField = value;
-                    this.RaisePropertyChanged("CreatorId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public UI.ServiceReference.User[] Users {
-            get {
-                return this.UsersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsersField, value) != true)) {
-                    this.UsersField = value;
-                    this.RaisePropertyChanged("Users");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Request", Namespace="http://schemas.datacontract.org/2004/07/DAL.Entities")]
     [System.SerializableAttribute()]
     public partial class Request : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -478,10 +135,10 @@ namespace UI.ServiceReference {
         System.Threading.Tasks.Task SaveUserInfoAsync(string lastLogin, string login, string nickname, string password, byte[] img);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
-        byte[][] LoadUserInfo(string login);
+        System.Collections.Generic.List<byte[]> LoadUserInfo(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
-        System.Threading.Tasks.Task<byte[][]> LoadUserInfoAsync(string login);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<byte[]>> LoadUserInfoAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
         void AddRequest(string sender, string receiver);
@@ -508,16 +165,16 @@ namespace UI.ServiceReference {
         System.Threading.Tasks.Task SaveUserPhotoAsync(string login, byte[] img);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllContact", ReplyAction="http://tempuri.org/IProgramService/GetAllContactResponse")]
-        UI.ServiceReference.User[] GetAllContact(string login);
+        System.Collections.Generic.List<int> GetAllContact(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllContact", ReplyAction="http://tempuri.org/IProgramService/GetAllContactResponse")]
-        System.Threading.Tasks.Task<UI.ServiceReference.User[]> GetAllContactAsync(string login);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<int>> GetAllContactAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllRequests", ReplyAction="http://tempuri.org/IProgramService/GetAllRequestsResponse")]
-        UI.ServiceReference.Request[] GetAllRequests(string login, bool isSend);
+        System.Collections.Generic.List<UI.ServiceReference.Request> GetAllRequests(string login, bool isSend);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllRequests", ReplyAction="http://tempuri.org/IProgramService/GetAllRequestsResponse")]
-        System.Threading.Tasks.Task<UI.ServiceReference.Request[]> GetAllRequestsAsync(string login, bool isSend);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<UI.ServiceReference.Request>> GetAllRequestsAsync(string login, bool isSend);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetLoginUserById", ReplyAction="http://tempuri.org/IProgramService/GetLoginUserByIdResponse")]
         string GetLoginUserById(int id);
@@ -591,11 +248,11 @@ namespace UI.ServiceReference {
             return base.Channel.SaveUserInfoAsync(lastLogin, login, nickname, password, img);
         }
         
-        public byte[][] LoadUserInfo(string login) {
+        public System.Collections.Generic.List<byte[]> LoadUserInfo(string login) {
             return base.Channel.LoadUserInfo(login);
         }
         
-        public System.Threading.Tasks.Task<byte[][]> LoadUserInfoAsync(string login) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<byte[]>> LoadUserInfoAsync(string login) {
             return base.Channel.LoadUserInfoAsync(login);
         }
         
@@ -631,19 +288,19 @@ namespace UI.ServiceReference {
             return base.Channel.SaveUserPhotoAsync(login, img);
         }
         
-        public UI.ServiceReference.User[] GetAllContact(string login) {
+        public System.Collections.Generic.List<int> GetAllContact(string login) {
             return base.Channel.GetAllContact(login);
         }
         
-        public System.Threading.Tasks.Task<UI.ServiceReference.User[]> GetAllContactAsync(string login) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<int>> GetAllContactAsync(string login) {
             return base.Channel.GetAllContactAsync(login);
         }
         
-        public UI.ServiceReference.Request[] GetAllRequests(string login, bool isSend) {
+        public System.Collections.Generic.List<UI.ServiceReference.Request> GetAllRequests(string login, bool isSend) {
             return base.Channel.GetAllRequests(login, isSend);
         }
         
-        public System.Threading.Tasks.Task<UI.ServiceReference.Request[]> GetAllRequestsAsync(string login, bool isSend) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<UI.ServiceReference.Request>> GetAllRequestsAsync(string login, bool isSend) {
             return base.Channel.GetAllRequestsAsync(login, isSend);
         }
         

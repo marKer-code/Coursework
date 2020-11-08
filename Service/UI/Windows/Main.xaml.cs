@@ -2,6 +2,7 @@
 {
     using Microsoft.Win32;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
@@ -46,7 +47,7 @@
             }
             else
             {
-                byte[][] infoes = programServiceClient.LoadUserInfo(login_);
+                List<byte[]> infoes = programServiceClient.LoadUserInfo(login_);
 
                 nickname_ = Encoding.Default.GetString(infoes[0]);
                 photo_ = infoes[2];
@@ -54,7 +55,7 @@
                 Inizialize();
             }
 
-            lb_contacts.ItemsSource = programServiceClient.GetAllContact(login_);
+            List<int> users = programServiceClient.GetAllContact(login_);
 
             foreach (var request in programServiceClient.GetAllRequests(login_, false))
                 lb_requests.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.SenderId).Result);
@@ -380,7 +381,7 @@
             {
                 login_r.Text = listBox.SelectedItem.ToString();
 
-                byte[][] infoes = programServiceClient.LoadUserInfo(login_r.Text);
+                List<byte[]> infoes = programServiceClient.LoadUserInfo(login_r.Text);
 
                 if (Encoding.Default.GetString(infoes[3]) == "true")
                     status_r.Text = Encoding.Default.GetString(infoes[3]);
