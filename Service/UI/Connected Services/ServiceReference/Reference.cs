@@ -187,6 +187,12 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RejectRequest")]
         System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RemoveContact")]
+        void RemoveContact(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RemoveContact")]
+        System.Threading.Tasks.Task RemoveContactAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -326,6 +332,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver) {
             return base.Channel.RejectRequestAsync(sender, receiver);
+        }
+        
+        public void RemoveContact(string login) {
+            base.Channel.RemoveContact(login);
+        }
+        
+        public System.Threading.Tasks.Task RemoveContactAsync(string login) {
+            return base.Channel.RemoveContactAsync(login);
         }
     }
 }
