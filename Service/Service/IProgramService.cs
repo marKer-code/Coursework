@@ -38,8 +38,6 @@
         void AceptRequest(string sender, string receiver);
         [OperationContract(IsOneWay = true)]
         void RejectRequest(string sender, string receiver);
-        [OperationContract(IsOneWay = true)]
-        void RemoveContact(string login);
     }
     public interface ICallback
     {

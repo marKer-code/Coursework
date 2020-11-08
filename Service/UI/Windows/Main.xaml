@@ -7,204 +7,177 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
-        mc:Ignorable="d" 
+        mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         FontFamily="OCR A" ResizeMode="NoResize" 
-        WindowStyle="None" FontSize="18"
-        Height="450" Width="800" Foreground="#FFF44336">
+        WindowStyle="ThreeDBorderWindow" FontSize="18"
+        Height="450" Width="800" Foreground="#FFF44336"
+        Closed="Window_Closed">
     <!--="#FF303030">-->
     <!--="#FFA81F15">-->
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*" MinWidth="150"/>
+            <ColumnDefinition Width="3*" MinWidth="400"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
-        </Grid.RowDefinitions>
-
-        <Label Name="B_Close" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center"
-               HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Stretch" Content="X" MouseDown="B_Close_MouseDown"/>
-
-        <Grid Grid.RowSpan="2" Grid.Row="0">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*" MinWidth="150"/>
-                <ColumnDefinition Width="3*" MinWidth="400"/>
-            </Grid.ColumnDefinitions>
-
-            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
+        <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
             Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
-                <materialDesign:Flipper.FrontContent>
-                    <Grid Height="300" Background="#FF232323">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image x:Name="Avatar" Margin="0,10" MouseDown="Avatar_MouseDown"/>
-                        <DockPanel Grid.Row="1" Margin="10,0">
-                            <Label Name="l_nicname" Content="Nicname &gt; " DockPanel.Dock="Left"
-                               VerticalAlignment="Center"/>
-                            <TextBox x:Name="tb_nickname"
-                                 VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel Grid.Row="2" Margin="10,0">
-                            <Label Content="Login &gt; " DockPanel.Dock="Left"
-                               VerticalAlignment="Center"/>
-                            <TextBox x:Name="tb_login"
-                                 VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel Grid.Row="3" Margin="10,0">
-                            <Label Name="l_pass" Content="Password &gt; " DockPanel.Dock="Left"
-                               VerticalAlignment="Center"/>
-                            <TextBox x:Name="tb_password"
-                                 VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <Button x:Name="Flipper_b" Content="Save" 
-                            Foreground="White" Grid.Row="4"
-                            Margin="10,10" Click="Flipper_b_Click"/>
-                    </Grid>
-                </materialDesign:Flipper.FrontContent>
-            </materialDesign:Flipper>
-
-            <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
-                <ListBoxItem>
-                    <Image Height="30" Margin="15,0" x:Name="i_profile" 
-                   Source="../Windows/Icons/account.png" MouseDown="I_Profile_MouseDown"/>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <materialDesign:Badged x:Name="chat_badged"
-                            Badge="" BadgeBackground="#FFA81F15"
-                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
-                            Height="30" Margin="15,0" MouseDown="chat_badged_MouseDown">
-                        <Image Source="../Windows/Icons/all.png"/>
-                    </materialDesign:Badged>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <materialDesign:Badged x:Name="allContacts_badget"
-                            Badge="" BadgeBackground="#FFA81F15"
-                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
-                            Height="30" Margin="17,0" MouseDown="allContacts_badget_MouseDown">
-                        <Image Source="../Windows/Icons/Contacts.png"/>
-                    </materialDesign:Badged>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <materialDesign:Badged x:Name="addFriend_badget"
-                            Badge="" BadgeBackground="#FFA81F15"
-                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
-                            Height="24" Margin="17,0" MouseDown="addFriend_badget_MouseDown">
-                        <Image Source="../Windows/Icons/addFriend.png"/>
-                    </materialDesign:Badged>
-                </ListBoxItem>
-            </ListBox>
-
-            <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden" SelectionChanged="lb_contacts_SelectionChanged"/>
-
-            <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_contactInfo">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Image x:Name="avatar_fr" Margin="10"/>
-
-                <StackPanel Grid.Row="1">
-                    <Label Name="l_login" Content="Login:"/>
-                    <TextBlock x:Name="login" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
-                    <Label Name="l_nickname" Content="Nickname:"/>
-                    <TextBlock x:Name="nickname" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="3">
-                    <Label Name="l_status" Content="Status:"/>
-                    <TextBlock x:Name="status" />
-                </StackPanel>
-
-                <Button x:Name="bt_remove_fr" Margin="10" Grid.Row="5" 
-                        Content="Remove" Foreground="White" Click="bt_remove_fr_Click"/>
-            </Grid>
-
-            <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_requestInfo">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image x:Name="avatar_r" Margin="10"/>
-
-                <StackPanel Grid.Row="1">
-                    <Label Name="l_login_r" Content="Login:"/>
-                    <TextBlock x:Name="login_r" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
-                    <Label Name="l_nickname_r" Content="Nickname:"/>
-                    <TextBlock x:Name="nickname_r" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="3">
-                    <Label Name="l_status_r" Content="Status:"/>
-                    <TextBlock x:Name="status_r" />
-                </StackPanel>
-
-                <Button Visibility="Hidden" x:Name="bt_accept_r" Margin="10" Grid.Row="4" 
-                        Content="Accept" Foreground="White" Click="bt_accept_r_Click"/>
-                <Button Visibility="Hidden" x:Name="bt_reject_r" Margin="10" Grid.Row="5" 
-                        Content="Reject" Foreground="White" Click="bt_reject_r_Click"/>
-            </Grid>
-
-            <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ListBox x:Name="chat_lb" Margin="10" Visibility="Hidden"/>
-                <Grid Grid.Column="1">
+            <materialDesign:Flipper.FrontContent>
+                <Grid Height="300" Background="#FF232323">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image x:Name="avatar_ct" Margin="10"/>
-                    <TextBlock x:Name="login_ct" Margin="0,10" Grid.Row="1"/>
-                    <TextBlock x:Name="nickname_ct" Margin="0,10" Grid.Row="2"/>
-                    <TextBlock x:Name="status_ct" Margin="0,10" Grid.Row="3"/>
-                    <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" 
-                        Content="Remove" Foreground="White"/>
+                    <Image x:Name="Avatar" Margin="0,10" MouseDown="Avatar_MouseDown"/>
+                    <DockPanel Grid.Row="1" Margin="10,0">
+                        <Label Name="l_nicname" Content="Nicname &gt; " DockPanel.Dock="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_nickname"
+                                 VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Margin="10,0">
+                        <Label Content="Login &gt; " DockPanel.Dock="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_login"
+                                 VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Grid.Row="3" Margin="10,0">
+                        <Label Name="l_pass" Content="Password &gt; " DockPanel.Dock="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_password"
+                                 VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Button x:Name="Flipper_b" Content="Save" 
+                            Foreground="White" Grid.Row="4"
+                            Margin="10,10" Click="Flipper_b_Click"/>
                 </Grid>
-            </Grid>
+            </materialDesign:Flipper.FrontContent>
+        </materialDesign:Flipper>
 
-            <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden" SelectionChanged="lb_chats_SelectionChanged" />
-            <StackPanel x:Name="sp_Requests" Grid.Column="1" Visibility="Hidden">
-                <Label Name="l_send" FontSize="14">Send requests:</Label>
-                <ListBox MaxHeight="200"  x:Name="lb_requests_Send" SelectionChanged="lb_requests_Send_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+        <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
+            <ListBoxItem>
+                <Image Height="30" Margin="15,0" x:Name="i_profile" 
+                   Source="../Windows/Icons/account.png" MouseDown="I_Profile_MouseDown"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <materialDesign:Badged x:Name="chat_badged"
+                            Badge="" BadgeBackground="#FFA81F15"
+                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
+                            Height="30" Margin="15,0" MouseDown="chat_badged_MouseDown">
+                    <Image Source="../Windows/Icons/all.png"/>
+                </materialDesign:Badged>
+            </ListBoxItem>
+            <ListBoxItem>
+                <materialDesign:Badged x:Name="allContacts_badget"
+                            Badge="" BadgeBackground="#FFA81F15"
+                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
+                            Height="30" Margin="17,0" MouseDown="allContacts_badget_MouseDown">
+                    <Image Source="../Windows/Icons/Contacts.png"/>
+                </materialDesign:Badged>
+            </ListBoxItem>
+            <ListBoxItem>
+                <materialDesign:Badged x:Name="addFriend_badget"
+                            Badge="" BadgeBackground="#FFA81F15"
+                            BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
+                            Height="24" Margin="17,0" MouseDown="addFriend_badget_MouseDown">
+                    <Image Source="../Windows/Icons/addFriend.png"/>
+                </materialDesign:Badged>
+            </ListBoxItem>
+        </ListBox>
 
-                <Label Name="l_receipt" FontSize="14">Receipt requests:</Label>
-                <ListBox MaxHeight="200" Grid.Column="1" x:Name="lb_requests" SelectionChanged="lb_requests_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+        <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden" SelectionChanged="lb_contacts_SelectionChanged"/>
 
-            </StackPanel>
-
-            <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
-                      Width="5" Grid.Column="2" Background="#FF232323" IsEnabled="false"
-                      Visibility="Hidden"/>
+        <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_contactInfo">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="avatar_fr" Margin="10"/>
+            <TextBlock x:Name="login" Margin="0,10" Grid.Row="1"/>
+            <TextBlock x:Name="nickname" Margin="0,10" Grid.Row="2"/>
+            <TextBlock x:Name="status" Margin="0,10" Grid.Row="3"/>
+            <Button x:Name="bt_remove_fr" Margin="10" Grid.Row="5" 
+                        Content="Remove" Foreground="White"/>
         </Grid>
 
+        <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_requestInfo">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="avatar_r" Margin="10"/>
+            
+            <StackPanel Grid.Row="1">
+                <Label Name="l_login_r" Content="Login:"/>
+                <TextBlock x:Name="login_r" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <Label Name="l_nickname_r" Content="Nickname:"/>
+                <TextBlock x:Name="nickname_r" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <Label Name="l_status_r" Content="Status:"/>
+                <TextBlock x:Name="status_r" />
+            </StackPanel>
+
+            <Button Visibility="Hidden" x:Name="bt_accept_r" Margin="10" Grid.Row="4" 
+                        Content="Accept" Foreground="White" Click="bt_accept_r_Click"/>
+            <Button Visibility="Hidden" x:Name="bt_reject_r" Margin="10" Grid.Row="5" 
+                        Content="Reject" Foreground="White" Click="bt_reject_r_Click"/>
+        </Grid>
+
+        <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="chat_lb" Margin="10" Visibility="Hidden"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="avatar_ct" Margin="10"/>
+                <TextBlock x:Name="login_ct" Margin="0,10" Grid.Row="1"/>
+                <TextBlock x:Name="nickname_ct" Margin="0,10" Grid.Row="2"/>
+                <TextBlock x:Name="status_ct" Margin="0,10" Grid.Row="3"/>
+                <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" 
+                        Content="Remove" Foreground="White"/>
+            </Grid>
+        </Grid>
+
+        <ListBox Grid.Column="1" x:Name="lb_chats" Visibility="Hidden" SelectionChanged="lb_chats_SelectionChanged" />
+        <StackPanel x:Name="sp_Requests" Grid.Column="1" Visibility="Hidden">
+            <Label Name="l_send" FontSize="14">Send requests:</Label>
+            <ListBox MaxHeight="200"  x:Name="lb_requests_Send" SelectionChanged="lb_requests_Send_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+
+            <Label Name="l_receipt" FontSize="14">Receipt requests:</Label>
+            <ListBox MaxHeight="200" Grid.Column="1" x:Name="lb_requests" SelectionChanged="lb_requests_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+
+        </StackPanel>
+
+        <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
+                      Width="5" Grid.Column="2" Background="#FF232323" IsEnabled="false"
+                      Visibility="Hidden"/>
     </Grid>
 </Window>

@@ -540,29 +540,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_RemoveContact_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_Message__output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -651,9 +628,6 @@
   <wsdl:message name="IProgramService_RejectRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:RejectRequest" />
   </wsdl:message>
-  <wsdl:message name="IProgramService_RemoveContact_InputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveContact" />
-  </wsdl:message>
   <wsdl:message name="IProgramService_Message__OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Message_" />
   </wsdl:message>
@@ -702,9 +676,6 @@
     </wsdl:operation>
     <wsdl:operation name="RejectRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/RejectRequest" message="tns:IProgramService_RejectRequest_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RemoveContact">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/RemoveContact" message="tns:IProgramService_RemoveContact_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Message_">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/Message_" message="tns:IProgramService_Message__OutputCallbackMessage" />
@@ -825,13 +796,6 @@
       <soap12:operation soapAction="http://tempuri.org/IProgramService/RejectRequest" style="document" />
       <wsdl:input>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_RejectRequest_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="RemoveContact">
-      <soap12:operation soapAction="http://tempuri.org/IProgramService/RemoveContact" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_RemoveContact_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>

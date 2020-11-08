@@ -286,17 +286,5 @@
             repositories.Save();
         }
 
-        public void RemoveContact(string login)
-        {
-            int idUser = repositories.UserRepository
-                .Get(u => u.Login == login)
-                .First()
-                .Id;
-
-            repositories.CoupleRepository.Delete(
-                repositories.CoupleRepository
-                .GetById(idUser));
-        }
-
     }
 }

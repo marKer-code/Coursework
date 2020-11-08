@@ -335,21 +335,7 @@
             lb_chats.Visibility = Visibility.Hidden;
         }
         private void hidenContactInfo()
-        {
-            gr_contactInfo.Visibility = Visibility.Hidden;
-            bt_remove_fr.Visibility = Visibility.Hidden;
-            avatar_fr.Visibility = Visibility.Hidden;
-
-            nickname.Visibility = Visibility.Hidden;
-            login.Visibility = Visibility.Hidden;
-            status.Visibility = Visibility.Hidden;
-
-            l_login.Visibility = Visibility.Hidden;
-            l_nickname.Visibility = Visibility.Hidden;
-            l_status.Visibility = Visibility.Hidden;
-
-            lb_contacts.SelectedItem = 0;
-        }
+            => gr_contactInfo.Visibility = Visibility.Hidden;
 
         private void hidenChatInfo()
         {
@@ -394,6 +380,7 @@
 
         private void ShowInfoRequests(System.Windows.Controls.ListBox listBox)
         {
+
             hidenChatInfo();
             hidenContactInfo();
             sp_Requests.Visibility = Visibility.Visible;
@@ -477,6 +464,10 @@
             else MessageBox.Show("< Select Request >");
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+        }
+
         private void lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             hiddenReqestsInfo();
@@ -485,67 +476,12 @@
             chat_lb.Visibility = Visibility.Visible;
         }
 
-        private void bt_remove_fr_Click(object sender, RoutedEventArgs e)
-        {
-            if (login.Text != null)
-                programServiceClient.RemoveContactAsync(login.Text);
-            else MessageBox.Show("< Select Request >");
-        }
-
-        private void ShowContactInfo()
-        {
-            hidenChatInfo();
-            hidenContactInfo();
-
-            gr_contactInfo.Visibility = Visibility.Visible;
-            bt_remove_fr.Visibility = Visibility.Visible;
-
-            l_login.Visibility = Visibility.Visible;
-            l_nickname.Visibility = Visibility.Visible;
-            l_status.Visibility = Visibility.Visible;
-
-            nickname.Visibility = Visibility.Visible;
-            login.Visibility = Visibility.Visible;
-            status.Visibility = Visibility.Visible;
-
-
-            avatar_fr.Visibility = Visibility.Visible;
-            flipper.IsEnabled = false;
-            flipper.Visibility = Visibility.Collapsed;
-
-            if (lb_contacts.SelectedItems != null)
-            {
-                login.Text = lb_contacts.SelectedItem.ToString();
-
-                List<byte[]> infoes = programServiceClient.LoadUserInfo(login.Text);
-
-                if (Encoding.Default.GetString(infoes[3]) == "true")
-                    status.Text = Encoding.Default.GetString(infoes[3]);
-                else
-                    status.Text = Encoding.Default.GetString(infoes[1]);
-
-                nickname.Text = Encoding.Default.GetString(infoes[0]);
-                byte[] ph = infoes[2];
-                TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
-                Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
-                var handle = bitmap1.GetHbitmap();
-                avatar_fr.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
-                IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            }
-        }
-
         private void lb_contacts_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (lb_contacts.SelectedItem != null)
-            {
-                ShowContactInfo();
-
-                lb_contacts.SelectedItem = null;
-            }
+            hiddenReqestsInfo();
+            hidenChatInfo();
+            gr_contactInfo.Visibility = Visibility.Visible;
         }
-
-        private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
-            => Close();
 
     }
 }
