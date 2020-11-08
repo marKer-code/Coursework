@@ -78,12 +78,18 @@
     </Compile>
     <Compile Include="InsomableMethods\IInsomableMethods.cs" />
     <Compile Include="InsomableMethods\InsomableMethods.cs" />
+    <Compile Include="Windows\MainWindow\ChatsPage.cs" />
+    <Compile Include="Windows\MainWindow\ContactsPage.cs" />
+    <Compile Include="Windows\MainWindow\DesignChange.cs" />
     <Compile Include="Windows\Initial.xaml.cs">
       <DependentUpon>Initial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Main.xaml.cs">
+    <Compile Include="Windows\MainWindow\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MainWindow\MenuItem.cs" />
+    <Compile Include="Windows\MainWindow\ProfilePage.cs" />
+    <Compile Include="Windows\MainWindow\ReqectsPage.cs" />
     <Compile Include="Windows\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
@@ -157,7 +163,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Main.xaml">
+    <Page Include="Windows\MainWindow\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

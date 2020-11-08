@@ -7,6 +7,7 @@
     using System.Windows.Input;
     using UI.InsomableMethods_;
     using UI.ServiceReference;
+    using UI.Windows.MainWindow;
 
     public class CallbackHandler : IProgramServiceCallback
     {
@@ -18,10 +19,11 @@
 
     public partial class Initial : Window
     {
-        ProgramServiceClient programServiceClient;
+        readonly ProgramServiceClient programServiceClient;
+        readonly IInsomableMethods insomable;
 
         bool passwordBoxActive = true;
-        IInsomableMethods insomable;
+        string wantedLogin, wantedPassword;
 
         public Initial()
         {
@@ -36,7 +38,6 @@
 
             Tb_Password.Visibility = Visibility.Hidden;
         }
-        string wantedLogin, wantedPassword;
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
             => Close();
@@ -47,21 +48,50 @@
         private void B_SignIn_Click(object sender, RoutedEventArgs e)
         {
             wantedLogin = Tb_Login.Text;
-            if (passwordBoxActive)
-                wantedPassword = Pb_Password.Password;
-            else wantedPassword = Tb_Password.Text;
+
+            switch (passwordBoxActive.ToString())
+            {
+                case "True":
+                    {
+                        wantedPassword = Pb_Password.Password;
+                        break;
+                    }
+                case "False":
+                    {
+                        wantedPassword = Tb_Password.Text;
+                        break;
+                    }
+            }
 
             if (!String.IsNullOrWhiteSpace(wantedLogin) &&
                 !String.IsNullOrWhiteSpace(wantedPassword))
-                if (programServiceClient.CheckLogin(wantedLogin))
+                switch (programServiceClient.CheckLogin(wantedLogin).ToString())
                 {
-                    if (programServiceClient.CheckUser(wantedLogin, wantedPassword))
-                        insomable.OpenWindow(
-                            new Main(wantedLogin, wantedPassword,
-                            null, Encoding.Default.GetBytes("0")), this);
-                    else MessageBox.Show("< Uncorrect password >");
+                    case "True":
+                        {
+                            switch (programServiceClient.CheckUser(wantedLogin, wantedPassword).ToString())
+                            {
+                                case "True":
+                                    {
+                                        insomable.OpenWindow(
+                                            new Main(wantedLogin, wantedPassword,
+                                            null, Encoding.Default.GetBytes("0")), this);
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        MessageBox.Show("< Uncorrect password >");
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show("< No user with such login >");
+                            break;
+                        }
                 }
-                else MessageBox.Show("< No user with such login >");
             else MessageBox.Show("< Enter all data >");
         }
 

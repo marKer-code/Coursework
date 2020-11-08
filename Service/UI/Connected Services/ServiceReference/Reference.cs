@@ -122,35 +122,11 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/CheckLogin", ReplyAction="http://tempuri.org/IProgramService/CheckLoginResponse")]
         System.Threading.Tasks.Task<bool> CheckLoginAsync(string login);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
-        void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
-        System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserInfo")]
-        void SaveUserInfo(string lastLogin, string login, string nickname, string password, byte[] img);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserInfo")]
-        System.Threading.Tasks.Task SaveUserInfoAsync(string lastLogin, string login, string nickname, string password, byte[] img);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
         System.Collections.Generic.List<byte[]> LoadUserInfo(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/LoadUserInfo", ReplyAction="http://tempuri.org/IProgramService/LoadUserInfoResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<byte[]>> LoadUserInfoAsync(string login);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
-        void AddRequest(string sender, string receiver);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
-        System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserPhoto")]
-        void SaveUserPhoto(string login, byte[] img);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserPhoto")]
-        System.Threading.Tasks.Task SaveUserPhotoAsync(string login, byte[] img);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllContact", ReplyAction="http://tempuri.org/IProgramService/GetAllContactResponse")]
         System.Collections.Generic.List<int> GetAllContact(string login);
@@ -170,23 +146,47 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetLoginUserById", ReplyAction="http://tempuri.org/IProgramService/GetLoginUserByIdResponse")]
         System.Threading.Tasks.Task<string> GetLoginUserByIdAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
+        void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
+        System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserInfo")]
+        void SaveUserInfo(string lastLogin, string login, string nickname, string password, byte[] img);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserInfo")]
+        System.Threading.Tasks.Task SaveUserInfoAsync(string lastLogin, string login, string nickname, string password, byte[] img);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
+        void AddRequest(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
+        System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
         void UpdateOnline(string login, bool loginIn);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
         System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AceptRequest")]
-        void AceptRequest(string sender, string receiver);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AcceptRequest")]
+        void AcceptRequest(string sender, string receiver);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AceptRequest")]
-        System.Threading.Tasks.Task AceptRequestAsync(string sender, string receiver);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AcceptRequest")]
+        System.Threading.Tasks.Task AcceptRequestAsync(string sender, string receiver);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RejectRequest")]
         void RejectRequest(string sender, string receiver);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RejectRequest")]
         System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RemoveContact")]
+        void RemoveContact(string login, string otherLogin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RemoveContact")]
+        System.Threading.Tasks.Task RemoveContactAsync(string login, string otherLogin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -240,44 +240,12 @@ namespace UI.ServiceReference {
             return base.Channel.CheckLoginAsync(login);
         }
         
-        public void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
-            base.Channel.AddUser(login, nickname, password, img, online, lastOnline);
-        }
-        
-        public System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
-            return base.Channel.AddUserAsync(login, nickname, password, img, online, lastOnline);
-        }
-        
-        public void SaveUserInfo(string lastLogin, string login, string nickname, string password, byte[] img) {
-            base.Channel.SaveUserInfo(lastLogin, login, nickname, password, img);
-        }
-        
-        public System.Threading.Tasks.Task SaveUserInfoAsync(string lastLogin, string login, string nickname, string password, byte[] img) {
-            return base.Channel.SaveUserInfoAsync(lastLogin, login, nickname, password, img);
-        }
-        
         public System.Collections.Generic.List<byte[]> LoadUserInfo(string login) {
             return base.Channel.LoadUserInfo(login);
         }
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<byte[]>> LoadUserInfoAsync(string login) {
             return base.Channel.LoadUserInfoAsync(login);
-        }
-        
-        public void AddRequest(string sender, string receiver) {
-            base.Channel.AddRequest(sender, receiver);
-        }
-        
-        public System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver) {
-            return base.Channel.AddRequestAsync(sender, receiver);
-        }
-        
-        public void SaveUserPhoto(string login, byte[] img) {
-            base.Channel.SaveUserPhoto(login, img);
-        }
-        
-        public System.Threading.Tasks.Task SaveUserPhotoAsync(string login, byte[] img) {
-            return base.Channel.SaveUserPhotoAsync(login, img);
         }
         
         public System.Collections.Generic.List<int> GetAllContact(string login) {
@@ -304,6 +272,30 @@ namespace UI.ServiceReference {
             return base.Channel.GetLoginUserByIdAsync(id);
         }
         
+        public void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
+            base.Channel.AddUser(login, nickname, password, img, online, lastOnline);
+        }
+        
+        public System.Threading.Tasks.Task AddUserAsync(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
+            return base.Channel.AddUserAsync(login, nickname, password, img, online, lastOnline);
+        }
+        
+        public void SaveUserInfo(string lastLogin, string login, string nickname, string password, byte[] img) {
+            base.Channel.SaveUserInfo(lastLogin, login, nickname, password, img);
+        }
+        
+        public System.Threading.Tasks.Task SaveUserInfoAsync(string lastLogin, string login, string nickname, string password, byte[] img) {
+            return base.Channel.SaveUserInfoAsync(lastLogin, login, nickname, password, img);
+        }
+        
+        public void AddRequest(string sender, string receiver) {
+            base.Channel.AddRequest(sender, receiver);
+        }
+        
+        public System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver) {
+            return base.Channel.AddRequestAsync(sender, receiver);
+        }
+        
         public void UpdateOnline(string login, bool loginIn) {
             base.Channel.UpdateOnline(login, loginIn);
         }
@@ -312,12 +304,12 @@ namespace UI.ServiceReference {
             return base.Channel.UpdateOnlineAsync(login, loginIn);
         }
         
-        public void AceptRequest(string sender, string receiver) {
-            base.Channel.AceptRequest(sender, receiver);
+        public void AcceptRequest(string sender, string receiver) {
+            base.Channel.AcceptRequest(sender, receiver);
         }
         
-        public System.Threading.Tasks.Task AceptRequestAsync(string sender, string receiver) {
-            return base.Channel.AceptRequestAsync(sender, receiver);
+        public System.Threading.Tasks.Task AcceptRequestAsync(string sender, string receiver) {
+            return base.Channel.AcceptRequestAsync(sender, receiver);
         }
         
         public void RejectRequest(string sender, string receiver) {
@@ -326,6 +318,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver) {
             return base.Channel.RejectRequestAsync(sender, receiver);
+        }
+        
+        public void RemoveContact(string login, string otherLogin) {
+            base.Channel.RemoveContact(login, otherLogin);
+        }
+        
+        public System.Threading.Tasks.Task RemoveContactAsync(string login, string otherLogin) {
+            return base.Channel.RemoveContactAsync(login, otherLogin);
         }
     }
 }

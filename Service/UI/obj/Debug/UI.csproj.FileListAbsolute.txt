@@ -22,8 +22,6 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.g.cs
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.baml
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Main.g.cs
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Main.baml
 D:\Step\Coursework\Service\UI\bin\Debug\UI.exe.config
 D:\Step\Coursework\Service\UI\bin\Debug\UI.exe
 D:\Step\Coursework\Service\UI\bin\Debug\UI.pdb
@@ -50,3 +48,5 @@ D:\Step\Coursework\Service\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
 D:\Step\Coursework\Service\UI\obj\Debug\UI.csproj.CopyComplete
 D:\Step\Coursework\Service\UI\obj\Debug\UI.exe
 D:\Step\Coursework\Service\UI\obj\Debug\UI.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\MainWindow\Main.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\MainWindow\Main.baml

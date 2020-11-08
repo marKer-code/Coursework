@@ -4,165 +4,71 @@
     using DAL.Entities;
     using DAL.Interfaces;
     using DAL.Repositories;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceModel;
     using System.Text;
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class ProgramService : IProgramService
+    public partial class ProgramService : IProgramService
     {
         private readonly IUnitOfWork repositories;
+        readonly Dictionary<string, UserMessage> sub =
+           new Dictionary<string, UserMessage>();
 
         public ProgramService()
-            => repositories = new UnitOfWork(new DAL.ProgramDatabaseModel());
+            => repositories =
+               new UnitOfWork(new ProgramDatabaseModel());
 
         public bool CheckUser(string login, string password)
         {
             string pass = new Utils().ComputeSha256Hash(password);
-            try
-            {
-                User user = repositories.UserRepository
-                            .Get(u => u.Login == login &&
-                                 u.HashPassword == pass)
-                            .First();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return repositories.UserRepository
+                             .Get(u => u.Login == login &&
+                              u.HashPassword == pass)
+                             .FirstOrDefault() != null;
         }
 
         public bool CheckLogin(string login)
-        {
-            try
-            {
-                User user = repositories.UserRepository
-                                .Get(u => u.Login == login)
-                                .First();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public void AddUser(string login, string nickname,
-            string password, byte[] img, bool online, DateTime lastOnline)
-        {
-            repositories.UserRepository.Insert(new User()
-            {
-                Login = login,
-                HashPassword = new Utils().ComputeSha256Hash(password)
-            });
-            repositories.Save();
-
-            User user = repositories.UserRepository
-                .Get(u => u.Login == login).First();
-            int id = user.Id;
-
-            repositories.UserInfoRepository.Insert(new UserInfo()
-            {
-                Nickname = nickname,
-                LastOnline = lastOnline,
-                Online = online,
-                Photo = img,
-                UserId = id
-            });
-            repositories.Save();
-        }
+            => repositories.UserRepository
+                           .Get(u => u.Login == login)
+                           .FirstOrDefault() != null;
 
         public List<byte[]> LoadUserInfo(string login)
         {
-            User user = repositories.UserRepository
-                .Get(u => u.Login == login).First();
-            int id = user.Id;
+            int id = repositories.UserRepository
+                                 .Get(u => u.Login == login)
+                                 .First()
+                                 .Id;
 
-            IEnumerable<UserInfo> userInfo = repositories
-                .UserInfoRepository.Get(ui => ui.UserId == id);
-            List<byte[]> infoes = new List<byte[]>();
-            infoes.Add(Encoding.Default.GetBytes(userInfo.First().Nickname));
-            infoes.Add(Encoding.Default.GetBytes(userInfo.First().LastOnline.ToString()));
-            infoes.Add(userInfo.First().Photo);
-            infoes.Add(Encoding.Default.GetBytes(userInfo.First().Online.ToString()));
-            return infoes;
-        }
+            List<UserInfo> userInfo = repositories
+                           .UserInfoRepository
+                           .Get(ui => ui.UserId == id)
+                           .ToList();
 
-        public void SaveUserPhoto(string login, byte[] img)
-        {
-            User newUser = repositories.UserRepository
-               .Get(u => u.Login == login)
-               .First();
-
-            UserInfo info = repositories.UserInfoRepository
-                .Get(i => i.UserId == newUser.Id)
-                .First();
-
-            info.Photo = img;
-            repositories.Save();
-        }
-
-        public void SaveUserInfo(string lastLogin,
-            string login, string nickname,
-            string password, byte[] img)
-        {
-            User newUser = repositories.UserRepository
-                .Get(u => u.Login == lastLogin)
-                .First();
-
-            UserInfo info = repositories.UserInfoRepository
-               .Get(i => i.UserId == newUser.Id)
-               .First();
-
-            newUser.Login = login;
-            newUser.HashPassword = new Utils().ComputeSha256Hash(password);
-            info.Nickname = nickname;
-            info.Photo = img;
-
-            repositories.Save();
-        }
-
-        public void AddRequest(string sender, string receiver)
-        {
-            int idSender = repositories.UserRepository
-                .Get(u => u.Login == sender)
-                .First()
-                .Id,
-
-                idReceiver = repositories.UserRepository
-                .Get(u => u.Login == receiver)
-                .First()
-                .Id;
-
-            repositories.RequestRepository.Insert(
-                new Request
-                {
-                    SenderId = idSender,
-                    ReceiverId = idReceiver,
-                    SendTime = DateTime.Now
-                });
-
-            repositories.Save();
+            return new List<byte[]>
+            {
+                Encoding.Default.GetBytes(userInfo.First().Nickname),
+                Encoding.Default.GetBytes(userInfo.First().LastOnline.ToString()),
+                userInfo.First().Photo,
+                Encoding.Default.GetBytes(userInfo.First().Online.ToString())
+            };
         }
 
         public List<int> GetAllContact(string login)
         {
-            List<int> users = new List<int>();
             int idUser = repositories.UserRepository
-                .Get(u => u.Login == login)
-                .First()
-                .Id;
+                         .Get(u => u.Login == login)
+                         .First()
+                         .Id;
 
-            List<Couple> couples
-                = repositories.CoupleRepository
-                .Get(c => c.UserId1 == idUser ||
-                c.UserId2 == idUser)
-                .ToList();
+            List<int> users = new List<int>();
 
-            foreach (var c in couples)
+            foreach (var c in repositories
+                              .CoupleRepository
+                              .Get(c => c.UserId1 == idUser ||
+                               c.UserId2 == idUser)
+                              .ToList())
             {
                 if (c.UserId1 != idUser)
                     users.Add(c.UserId1);
@@ -173,118 +79,19 @@
             return users;
         }
 
-        public IEnumerable<Request> GetAllRequests(string login, bool isSend)
+        public List<Request> GetAllRequests(string login, bool isSend)
         {
-            if (!isSend)
-            {
-                int idResiver = repositories.UserRepository
-                    .Get(u => u.Login == login)
-                    .First()
-                    .Id;
-                return repositories.RequestRepository.Get(r => r.ReceiverId == idResiver).ToList();
-            }
-            else
-            {
-                int idResiver = repositories.UserRepository
-                    .Get(u => u.Login == login)
-                    .First()
-                    .Id;
-                return repositories.RequestRepository.Get(r => r.SenderId == idResiver).ToList();
-            }
+            int idResiver = repositories.UserRepository
+                            .Get(u => u.Login == login)
+                            .First()
+                            .Id;
 
+            return isSend == true ?
+                repositories.RequestRepository.Get(r => r.SenderId == idResiver).ToList() :
+                repositories.RequestRepository.Get(r => r.ReceiverId == idResiver).ToList();
         }
 
         public string GetLoginUserById(int id)
-        {
-            return repositories.UserRepository.GetById(id).Login;
-        }
-
-        Dictionary<string, UserMessage> sub =
-            new Dictionary<string, UserMessage>();
-        public void UpdateOnline(string login, bool loginIn)
-        {
-            UserInfo userInfo = repositories.UserInfoRepository
-                .Get(u => u.User.Login == login)
-                .First();
-
-            int idUser = userInfo.UserId;
-
-            userInfo.Online = loginIn;
-            if (!loginIn)
-            {
-                userInfo.LastOnline = DateTime.Now;
-
-                UserMessage user = new UserMessage();
-
-                foreach (var item in sub.Keys)
-                    if (item == login)
-                    {
-                        user.Message = "pidor exit";
-                        user.Callback = sub[item].Callback;
-                        break;
-                    }
-                sub.Remove(login);
-                user.Callback.Message_(user.Message);
-            }
-            else
-            {
-                UserMessage user = new UserMessage()
-                {
-                    Message = "",
-                    Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
-                };
-                sub.Add(login, user);
-                user.Callback.Message_(user.Message);
-            }
-        }
-
-        public void AceptRequest(string sender, string receiver)
-        {
-            int idSender = repositories.UserRepository
-                .Get(u => u.Login == sender)
-                .First()
-                .Id,
-
-                idReceiver = repositories.UserRepository
-                .Get(u => u.Login == receiver)
-                .First()
-                .Id;
-
-            repositories.RequestRepository.Delete(
-                repositories.RequestRepository
-                .Get(r => r.SenderId == idSender &&
-                r.ReceiverId == idReceiver)
-                .First());
-
-            repositories.CoupleRepository.Insert(
-                new Couple
-                {
-                    UserId1 = idSender,
-                    UserId2 = idReceiver
-                });
-
-            repositories.Save();
-        }
-
-        public void RejectRequest(string sender, string receiver)
-        {
-            int idSender = repositories.UserRepository
-                .Get(u => u.Login == sender)
-                .First()
-                .Id,
-
-                idReceiver = repositories.UserRepository
-                .Get(u => u.Login == receiver)
-                .First()
-                .Id;
-
-            repositories.RequestRepository.Delete(
-                repositories.RequestRepository
-                .Get(r => r.SenderId == idSender && r.ReceiverId == idReceiver)
-                .First());
-
-            repositories.Save();
-        }
-
+            => repositories.UserRepository.GetById(id).Login;
     }
 }
