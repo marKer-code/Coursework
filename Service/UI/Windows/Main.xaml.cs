@@ -57,6 +57,11 @@
 
             List<int> users = programServiceClient.GetAllContact(login_);
 
+            foreach (var u in users)
+            {
+                lb_contacts.Items.Add(programServiceClient.GetLoginUserByIdAsync(u).Result);
+            }
+
             foreach (var request in programServiceClient.GetAllRequests(login_, false))
                 lb_requests.Items.Add(programServiceClient.GetLoginUserByIdAsync(request.SenderId).Result);
             foreach (var request in programServiceClient.GetAllRequests(login_, true))
@@ -159,8 +164,12 @@
 
             if (programServiceClient.CheckLogin(tb_login.Text))
             {
-                programServiceClient.AddRequestAsync(login_, tb_login.Text);
-                lb_requests_Send.Items.Add(tb_login.Text);
+                if (!lb_requests_Send.Items.Contains(tb_login.Text))
+                {
+                    programServiceClient.AddRequestAsync(login_, tb_login.Text);
+                    lb_requests_Send.Items.Add(tb_login.Text);
+                }
+                else MessageBox.Show("< Request already send >");
             }
             else MessageBox.Show("< No user with such login >");
         }
@@ -400,19 +409,44 @@
 
         private void lb_requests_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            bt_accept_r.IsEnabled = true;
-            bt_reject_r.IsEnabled = true;
+            if (lb_requests.SelectedItem != null)
+            {
+                bt_accept_r.IsEnabled = true;
+                bt_reject_r.IsEnabled = true;
 
-            ShowInfoRequests(lb_requests);
+                ShowInfoRequests(lb_requests);
+
+                lb_requests.SelectedItem = null;
+            }
         }
 
 
         private void lb_requests_Send_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            bt_accept_r.IsEnabled = false;
-            bt_reject_r.IsEnabled = false;
+            if (lb_requests_Send.SelectedItem != null)
+            {
+                bt_accept_r.IsEnabled = false;
+                bt_reject_r.IsEnabled = false;
 
-            ShowInfoRequests(lb_requests_Send);
+                ShowInfoRequests(lb_requests_Send);
+
+                lb_requests_Send.SelectedItem = null;
+            }
+        }
+
+
+        private void bt_accept_r_Click(object sender, RoutedEventArgs e)
+        {
+            if (login_r.Text != null)
+                programServiceClient.AceptRequestAsync(login_r.Text, login_);
+            else MessageBox.Show("< Select Request >");
+        }
+
+        private void bt_reject_r_Click(object sender, RoutedEventArgs e)
+        {
+            if (login_r.Text != null)
+                programServiceClient.RejectRequestAsync(login_r.Text, login_);
+            else MessageBox.Show("< Select Request >");
         }
 
         private void Window_Closed(object sender, EventArgs e)

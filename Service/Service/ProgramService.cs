@@ -199,16 +199,6 @@
             return repositories.UserRepository.GetById(id).Login;
         }
 
-        public void DeletedRequest(string sender, string receiver)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddCouple(string user1, string ser2)
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateOnline(string login, bool loginIn)
         {
             UserInfo userInfo = repositories.UserInfoRepository
@@ -221,5 +211,54 @@
             if (!loginIn)
                 userInfo.LastOnline = DateTime.Now;
         }
+
+        public void AceptRequest(string sender, string receiver)
+        {
+            int idSender = repositories.UserRepository
+                .Get(u => u.Login == sender)
+                .First()
+                .Id,
+
+                idReceiver = repositories.UserRepository
+                .Get(u => u.Login == receiver)
+                .First()
+                .Id;
+
+            repositories.RequestRepository.Delete(
+                repositories.RequestRepository
+                .Get(r => r.SenderId == idSender &&
+                r.ReceiverId == idReceiver)
+                .First());
+
+            repositories.CoupleRepository.Insert(
+                new Couple
+                {
+                    UserId1 = idSender,
+                    UserId2 = idReceiver
+                });
+
+            repositories.Save();
+        }
+
+        public void RejectRequest(string sender, string receiver)
+        {
+            int idSender = repositories.UserRepository
+                .Get(u => u.Login == sender)
+                .First()
+                .Id,
+
+                idReceiver = repositories.UserRepository
+                .Get(u => u.Login == receiver)
+                .First()
+                .Id;
+
+            repositories.RequestRepository.Delete(
+                repositories.RequestRepository
+                .Get(r => r.SenderId == idSender && r.ReceiverId == idReceiver)
+                .First());
+
+            repositories.Save();
+        }
+
     }
 }

@@ -146,18 +146,6 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddRequest")]
         System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeletedRequest")]
-        void DeletedRequest(string sender, string receiver);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeletedRequest")]
-        System.Threading.Tasks.Task DeletedRequestAsync(string sender, string receiver);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddCouple")]
-        void AddCouple(string user1, string ser2);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddCouple")]
-        System.Threading.Tasks.Task AddCoupleAsync(string user1, string ser2);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SaveUserPhoto")]
         void SaveUserPhoto(string login, byte[] img);
         
@@ -187,6 +175,18 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
         System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AceptRequest")]
+        void AceptRequest(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AceptRequest")]
+        System.Threading.Tasks.Task AceptRequestAsync(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RejectRequest")]
+        void RejectRequest(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RejectRequest")]
+        System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -264,22 +264,6 @@ namespace UI.ServiceReference {
             return base.Channel.AddRequestAsync(sender, receiver);
         }
         
-        public void DeletedRequest(string sender, string receiver) {
-            base.Channel.DeletedRequest(sender, receiver);
-        }
-        
-        public System.Threading.Tasks.Task DeletedRequestAsync(string sender, string receiver) {
-            return base.Channel.DeletedRequestAsync(sender, receiver);
-        }
-        
-        public void AddCouple(string user1, string ser2) {
-            base.Channel.AddCouple(user1, ser2);
-        }
-        
-        public System.Threading.Tasks.Task AddCoupleAsync(string user1, string ser2) {
-            return base.Channel.AddCoupleAsync(user1, ser2);
-        }
-        
         public void SaveUserPhoto(string login, byte[] img) {
             base.Channel.SaveUserPhoto(login, img);
         }
@@ -318,6 +302,22 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn) {
             return base.Channel.UpdateOnlineAsync(login, loginIn);
+        }
+        
+        public void AceptRequest(string sender, string receiver) {
+            base.Channel.AceptRequest(sender, receiver);
+        }
+        
+        public System.Threading.Tasks.Task AceptRequestAsync(string sender, string receiver) {
+            return base.Channel.AceptRequestAsync(sender, receiver);
+        }
+        
+        public void RejectRequest(string sender, string receiver) {
+            base.Channel.RejectRequest(sender, receiver);
+        }
+        
+        public System.Threading.Tasks.Task RejectRequestAsync(string sender, string receiver) {
+            return base.Channel.RejectRequestAsync(sender, receiver);
         }
     }
 }

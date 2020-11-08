@@ -137,9 +137,9 @@
             </StackPanel>
 
             <Button Visibility="Hidden" x:Name="bt_accept_r" Margin="10" Grid.Row="4" 
-                        Content="Accept" Foreground="White"/>
+                        Content="Accept" Foreground="White" Click="bt_accept_r_Click"/>
             <Button Visibility="Hidden" x:Name="bt_reject_r" Margin="10" Grid.Row="5" 
-                        Content="Reject" Foreground="White"/>
+                        Content="Reject" Foreground="White" Click="bt_reject_r_Click"/>
         </Grid>
 
         <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">

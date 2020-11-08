@@ -25,10 +25,6 @@
         void AddRequest(string sender, string receiver);
 
         [OperationContract(IsOneWay = true)]
-        void DeletedRequest(string sender, string receiver);
-        [OperationContract(IsOneWay = true)]
-        void AddCouple(string user1, string ser2);
-        [OperationContract(IsOneWay = true)]
         void SaveUserPhoto(string login, byte[] img);
         [OperationContract]
         List<int> GetAllContact(string login);
@@ -38,6 +34,10 @@
         string GetLoginUserById(int id);
         [OperationContract(IsOneWay = true)]
         void UpdateOnline(string login, bool loginIn);
+        [OperationContract(IsOneWay = true)]
+        void AceptRequest(string sender, string receiver);
+        [OperationContract(IsOneWay = true)]
+        void RejectRequest(string sender, string receiver);
     }
     public interface ICallback
     {
