@@ -34,15 +34,33 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
             callbackHandler.ReceiveRequestEvent += ReceiveRequest;
-
+            callbackHandler.NewContactEvent += NewContact;
+            callbackHandler.RejectRequest_Event += RejectRequest_;
+            callbackHandler.DeleteContactEvent += DeleteContact;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
         }
+
+        private void DeleteContact(string toDeleteLogin)
+            => Lists.contacts.Remove(toDeleteLogin);
+
+        private void RejectRequest_(string receiverLogin)
+            => Lists.sendRequests.Remove(receiverLogin);
+
+        private void NewContact(string contactLogin)
+        {
+            Lists.sendRequests.Remove(contactLogin);
+            Lists.contacts.Add(contactLogin);
+        }
+
         private void ReceiveRequest(string senderLogin)
             => Lists.receivedRequests.Add(senderLogin);
+
+        private void Window_Closed(object sender, EventArgs e)
+            => programServiceClient.UpdateOnlineAsync(login_, false);
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
@@ -86,9 +104,6 @@
             IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            programServiceClient.UpdateOnlineAsync(login_, false);
-            Close();
-        }
+            => Close();
     }
 }

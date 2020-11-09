@@ -34,7 +34,7 @@
             {
                 case "True":
                     {
-                        switch (lb_requests_Send.Items.Contains(tb_login.Text).ToString())
+                        switch (Lists.sendRequests.Contains(tb_login.Text).ToString())
                         {
                             case "False":
                                 {
@@ -144,6 +144,8 @@
                     }
                 default:
                     {
+                        Lists.receivedRequests.Remove(login_r.Text);
+                        Lists.contacts.Add(login_r.Text);
                         programServiceClient.AcceptRequestAsync(login_r.Text, login_);
                         break;
                     }
@@ -162,6 +164,7 @@
                 default:
                     {
                         programServiceClient.RejectRequestAsync(login_r.Text, login_);
+                        Lists.receivedRequests.Remove(login_r.Text);
                         break;
                     }
             }

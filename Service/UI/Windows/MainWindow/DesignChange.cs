@@ -6,7 +6,7 @@
 
     public static class Lists
     {
-        public static List<string> contacts = new List<string>();
+        public static Collection<string> contacts = new ObservableCollection<string>();
         public static Collection<string> receivedRequests = new ObservableCollection<string>();
         public static Collection<string> sendRequests = new ObservableCollection<string>();
     }

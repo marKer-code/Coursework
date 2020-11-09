@@ -49,22 +49,10 @@
 
         private void Bt_remove_fr_Click(object sender, RoutedEventArgs e)
         {
-            switch (login.Text)
-            {
-                case null:
-                    {
-                        MessageBox.Show("< Select Request >");
-                        break;
-                    }
-                default:
-                    {
-                        programServiceClient.RemoveContactAsync(login_, login.Text);
-                        lb_contacts.Items.Remove(login.Text);
-                        gr_contactInfo.Visibility = Visibility.Hidden;
-                        MessageBox.Show("< Removed >");
-                        break;
-                    }
-            }
+            programServiceClient.RemoveContactAsync(login_, login.Text);
+            Lists.contacts.Remove(login.Text);
+            gr_contactInfo.Visibility = Visibility.Hidden;
+            MessageBox.Show("< Removed >");
         }
     }
 }

@@ -9,7 +9,6 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Deb
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.dll
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.pdb
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\Step\Coursework\Service\DAL\bin\Debug\DAL.dll.config
 D:\Step\Coursework\Service\DAL\bin\Debug\DAL.dll
 D:\Step\Coursework\Service\DAL\bin\Debug\DAL.pdb

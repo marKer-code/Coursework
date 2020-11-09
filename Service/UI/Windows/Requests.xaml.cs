@@ -1,6 +1,5 @@
 ﻿namespace UI
 {
-    using System;
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.Text;
@@ -27,7 +26,10 @@
             insomable = new InsomableMethods();
 
             CallbackHandler callbackHandler = new CallbackHandler();
+            callbackHandler.NewContactEvent += NewContact;
             callbackHandler.ReceiveRequestEvent += ReceiveRequest;
+            callbackHandler.RejectRequest_Event += RejectRequest_;
+            callbackHandler.DeleteContactEvent += DeleteContact;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
@@ -35,8 +37,23 @@
             LoadInfo(login, password, nickname, photo);
         }
 
+        private void DeleteContact(string toDeleteLogin)
+            => Lists.contacts.Remove(toDeleteLogin);
+
+        private void RejectRequest_(string receiverLogin)
+            => Lists.sendRequests.Remove(receiverLogin);
+
+        private void NewContact(string contactLogin)
+        {
+            Lists.sendRequests.Remove(contactLogin);
+            Lists.contacts.Add(contactLogin);
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+            => programServiceClient.UpdateOnlineAsync(login_, false);
+
         private void ReceiveRequest(string senderLogin)
-             => Lists.receivedRequests.Add(senderLogin);
+            => Lists.receivedRequests.Add(senderLogin);
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
@@ -70,9 +87,6 @@
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            programServiceClient.UpdateOnlineAsync(login_, false);
-            Close();
-        }
+            => Close();
     }
 }

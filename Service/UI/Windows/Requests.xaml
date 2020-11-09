@@ -117,7 +117,7 @@
                         Content="Reject" Foreground="White" Click="Bt_reject_r_Click"/>
             </Grid>
 
-             <StackPanel x:Name="sp_Requests" Grid.Column="1">
+            <StackPanel x:Name="sp_Requests" Grid.Column="1">
                 <Label Name="l_send" FontSize="14">Send requests:</Label>
                 <ListBox MinHeight="195"  x:Name="lb_requests_Send" SelectionChanged="Lb_requests_Send_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 

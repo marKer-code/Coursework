@@ -12,9 +12,21 @@
     public class CallbackHandler : IProgramServiceCallback
     {
         public event Action<string> ReceiveRequestEvent;
+        public event Action<string> NewContactEvent;
+        public event Action<string> RejectRequest_Event;
+        public event Action<string> DeleteContactEvent;
+
+        public void DeleteContact(string toDeleteLogin)
+            => DeleteContactEvent?.Invoke(toDeleteLogin);
+
+        public void NewContact(string contactLogin)
+            => NewContactEvent?.Invoke(contactLogin);
 
         public void ReceiveRequest(string senderLogin)
-            => ReceiveRequestEvent.Invoke(senderLogin);
+            => ReceiveRequestEvent?.Invoke(senderLogin);
+
+        public void RejectRequest_(string receiverLogin)
+            => RejectRequest_Event?.Invoke(receiverLogin);
     }
 
     public partial class Initial : Window
