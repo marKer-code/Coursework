@@ -38,8 +38,8 @@
                         {
                             case "False":
                                 {
+                                    Lists.sendRequests.Add(tb_login.Text);
                                     programServiceClient.AddRequestAsync(login_, tb_login.Text);
-                                    lb_requests_Send.Items.Add(tb_login.Text);
                                     break;
                                 }
                             default:

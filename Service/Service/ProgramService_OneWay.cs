@@ -3,8 +3,8 @@
     using DAL;
     using DAL.Entities;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.ServiceModel;
 
     public partial class ProgramService
@@ -55,6 +55,9 @@
 
             repositories.Save();
         }
+
+        readonly static Dictionary<string, UserMessage> sub =
+           new Dictionary<string, UserMessage>();
         public void UpdateOnline(string login, bool loginIn)
         {
             UserInfo userInfo = repositories.UserInfoRepository
@@ -122,6 +125,20 @@
             );
 
             repositories.Save();
+
+            string login = repositories.UserRepository
+                .GetById(idReceiver).Login;
+            string loginSender = repositories.UserRepository
+               .GetById(idSender).Login;
+
+            foreach (var item in sub)
+            {
+                if (item.Key == login)
+                {
+                    item.Value.Message = loginSender;
+                    item.Value.Callback.Message_(loginSender);
+                }
+            }
         }
 
         public void AcceptRequest(string sender, string receiver)

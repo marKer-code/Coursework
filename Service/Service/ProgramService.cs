@@ -13,8 +13,6 @@
     public partial class ProgramService : IProgramService
     {
         private readonly IUnitOfWork repositories;
-        readonly Dictionary<string, UserMessage> sub =
-           new Dictionary<string, UserMessage>();
 
         public ProgramService()
             => repositories =

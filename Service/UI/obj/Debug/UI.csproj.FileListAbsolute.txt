@@ -19,7 +19,6 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\App.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Initial.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csproj.CopyComplete
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.g.cs
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\SignUp.baml
 D:\Step\Coursework\Service\UI\bin\Debug\UI.exe.config
@@ -66,3 +65,4 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Contact.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Profile.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Requests.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache

@@ -143,6 +143,11 @@
             {
                 case "True":
                     {
+                        MessageBox.Show("< Login already busy >");
+                        break;
+                    }
+                default:
+                    {
                         try
                         {
                             programServiceClient.AddUser(loginToAdd,
@@ -154,11 +159,6 @@
                         {
                             MessageBox.Show("< Too big a photo >");
                         }
-                        break;
-                    }
-                default:
-                    {
-                        MessageBox.Show("< Login already busy >");
                         break;
                     }
             }

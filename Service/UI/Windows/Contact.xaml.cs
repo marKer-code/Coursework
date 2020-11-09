@@ -1,6 +1,5 @@
 ﻿namespace UI
 {
-    using System;
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.Text;
@@ -27,11 +26,16 @@
             insomable = new InsomableMethods();
 
             CallbackHandler callbackHandler = new CallbackHandler();
-
+            callbackHandler.MessageEvent += GetMessage;
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
+        }
+
+        private void GetMessage(string obj)
+        {
+            MessageBox.Show(obj);
         }
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)

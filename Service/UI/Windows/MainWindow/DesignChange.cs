@@ -1,13 +1,14 @@
 ﻿namespace UI
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Windows;
 
     public static class Lists
     {
         public static List<string> contacts = new List<string>();
-        public static List<string> receivedRequests = new List<string>();
-        public static List<string> sendRequests = new List<string>();
+        public static Collection<string> receivedRequests = new ObservableCollection<string>();
+        public static Collection<string> sendRequests = new ObservableCollection<string>();
     }
 
     public partial class Profile

@@ -33,15 +33,22 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
+            callbackHandler.MessageEvent += GetMessage;
+
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
-            programServiceClient.UpdateOnlineAsync(login, true);
+            programServiceClient.UpdateOnline(login, true);
 
             if (!programServiceClient.CheckLogin(login))
                 insomable.OpenWindow(new SignUp(), this);
 
             Task.Run(() => LoadInfo(login, password, nickname, photo));
+        }
+
+        private void GetMessage(string obj)
+        {
+            Lists.receivedRequests.Add(obj);
         }
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
@@ -88,10 +95,10 @@
                     .Result);
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, false);
-
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, false);
+        {
+            programServiceClient.UpdateOnlineAsync(login_, false);
+            Close();
+        }
     }
 }
