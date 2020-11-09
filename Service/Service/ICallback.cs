@@ -5,7 +5,7 @@
     public interface ICallback
     {
         [OperationContract(IsOneWay = true)]
-        void Message_(string message);
+        void ReceiveRequest(string senderLogin);
     }
     class UserMessage
     {

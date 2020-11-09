@@ -11,10 +11,10 @@
 
     public class CallbackHandler : IProgramServiceCallback
     {
-        public event Action<string> MessageEvent;
+        public event Action<string> ReceiveRequestEvent;
 
-        public void Message_(string message)
-            => MessageEvent?.Invoke(message);
+        public void ReceiveRequest(string senderLogin)
+            => ReceiveRequestEvent.Invoke(senderLogin);
     }
 
     public partial class Initial : Window

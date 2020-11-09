@@ -136,7 +136,7 @@
                 if (item.Key == login)
                 {
                     item.Value.Message = loginSender;
-                    item.Value.Callback.Message_(loginSender);
+                    item.Value.Callback.ReceiveRequest(loginSender);
                 }
             }
         }

@@ -33,7 +33,7 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
-            callbackHandler.MessageEvent += GetMessage;
+            callbackHandler.ReceiveRequestEvent += ReceiveRequest;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
@@ -46,10 +46,8 @@
             Task.Run(() => LoadInfo(login, password, nickname, photo));
         }
 
-        private void GetMessage(string obj)
-        {
-            Lists.receivedRequests.Add(obj);
-        }
+        private void ReceiveRequest(string senderLogin)
+            => Lists.receivedRequests.Add(senderLogin);
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {

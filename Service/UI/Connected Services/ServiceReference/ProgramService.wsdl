@@ -540,7 +540,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_Message__output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_ReceiveRequest_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -628,8 +628,8 @@
   <wsdl:message name="IProgramService_RemoveContact_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveContact" />
   </wsdl:message>
-  <wsdl:message name="IProgramService_Message__OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:Message_" />
+  <wsdl:message name="IProgramService_ReceiveRequest_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveRequest" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -677,8 +677,8 @@
     <wsdl:operation name="RemoveContact">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/RemoveContact" message="tns:IProgramService_RemoveContact_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Message_">
-      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/Message_" message="tns:IProgramService_Message__OutputCallbackMessage" />
+    <wsdl:operation name="ReceiveRequest">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/ReceiveRequest" message="tns:IProgramService_ReceiveRequest_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -799,10 +799,10 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="Message_">
-      <soap12:operation soapAction="http://tempuri.org/IProgramService/Message_" style="document" />
+    <wsdl:operation name="ReceiveRequest">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/ReceiveRequest" style="document" />
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_Message__output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_ReceiveRequest_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
