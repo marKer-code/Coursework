@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
@@ -19,7 +20,7 @@
         readonly ProgramServiceClient programServiceClient;
         readonly IInsomableMethods insomable;
 
-        string login_, password_, nickname_, lastLogin;
+        string login_, password_, nickname_;
         byte[] photo_;
 
         #endregion
@@ -35,10 +36,12 @@
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
+            programServiceClient.UpdateOnlineAsync(login, true);
+
             if (!programServiceClient.CheckLogin(login))
                 insomable.OpenWindow(new SignUp(), this);
 
-            LoadInfo(login, password, nickname, photo);
+            Task.Run(() => LoadInfo(login, password, nickname, photo));
         }
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
@@ -66,8 +69,23 @@
                     }
             }
 
-            programServiceClient.UpdateOnlineAsync(login, true);
-            lastLogin = login_;
+            foreach (var u in programServiceClient.GetAllContact(login_))
+                Lists.contacts
+                     .Add(programServiceClient
+                     .GetLoginUserByIdAsync(u)
+                     .Result);
+
+            foreach (var request in programServiceClient.GetAllRequests(login_, false))
+                Lists.receivedRequests
+                    .Add(programServiceClient
+                    .GetLoginUserByIdAsync(request.SenderId)
+                    .Result);
+
+            foreach (var request in programServiceClient.GetAllRequests(login_, true))
+                Lists.sendRequests
+                    .Add(programServiceClient
+                    .GetLoginUserByIdAsync(request.ReceiverId)
+                    .Result);
         }
 
         private void Window_Closed(object sender, EventArgs e)

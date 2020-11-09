@@ -14,11 +14,11 @@
     {
         private void Search()
         {
-            //if (lb_contacts.Items.Contains(tb_login.Text))
-            //{
-            //    MessageBox.Show("< You already have such a friend >");
-            //    return;
-            //}
+            if (Lists.contacts.Contains(tb_login.Text))
+            {
+                MessageBox.Show("< You already have such a friend >");
+                return;
+            }
             if (tb_login.Text == lastLogin)
             {
                 MessageBox.Show("< You can't add yourself  >");
@@ -168,8 +168,6 @@
         }
 
         private void Flipper_b_Click(object sender, RoutedEventArgs e)
-        {
-                    Search();
-        }
+            => Search();
     }
 }

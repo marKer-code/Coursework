@@ -1,8 +1,13 @@
 ﻿namespace UI
 {
-    public class Close
+    using System.Collections.Generic;
+    using System.Windows;
+
+    public static class Lists
     {
-        public bool ProgramClose { get; set; }
+        public static List<string> contacts = new List<string>();
+        public static List<string> receivedRequests = new List<string>();
+        public static List<string> sendRequests = new List<string>();
     }
 
     public partial class Profile
@@ -26,7 +31,23 @@
                         insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
                         break;
                     }
-                default: break;
+                default:
+                    {
+                        if (flipper.Visibility == Visibility.Visible &&
+                            Avatar.Visibility == Visibility.Visible)
+                        {
+                            flipper.IsEnabled = false;
+                            flipper.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            flipper.IsEnabled = true;
+                            flipper.Visibility = Visibility.Visible;
+                            tb_login.Text = login_;
+                            Flipper_b.Content = "Save";
+                        }
+                        break;
+                    }
             }
         }
     }
@@ -52,7 +73,35 @@
                         insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
                         break;
                     }
-                default: break;
+                default:
+                    {
+                        if (flipper.Visibility == Visibility.Visible)
+                        {
+                            flipper.IsEnabled = false;
+                            flipper.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            gr_requestInfo.Visibility = Visibility.Hidden;
+
+                            avatar_r.Visibility = Visibility.Hidden;
+                            login_r.Visibility = Visibility.Hidden;
+                            nickname_r.Visibility = Visibility.Hidden;
+                            status_r.Visibility = Visibility.Hidden;
+
+                            l_login_r.Visibility = Visibility.Hidden;
+                            l_nickname_r.Visibility = Visibility.Hidden;
+                            l_status_r.Visibility = Visibility.Hidden;
+
+                            bt_accept_r.Visibility = Visibility.Hidden;
+                            bt_reject_r.Visibility = Visibility.Hidden;
+
+                            flipper.IsEnabled = true;
+                            flipper.Visibility = Visibility.Visible;
+                            Flipper_b.Content = "Search";
+                        }
+                        break;
+                    }
             }
         }
     }
