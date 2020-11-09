@@ -95,16 +95,6 @@
         }
 
         private void Flipper_b_Click(object sender, RoutedEventArgs e)
-        {
-            switch (Flipper_b.Content)
-            {
-                case "Save":
-                    SaveAcc();
-                    break;
-                default:
-                    //Search();
-                    break;
-            }
-        }
+            => SaveAcc();
     }
 }

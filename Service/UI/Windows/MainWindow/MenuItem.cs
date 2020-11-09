@@ -15,7 +15,6 @@
 
         private void I_Profile_MouseDown(object sender, MouseButtonEventArgs e)
             => Hiden(BUTTON.PROFILE);
-
     }
 
     public partial class Requests

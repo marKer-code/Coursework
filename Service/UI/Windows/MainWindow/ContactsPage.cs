@@ -14,9 +14,6 @@
     {
         private void ShowContactInfo()
         {
-            //HidenChatInfo();
-            //HidenContactInfo();
-
             gr_contactInfo.Visibility = Visibility.Visible;
 
             if (lb_contacts.SelectedItems != null)

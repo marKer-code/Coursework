@@ -58,3 +58,11 @@ D:\Step\Coursework\Service\UI\obj\Debug\Windows\Chats.baml
 D:\Step\Coursework\Service\UI\obj\Debug\Windows\Contact.baml
 D:\Step\Coursework\Service\UI\obj\Debug\Windows\Profile.baml
 D:\Step\Coursework\Service\UI\obj\Debug\Windows\Requests.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Chats.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Contact.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Profile.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Requests.g.cs
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Chats.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Contact.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Profile.baml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Requests.baml

@@ -1,6 +1,9 @@
 ﻿namespace UI
 {
-    using System.Windows;
+    public class Close
+    {
+        public bool ProgramClose { get; set; }
+    }
 
     public partial class Profile
     {
@@ -8,23 +11,6 @@
         {
             switch (btn)
             {
-                case BUTTON.PROFILE:
-                    {
-                        if (flipper.Visibility == Visibility.Visible &&
-                            Avatar.Visibility == Visibility.Visible)
-                        {
-                            flipper.IsEnabled = false;
-                            flipper.Visibility = Visibility.Collapsed;
-                        }
-                        else
-                        {
-                            flipper.IsEnabled = true;
-                            flipper.Visibility = Visibility.Visible;
-                            tb_login.Text = login_;
-                            Flipper_b.Content = "Save";
-                        }
-                        break;
-                    }
                 case BUTTON.CHATS:
                     {
                         insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
@@ -40,9 +26,9 @@
                         insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
                         break;
                     }
+                default: break;
             }
         }
-
     }
 
     public partial class Requests
@@ -66,43 +52,9 @@
                         insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
                         break;
                     }
-                case BUTTON.ADDFRIENDS:
-                    {
-                        if (flipper.Visibility == Visibility.Visible)
-                        {
-                            flipper.IsEnabled = false;
-                            flipper.Visibility = Visibility.Collapsed;
-                        }
-                        else
-                        {
-                            hiddenElement();
-                            flipper.IsEnabled = true;
-                            flipper.Visibility = Visibility.Visible;
-                            //tb_login.Text = login_;
-                            Flipper_b.Content = "Search";
-                        }
-                        break;
-                    }
+                default: break;
             }
         }
-
-        private void hiddenElement()
-        {
-            gr_requestInfo.Visibility = Visibility.Hidden;
-
-            avatar_r.Visibility = Visibility.Hidden;
-            login_r.Visibility = Visibility.Hidden;
-            nickname_r.Visibility = Visibility.Hidden;
-            status_r.Visibility = Visibility.Hidden;
-
-            l_login_r.Visibility = Visibility.Hidden;
-            l_nickname_r.Visibility = Visibility.Hidden;
-            l_status_r.Visibility = Visibility.Hidden;
-
-            bt_accept_r.Visibility = Visibility.Hidden;
-            bt_reject_r.Visibility = Visibility.Hidden;
-        }
-
     }
 
     public partial class Contact
@@ -121,19 +73,14 @@
                         insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
                         break;
                     }
-                case BUTTON.ALLCONTACTS:
-                    {
-                        insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
-                        break;
-                    }
                 case BUTTON.ADDFRIENDS:
                     {
                         insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
                         break;
                     }
+                default: break;
             }
         }
-
     }
 
     public partial class Chats
@@ -147,11 +94,6 @@
                         insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
                         break;
                     }
-                case BUTTON.CHATS:
-                    {
-                        insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
-                        break;
-                    }
                 case BUTTON.ALLCONTACTS:
                     {
                         insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
@@ -162,11 +104,10 @@
                         insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
                         break;
                     }
+                default: break;
             }
         }
-
     }
-
 }
 namespace UI.Windows.MainWindow
 {
@@ -198,6 +139,5 @@ namespace UI.Windows.MainWindow
                     }
             }
         }
-
     }
 }
