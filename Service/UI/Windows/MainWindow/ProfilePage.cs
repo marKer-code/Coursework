@@ -1,4 +1,4 @@
-﻿namespace UI.Windows.MainWindow
+﻿namespace UI
 {
     using Microsoft.Win32;
     using System;
@@ -11,7 +11,7 @@
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
 
-    public partial class Main
+    public partial class Profile
     {
         private void SaveAcc()
         {
@@ -92,6 +92,19 @@
                 IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
             ing = true;
+        }
+
+        private void Flipper_b_Click(object sender, RoutedEventArgs e)
+        {
+            switch (Flipper_b.Content)
+            {
+                case "Save":
+                    SaveAcc();
+                    break;
+                default:
+                    //Search();
+                    break;
+            }
         }
     }
 }

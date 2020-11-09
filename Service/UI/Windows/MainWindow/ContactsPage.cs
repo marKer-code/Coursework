@@ -1,4 +1,4 @@
-﻿namespace UI.Windows.MainWindow
+﻿namespace UI
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +10,12 @@
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
 
-    public partial class Main
+    public partial class Contact
     {
         private void ShowContactInfo()
         {
-            HidenChatInfo();
-            HidenContactInfo();
+            //HidenChatInfo();
+            //HidenContactInfo();
 
             gr_contactInfo.Visibility = Visibility.Visible;
 

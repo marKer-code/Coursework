@@ -1,13 +1,13 @@
-﻿namespace UI.Windows.MainWindow
+﻿namespace UI
 {
     using System.Windows;
 
-    public partial class Main
+    public partial class Chats
     {
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            HiddenReqestsInfo();
-            HidenContactInfo();
+            //HiddenReqestsInfo();
+            //HidenContactInfo();
             gr_chatInfo.Visibility = Visibility.Visible;
             chat_lb.Visibility = Visibility.Visible;
         }

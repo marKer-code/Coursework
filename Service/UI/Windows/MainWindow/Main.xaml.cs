@@ -8,6 +8,7 @@
     using System.ServiceModel;
     using System.Text;
     using System.Windows;
+    using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
     using UI.InsomableMethods_;
@@ -25,7 +26,7 @@
 
         string login_, password_, nickname_, lastLogin;
         byte[] photo_;
-        bool ing = false;
+        //bool ing = false;
 
         #endregion
 
@@ -75,23 +76,23 @@
                     }
             }
 
-            List<int> users = programServiceClient.GetAllContact(login_);
-            foreach (var u in users)
-                lb_contacts.Items
-                    .Add(programServiceClient
-                    .GetLoginUserByIdAsync(u)
-                    .Result);
+            //List<int> users = programServiceClient.GetAllContact(login_);
+            //foreach (var u in users)
+            //    lb_contacts.Items
+            //        .Add(programServiceClient
+            //        .GetLoginUserByIdAsync(u)
+            //        .Result);
 
-            foreach (var request in programServiceClient.GetAllRequests(login_, false))
-                lb_requests.Items
-                    .Add(programServiceClient
-                    .GetLoginUserByIdAsync(request.SenderId)
-                    .Result);
-            foreach (var request in programServiceClient.GetAllRequests(login_, true))
-                lb_requests_Send.Items
-                    .Add(programServiceClient
-                    .GetLoginUserByIdAsync(request.ReceiverId)
-                    .Result);
+            //foreach (var request in programServiceClient.GetAllRequests(login_, false))
+            //    lb_requests.Items
+            //        .Add(programServiceClient
+            //        .GetLoginUserByIdAsync(request.SenderId)
+            //        .Result);
+            //foreach (var request in programServiceClient.GetAllRequests(login_, true))
+            //    lb_requests_Send.Items
+            //        .Add(programServiceClient
+            //        .GetLoginUserByIdAsync(request.ReceiverId)
+            //        .Result);
 
             programServiceClient.UpdateOnlineAsync(login, true);
             lastLogin = login_;
@@ -99,14 +100,14 @@
 
         private void Inizialize()
         {
-            tb_login.Text = login_;
-            tb_password.Text = password_;
-            tb_nickname.Text = nickname_;
-            TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
-            Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(photo_.ToArray());
-            var handle = bitmap1.GetHbitmap();
-            Avatar.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
-            IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            //tb_login.Text = login_;
+            //tb_password.Text = password_;
+            //tb_nickname.Text = nickname_;
+            //TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+            //Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(photo_.ToArray());
+            //var handle = bitmap1.GetHbitmap();
+            //Avatar.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
+            //IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
 
@@ -119,22 +120,24 @@
             MessageBox.Show("");
         }
 
+        private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
+           => Close();
 
-        private void Flipper_b_Click(object sender, RoutedEventArgs e)
-        {
-            switch (Flipper_b.Content)
-            {
-                case "Save":
-                    {
-                        SaveAcc();
-                        break;
-                    }
-                default:
-                    {
-                        Search();
-                        break;
-                    }
-            }
-        }
+        //private void Flipper_b_Click(object sender, RoutedEventArgs e)
+        //{
+        //    switch (Flipper_b.Content)
+        //    {
+        //        case "Save":
+        //            {
+        //                SaveAcc();
+        //                break;
+        //            }
+        //        default:
+        //            {
+        //                Search();
+        //                break;
+        //            }
+        //    }
+        //}
     }
 }

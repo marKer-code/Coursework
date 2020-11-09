@@ -71,13 +71,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Windows\Chats.xaml.cs">
+      <DependentUpon>Chats.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Contact.xaml.cs">
+      <DependentUpon>Contact.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InsomableMethods\IInsomableMethods.cs" />
     <Compile Include="InsomableMethods\InsomableMethods.cs" />
+    <Compile Include="Windows\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Requests.xaml.cs">
+      <DependentUpon>Requests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindow\ChatsPage.cs" />
     <Compile Include="Windows\MainWindow\ContactsPage.cs" />
     <Compile Include="Windows\MainWindow\DesignChange.cs" />
@@ -159,6 +171,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Windows\Chats.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Requests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Initial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

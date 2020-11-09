@@ -10,19 +10,29 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         FontFamily="OCR A" ResizeMode="NoResize" 
-        WindowStyle="ThreeDBorderWindow" FontSize="18"
+        WindowStyle="None" FontSize="18"
         Height="450" Width="800" Foreground="#FFF44336"
         Closed="Window_Closed">
     <!--="#FF303030">-->
     <!--="#FFA81F15">-->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="*" MinWidth="150"/>
-            <ColumnDefinition Width="3*" MinWidth="400"/>
-        </Grid.ColumnDefinitions>
 
-        <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <Label Name="B_Close" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center"
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Stretch" Content="X" MouseDown="B_Close_MouseDown"/>
+        <Grid Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*" MinWidth="150"/>
+                <ColumnDefinition Width="3*" MinWidth="400"/>
+            </Grid.ColumnDefinitions>
+
+            <!--<materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
             Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
             <materialDesign:Flipper.FrontContent>
                 <Grid Height="300" Background="#FF232323">
@@ -57,40 +67,40 @@
                             Margin="10,10" Click="Flipper_b_Click"/>
                 </Grid>
             </materialDesign:Flipper.FrontContent>
-        </materialDesign:Flipper>
+        </materialDesign:Flipper>-->
 
-        <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
-            <ListBoxItem>
-                <Image Height="30" Margin="15,0" x:Name="i_profile" 
+            <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
+                <ListBoxItem>
+                    <Image Height="30" Margin="15,0" x:Name="i_profile" 
                    Source="../../Windows/Icons/account.png" MouseDown="I_Profile_MouseDown"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <materialDesign:Badged x:Name="chat_badged"
+                </ListBoxItem>
+                <ListBoxItem>
+                    <materialDesign:Badged x:Name="chat_badged"
                             Badge="" BadgeBackground="#FFA81F15"
                             BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
                             Height="30" Margin="15,0" MouseDown="Chat_badged_MouseDown">
-                    <Image Source="../../Windows/Icons/all.png"/>
-                </materialDesign:Badged>
-            </ListBoxItem>
-            <ListBoxItem>
-                <materialDesign:Badged x:Name="allContacts_badget"
+                        <Image Source="../../Windows/Icons/all.png"/>
+                    </materialDesign:Badged>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <materialDesign:Badged x:Name="allContacts_badget"
                             Badge="" BadgeBackground="#FFA81F15"
                             BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
                             Height="30" Margin="17,0" MouseDown="AllContacts_badget_MouseDown">
-                    <Image Source="../../Windows/Icons/Contacts.png"/>
-                </materialDesign:Badged>
-            </ListBoxItem>
-            <ListBoxItem>
-                <materialDesign:Badged x:Name="addFriend_badget"
+                        <Image Source="../../Windows/Icons/Contacts.png"/>
+                    </materialDesign:Badged>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <materialDesign:Badged x:Name="addFriend_badget"
                             Badge="" BadgeBackground="#FFA81F15"
                             BadgeForeground="#FF232323" BadgePlacementMode="TopRight"
                             Height="24" Margin="17,0" MouseDown="AddFriend_badget_MouseDown">
-                    <Image Source="../../Windows/Icons/addFriend.png"/>
-                </materialDesign:Badged>
-            </ListBoxItem>
-        </ListBox>
+                        <Image Source="../../Windows/Icons/addFriend.png"/>
+                    </materialDesign:Badged>
+                </ListBoxItem>
+            </ListBox>
 
-        <ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden" 
+            <!--<ListBox Grid.Column="1" x:Name="lb_contacts" Visibility="Hidden" 
                  SelectionChanged="Lb_contacts_SelectionChanged"/>
 
         <Grid Grid.Column="2" Visibility="Hidden" x:Name="gr_contactInfo">
@@ -175,10 +185,11 @@
             <Label Name="l_receipt" FontSize="14">Receipt requests:</Label>
             <ListBox MaxHeight="200" Grid.Column="1" x:Name="lb_requests" SelectionChanged="Lb_requests_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 
-        </StackPanel>
+        </StackPanel>-->
 
-        <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
+            <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"
                       Width="5" Grid.Column="2" Background="#FF232323" IsEnabled="false"
                       Visibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>

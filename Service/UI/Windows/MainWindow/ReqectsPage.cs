@@ -1,4 +1,4 @@
-﻿namespace UI.Windows.MainWindow
+﻿namespace UI
 {
     using System;
     using System.Collections.Generic;
@@ -10,15 +10,15 @@
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
 
-    public partial class Main
+    public partial class Requests
     {
         private void Search()
         {
-            if (lb_contacts.Items.Contains(tb_login.Text))
-            {
-                MessageBox.Show("< You already have such a friend >");
-                return;
-            }
+            //if (lb_contacts.Items.Contains(tb_login.Text))
+            //{
+            //    MessageBox.Show("< You already have such a friend >");
+            //    return;
+            //}
             if (tb_login.Text == lastLogin)
             {
                 MessageBox.Show("< You can't add yourself  >");
@@ -60,9 +60,6 @@
 
         private void ShowInfoRequests(System.Windows.Controls.ListBox listBox)
         {
-            HidenChatInfo();
-            HidenContactInfo();
-
             sp_Requests.Visibility = Visibility.Visible;
             gr_requestInfo.Visibility = Visibility.Visible;
             bt_reject_r.Visibility = Visibility.Visible;
@@ -168,6 +165,11 @@
                         break;
                     }
             }
+        }
+
+        private void Flipper_b_Click(object sender, RoutedEventArgs e)
+        {
+                    Search();
         }
     }
 }

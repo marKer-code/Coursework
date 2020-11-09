@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\
+D:\Step\Coursework\Service\UI\obj\Debug\
 UI
 none
 false
 DEBUG;TRACE
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\App.xaml
-3808087053
+D:\Step\Coursework\Service\UI\App.xaml
+71123152593
 
-17226305341
-181865283805
-Windows\Initial.xaml;Windows\MainWindow\Main.xaml;Windows\SignUp.xaml;
+21-897693177
+18430692095
+Windows\Chats.xaml;Windows\Contact.xaml;Windows\Profile.xaml;Windows\Requests.xaml;Windows\Initial.xaml;Windows\MainWindow\Main.xaml;Windows\SignUp.xaml;
 
-False
+True
 
