@@ -19,6 +19,8 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
+
+
         <Label Name="B_Close" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center"
                HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Stretch" Content="X" MouseDown="B_Close_MouseDown"/>
@@ -28,6 +30,29 @@
                 <ColumnDefinition Width="*" MinWidth="150"/>
                 <ColumnDefinition Width="3*" MinWidth="400"/>
             </Grid.ColumnDefinitions>
+
+            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
+            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+                <materialDesign:Flipper.FrontContent>
+                    <Grid Height="300" Background="#FF232323">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="2" Margin="10,0">
+                            <Label Content="Contact &gt; " DockPanel.Dock="Left"
+                               VerticalAlignment="Center"/>
+                            <ComboBox Name="cb_contact"/>
+                        </DockPanel>
+                        <Button x:Name="Flipper_b" Content="Add" 
+                            Foreground="White" Grid.Row="4"
+                            Margin="10,10" Click="Flipper_b_Click"/>
+                    </Grid>
+                </materialDesign:Flipper.FrontContent>
+            </materialDesign:Flipper>
 
             <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
                 <ListBoxItem>
@@ -87,8 +112,12 @@
 
             <StackPanel Grid.Column="1">
                 <Label Content="Chats:"/>
-                <ListBox MinHeight="420" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                <ListBox MinHeight="390" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                <Button Margin="10,0" x:Name="bt_add_ct" Content="Add Chat" Click="bt_add_ct_Click"/>
             </StackPanel>
+
+
 
 
             <GridSplitter HorizontalAlignment="Left" Height="450" VerticalAlignment="Top"

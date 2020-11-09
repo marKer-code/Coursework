@@ -58,6 +58,32 @@
         private void Window_Loaded(object sender, RoutedEventArgs e)
             => programServiceClient.UpdateOnlineAsync(login_, true);
 
+        private void bt_add_ct_Click(object sender, RoutedEventArgs e)
+        {
+            if (flipper.Visibility == Visibility.Visible)
+            {
+                flipper.IsEnabled = false;
+                flipper.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                flipper.IsEnabled = true;
+                flipper.Visibility = Visibility.Visible;
+
+                gr_chatInfo.Visibility = Visibility.Hidden;
+                avatar_ct.Visibility = Visibility.Hidden;
+                login_ct.Visibility = Visibility.Hidden;
+                nickname_ct.Visibility = Visibility.Hidden;
+                status_ct.Visibility = Visibility.Hidden;
+                bt_remove_ct.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Flipper_b_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
             login_ = login;
