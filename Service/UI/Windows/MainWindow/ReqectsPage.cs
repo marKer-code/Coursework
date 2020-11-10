@@ -146,6 +146,7 @@
                     {
                         Lists.receivedRequests.Remove(login_r.Text);
                         Lists.contacts.Add(login_r.Text);
+                        Lists.noChat.Add(login_r.Text);
                         programServiceClient.AcceptRequestAsync(login_r.Text, login_);
                         break;
                     }

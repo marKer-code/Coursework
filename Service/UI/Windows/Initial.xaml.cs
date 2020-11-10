@@ -15,9 +15,13 @@
         public event Action<string> NewContactEvent;
         public event Action<string> RejectRequest_Event;
         public event Action<string> DeleteContactEvent;
+        public event Action<string> NewChatEvent;
 
         public void DeleteContact(string toDeleteLogin)
             => DeleteContactEvent?.Invoke(toDeleteLogin);
+
+        public void NewChat_(string senderLogin)
+            => NewChatEvent.Invoke(senderLogin);
 
         public void NewContact(string contactLogin)
             => NewContactEvent?.Invoke(contactLogin);

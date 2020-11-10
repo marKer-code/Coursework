@@ -394,6 +394,12 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/RemoveContact")]
         System.Threading.Tasks.Task RemoveContactAsync(string login, string otherLogin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddChat")]
+        void AddChat(string senderLogin, string receiverLogin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddChat")]
+        System.Threading.Tasks.Task AddChatAsync(string senderLogin, string receiverLogin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -410,6 +416,9 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeleteContact")]
         void DeleteContact(string toDeleteLogin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/NewChat_")]
+        void NewChat_(string senderLogin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -566,6 +575,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task RemoveContactAsync(string login, string otherLogin) {
             return base.Channel.RemoveContactAsync(login, otherLogin);
+        }
+        
+        public void AddChat(string senderLogin, string receiverLogin) {
+            base.Channel.AddChat(senderLogin, receiverLogin);
+        }
+        
+        public System.Threading.Tasks.Task AddChatAsync(string senderLogin, string receiverLogin) {
+            return base.Channel.AddChatAsync(senderLogin, receiverLogin);
         }
     }
 }

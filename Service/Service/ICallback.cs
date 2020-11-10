@@ -1,5 +1,6 @@
 ﻿namespace Service
 {
+    using System.Collections.Generic;
     using System.ServiceModel;
 
     public interface ICallback
@@ -12,6 +13,8 @@
         void RejectRequest_(string senderLogin);
         [OperationContract(IsOneWay = true)]
         void DeleteContact(string toDeleteLogin);
+        [OperationContract(IsOneWay = true)]
+        void NewChat_(string senderLogin);
     }
     class UserMessage
     {

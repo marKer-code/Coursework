@@ -40,8 +40,6 @@
             }
         }
 
-
-
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lb_chats.SelectedItem != null)

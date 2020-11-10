@@ -9,7 +9,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        FontFamily="OCR A" ResizeMode="NoResize" 
+        FontFamily="OCR A"
         WindowStyle="None" FontSize="18"
         Height="450" Width="800" Foreground="#FFF44336">
     <Grid>

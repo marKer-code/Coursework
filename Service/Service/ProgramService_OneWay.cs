@@ -61,7 +61,6 @@
            new Dictionary<string, UserMessage>();
         public void UpdateOnline(string login, bool loginIn)
         {
-            sub.Clear();
             UserInfo userInfo = repositories.UserInfoRepository
                                 .Get(u => u.User.Login == login)
                                 .First();
@@ -231,6 +230,36 @@
                 {
                     item.Value.Message = sender;
                     item.Value.Callback.DeleteContact(item.Value.Message);
+                    return;
+                }
+        }
+
+        public void AddChat(string senderLogin, string receiverLogin)
+        {
+            int senderId = repositories.UserRepository
+                 .Get(u => u.Login == senderLogin)
+                 .First()
+                 .Id;
+            int receiverId = repositories.UserRepository
+                .Get(u => u.Login == receiverLogin)
+                .First()
+                .Id;
+
+            repositories.MessageRepository.Insert
+                (new DAL.Entities.Message()
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId,
+                    SendTime = DateTime.Now,
+                    ReadTime = new DateTime(2020, 1, 1)
+                });
+            repositories.Save();
+
+            foreach (var item in sub)
+                if (item.Key == receiverLogin)
+                {
+                    item.Value.Message = senderLogin;
+                    item.Value.Callback.NewChat_(item.Value.Message);
                     return;
                 }
         }

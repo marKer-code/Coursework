@@ -30,11 +30,18 @@
             callbackHandler.NewContactEvent += NewContact;
             callbackHandler.RejectRequest_Event += RejectRequest_;
             callbackHandler.DeleteContactEvent += DeleteContact;
+            callbackHandler.NewChatEvent += NewChat;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
+        }
+        private void NewChat(string senderLogin)
+        {
+            Lists.chats.Add(senderLogin);
+            if (Lists.noChat.Contains(senderLogin))
+                Lists.noChat.Remove(senderLogin);
         }
 
         private void DeleteContact(string toDeleteLogin)
@@ -46,6 +53,7 @@
         private void NewContact(string contactLogin)
         {
             Lists.sendRequests.Remove(contactLogin);
+            Lists.noChat.Add(contactLogin);
             Lists.contacts.Add(contactLogin);
         }
 
@@ -81,7 +89,13 @@
 
         private void Flipper_b_Click(object sender, RoutedEventArgs e)
         {
-
+            if (cb_contact.SelectedIndex != -1)
+            {
+                MessageBox.Show(cb_contact.SelectedItem.ToString());
+                programServiceClient.AddChat(login_, cb_contact.SelectedItem.ToString());
+                Lists.chats.Add(cb_contact.SelectedItem.ToString());
+                Lists.noChat.Remove(cb_contact.SelectedItem.ToString());
+            }
         }
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)

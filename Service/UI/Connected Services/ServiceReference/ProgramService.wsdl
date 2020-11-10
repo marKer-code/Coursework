@@ -678,6 +678,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_AddChat_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_ReceiveRequest_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -748,6 +771,29 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_DeleteContact_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_NewChat__output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -853,6 +899,9 @@
   <wsdl:message name="IProgramService_RemoveContact_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveContact" />
   </wsdl:message>
+  <wsdl:message name="IProgramService_AddChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddChat" />
+  </wsdl:message>
   <wsdl:message name="IProgramService_ReceiveRequest_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveRequest" />
   </wsdl:message>
@@ -864,6 +913,9 @@
   </wsdl:message>
   <wsdl:message name="IProgramService_DeleteContact_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DeleteContact" />
+  </wsdl:message>
+  <wsdl:message name="IProgramService_NewChat__OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NewChat_" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -923,6 +975,9 @@
     <wsdl:operation name="RemoveContact">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/RemoveContact" message="tns:IProgramService_RemoveContact_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/AddChat" message="tns:IProgramService_AddChat_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReceiveRequest">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/ReceiveRequest" message="tns:IProgramService_ReceiveRequest_OutputCallbackMessage" />
     </wsdl:operation>
@@ -934,6 +989,9 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteContact">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/DeleteContact" message="tns:IProgramService_DeleteContact_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewChat_">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/NewChat_" message="tns:IProgramService_NewChat__OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -1087,6 +1145,13 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="AddChat">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/AddChat" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_AddChat_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReceiveRequest">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/ReceiveRequest" style="document" />
       <wsdl:output>
@@ -1112,6 +1177,13 @@
       <soap12:operation soapAction="http://tempuri.org/IProgramService/DeleteContact" style="document" />
       <wsdl:output>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_DeleteContact_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewChat_">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/NewChat_" style="document" />
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_NewChat__output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
