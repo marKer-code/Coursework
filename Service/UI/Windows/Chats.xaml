@@ -124,7 +124,7 @@
                     </StackPanel>
 
                     <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" 
-                        Content="Remove" Foreground="White"/>
+                        Content="Remove" Foreground="White" Click="bt_remove_ct_Click"/>
                 </Grid>
             </Grid>
 

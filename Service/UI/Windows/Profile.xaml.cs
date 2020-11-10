@@ -39,11 +39,18 @@
             callbackHandler.DeleteContactEvent += DeleteContact;
             callbackHandler.NewChatEvent += NewChat;
 
+            callbackHandler.DeleteChatEvent += DeleteChat;
+
+
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
         }
+
+        private void DeleteChat(string toDeleteLogin)
+           => Lists.chats.Remove(toDeleteLogin);
+
         private void NewChat(string senderLogin)
         {
             Lists.chats.Add(senderLogin);

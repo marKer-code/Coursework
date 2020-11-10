@@ -353,6 +353,12 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetId", ReplyAction="http://tempuri.org/IProgramService/GetIdResponse")]
         System.Threading.Tasks.Task<int> GetIdAsync(string login);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/RemoveChat", ReplyAction="http://tempuri.org/IProgramService/RemoveChatResponse")]
+        void RemoveChat(string sender, string receiver);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/RemoveChat", ReplyAction="http://tempuri.org/IProgramService/RemoveChatResponse")]
+        System.Threading.Tasks.Task RemoveChatAsync(string sender, string receiver);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
         void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
         
@@ -419,6 +425,9 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/NewChat_")]
         void NewChat_(string senderLogin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeleteChat")]
+        void DeleteChat(string senderLogin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -519,6 +528,14 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task<int> GetIdAsync(string login) {
             return base.Channel.GetIdAsync(login);
+        }
+        
+        public void RemoveChat(string sender, string receiver) {
+            base.Channel.RemoveChat(sender, receiver);
+        }
+        
+        public System.Threading.Tasks.Task RemoveChatAsync(string sender, string receiver) {
+            return base.Channel.RemoveChatAsync(sender, receiver);
         }
         
         public void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {

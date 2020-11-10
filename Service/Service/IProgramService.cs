@@ -33,5 +33,8 @@
         List<DAL.Entities.Message> GetAllChats(string sender);
         [OperationContract]
         int GetId(string login);
+
+        [OperationContract]
+        void RemoveChat(string sender, string receiver);
     }
 }

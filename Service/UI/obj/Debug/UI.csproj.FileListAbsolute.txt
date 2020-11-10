@@ -29,7 +29,6 @@ D:\Step\Coursework\Service\UI\bin\Debug\MaterialDesignThemes.Wpf.dll
 D:\Step\Coursework\Service\UI\bin\Debug\MaterialDesignColors.pdb
 D:\Step\Coursework\Service\UI\bin\Debug\MaterialDesignThemes.Wpf.pdb
 D:\Step\Coursework\Service\UI\bin\Debug\MaterialDesignThemes.Wpf.xml
-D:\Step\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
 D:\Step\Coursework\Service\UI\obj\Debug\Windows\Initial.g.cs
 D:\Step\Coursework\Service\UI\obj\Debug\Windows\SignUp.g.cs
 D:\Step\Coursework\Service\UI\obj\Debug\App.g.cs

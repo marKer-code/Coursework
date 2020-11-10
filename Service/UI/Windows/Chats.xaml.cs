@@ -32,11 +32,25 @@
             callbackHandler.DeleteContactEvent += DeleteContact;
             callbackHandler.NewChatEvent += NewChat;
 
+
+
+            callbackHandler.DeleteChatEvent += DeleteChat;
+
+
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
         }
+
+
+        private void DeleteChat(string toDeleteLogin)
+
+        {
+            Lists.chats.Remove(toDeleteLogin);
+            MessageBox.Show("");
+        }
+
         private void NewChat(string senderLogin)
         {
             Lists.chats.Add(senderLogin);
@@ -95,6 +109,24 @@
                 programServiceClient.AddChat(login_, cb_contact.SelectedItem.ToString());
                 Lists.chats.Add(cb_contact.SelectedItem.ToString());
                 Lists.noChat.Remove(cb_contact.SelectedItem.ToString());
+            }
+        }
+
+        private void bt_remove_ct_Click(object sender, RoutedEventArgs e)
+        {
+            switch (login_ct.Text)
+            {
+                case null:
+                    {
+                        MessageBox.Show("< Select Request >");
+                        break;
+                    }
+                default:
+                    {
+                        Lists.chats.Remove(login_ct.Text);
+                        programServiceClient.RemoveChatAsync(login_, login_ct.Text);
+                        break;
+                    }
             }
         }
 

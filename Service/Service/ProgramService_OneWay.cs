@@ -263,5 +263,37 @@
                     return;
                 }
         }
+
+        public void RemoveChat(string sender, string receiver)
+        {
+            int senderId = repositories.UserRepository
+               .Get(u => u.Login == sender)
+               .First()
+               .Id;
+            int receiverId = repositories.UserRepository
+                .Get(u => u.Login == receiver)
+                .First()
+                .Id;
+
+            List<DAL.Entities.Message> messages = repositories.MessageRepository
+                .Get(m => m.SenderId == senderId &&
+                m.ReceiverId == receiverId ||
+                m.SenderId == receiverId &&
+                m.ReceiverId == senderId)
+                .ToList();
+
+            foreach (var item in messages)
+                repositories.MessageRepository.Delete(item);
+
+            repositories.Save();
+
+            foreach (var item in sub)
+                if (item.Key == receiver)
+                {
+                    item.Value.Message = sender;
+                    item.Value.Callback.DeleteChat(item.Value.Message);
+                    return;
+                }
+        }
     }
 }
