@@ -1,6 +1,7 @@
 ﻿namespace UI.Windows.MainWindow
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.ServiceModel;
     using System.Text;
     using System.Threading.Tasks;
@@ -118,12 +119,15 @@
             int id = programServiceClient.GetId(login);
             foreach (var chat in programServiceClient.GetAllChats(login))
             {
-                if (chat.ReceiverId != id)
+                if (chat.ReceiverId != id &&
+                    !Lists.chats.Contains(
+                        programServiceClient.GetLoginUserById(chat.ReceiverId)))
                     Lists.chats
                         .Add(programServiceClient
                         .GetLoginUserByIdAsync(chat.ReceiverId)
                         .Result);
-                else
+                else if (!Lists.chats.Contains(
+                        programServiceClient.GetLoginUserById(chat.SenderId)))
                     Lists.chats
                         .Add(programServiceClient
                         .GetLoginUserByIdAsync(chat.SenderId)

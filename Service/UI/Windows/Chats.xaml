@@ -112,9 +112,10 @@
 
             <StackPanel Grid.Column="1">
                 <Label Content="Chats:"/>
-                <ListBox MinHeight="390" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
+                <ListBox MinHeight="380" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
                          ScrollViewer.HorizontalScrollBarVisibility="Auto" />
-                <Button Margin="10,0" x:Name="bt_add_ct" Content="Add Chat" Click="bt_add_ct_Click"/>
+                <Button Margin="10,0" x:Name="bt_add_ct" Content="Add Chat" 
+                        Click="bt_add_ct_Click"  Foreground="White"/>
             </StackPanel>
 
 

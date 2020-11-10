@@ -81,7 +81,7 @@
                 <TextBlock x:Name="login" Margin="0,10" Grid.Row="1"/>
                 <TextBlock x:Name="nickname" Margin="0,10" Grid.Row="2"/>
                 <TextBlock x:Name="status" Margin="0,10" Grid.Row="3"/>
-                <Button x:Name="bt_remove_fr" Margin="10" Grid.Row="5" 
+                <Button x:Name="bt_remove_fr" Margin="0,10" Grid.Row="5" 
                         Content="Remove" Foreground="White" Click="Bt_remove_fr_Click"/>
             </Grid>
 
