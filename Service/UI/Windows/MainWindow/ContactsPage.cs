@@ -14,6 +14,9 @@
     {
         private void ShowContactInfo()
         {
+            l_login_r.Visibility = Visibility.Visible;
+            l_nickname_r.Visibility = Visibility.Visible;
+            l_status_r.Visibility = Visibility.Visible;
             gr_contactInfo.Visibility = Visibility.Visible;
 
             if (lb_contacts.SelectedItems != null)

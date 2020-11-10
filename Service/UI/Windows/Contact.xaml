@@ -77,10 +77,24 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                
                 <Image x:Name="avatar_fr" Margin="10"/>
-                <TextBlock x:Name="login" Margin="0,10" Grid.Row="1"/>
-                <TextBlock x:Name="nickname" Margin="0,10" Grid.Row="2"/>
-                <TextBlock x:Name="status" Margin="0,10" Grid.Row="3"/>
+
+                <StackPanel Grid.Row="1">
+                    <Label Name="l_login_r" Content="Login >"/>
+                    <TextBlock x:Name="login" Grid.Row="1"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Label Name="l_nickname_r" Content="Nickname >"/>
+                    <TextBlock x:Name="nickname" Grid.Row="2"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <Label Name="l_status_r" Content="Status >"/>
+                    <TextBlock x:Name="status" Grid.Row="3"/>
+                </StackPanel>
+
                 <Button x:Name="bt_remove_fr" Margin="0,10" Grid.Row="5" 
                         Content="Remove" Foreground="White" Click="Bt_remove_fr_Click"/>
             </Grid>
