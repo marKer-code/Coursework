@@ -65,3 +65,4 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Profile.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Requests.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
+D:\Step\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache

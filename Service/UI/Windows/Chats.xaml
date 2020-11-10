@@ -54,6 +54,38 @@
                 </materialDesign:Flipper.FrontContent>
             </materialDesign:Flipper>
 
+
+            <materialDesign:Flipper x:Name="flipper_attachFile" Height="300" Width="300"
+            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+                <materialDesign:Flipper.FrontContent>
+                    <Grid Height="300" Background="#FF232323">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="lb_attachFile" Grid.Row="2" Grid.RowSpan="3"/>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
+                            <Button x:Name="f_bt_add" Content="Add" 
+                            Foreground="White" Margin="10,0"/>
+                            <Button x:Name="f_bt_remove" Content="Remove" 
+                            Foreground="White" Margin="0,0,10,0"/>
+                            <Button x:Name="f_bt_removeAll" Content="Remove All" 
+                            Foreground="White"/>
+                        </StackPanel>
+
+                        <Button Grid.Row="4" x:Name="f_bt_Download" Content="Download" 
+                            Foreground="White" Margin="10,0"/>
+
+                    </Grid>
+                </materialDesign:Flipper.FrontContent>
+            </materialDesign:Flipper>
+
+
             <ListBox x:Name="lb_menu" Height="450" Background="#FF232323">
                 <ListBoxItem>
                     <Image Height="30" Margin="15,0" x:Name="i_profile" 
@@ -85,18 +117,31 @@
                 </ListBoxItem>
             </ListBox>
 
-            <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden" >
+            <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <DockPanel>
-                    <ListBox MinHeight="375" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" Visibility="Hidden"/>
-                    <Button DockPanel.Dock="Right" Content="Send"  Foreground="White"/>
-                    <TextBox Margin="10" />
+                    <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" Visibility="Hidden">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Margin="10" Source="{Binding Photo}" DockPanel.Dock="Left"></Image>
+                                    <TextBlock Margin="10,0" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Text="{Binding SendTime}"/>
+                                    <Image Margin="0,0,0,40" DockPanel.Dock="Right" Source="{Binding IsRead}"/>
+                                    <TextBlock Margin="10,5,0,5" DockPanel.Dock="Top" Text="{Binding Login}"/>
+                                    <TextBlock Margin="10,0" DockPanel.Dock="Bottom" Text="{Binding Message}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" Foreground="White" Content="+" Click="bt_Plus_Click"/>
+                    <Button x:Name="bt_send" DockPanel.Dock="Right" Content="Send"  Foreground="White"/>
+                    <TextBox Margin="10" Name="tb_message" />
                 </DockPanel>
-                
+
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>
@@ -129,9 +174,9 @@
             </Grid>
 
 
-            <StackPanel Grid.Column="1">
+            <StackPanel x:Name="sp_chats" Grid.Column="1">
                 <Label Content="Chats:"/>
-                <ListBox MinHeight="380" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
+                <ListBox MinHeight="375" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
                          ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                 <Button Margin="10,0" x:Name="bt_add_ct" Content="Add Chat" 
                         Click="bt_add_ct_Click"  Foreground="White"/>
