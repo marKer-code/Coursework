@@ -61,6 +61,7 @@
            new Dictionary<string, UserMessage>();
         public void UpdateOnline(string login, bool loginIn)
         {
+            sub.Clear();
             UserInfo userInfo = repositories.UserInfoRepository
                                 .Get(u => u.User.Login == login)
                                 .First();

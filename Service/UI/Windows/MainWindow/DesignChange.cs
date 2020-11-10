@@ -9,6 +9,9 @@
         public static Collection<string> contacts = new ObservableCollection<string>();
         public static Collection<string> receivedRequests = new ObservableCollection<string>();
         public static Collection<string> sendRequests = new ObservableCollection<string>();
+        public static Collection<string> noChat = new ObservableCollection<string>();
+        public static Collection<string> chats = new ObservableCollection<string>();
+
     }
 
     public partial class Profile

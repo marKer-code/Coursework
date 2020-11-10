@@ -137,6 +137,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference\ProgramService.wsdl" />
+    <None Include="Connected Services\ServiceReference\UI.ServiceReference.Message.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference\UI.ServiceReference.Request.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

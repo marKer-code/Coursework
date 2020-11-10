@@ -91,5 +91,50 @@
 
         public string GetLoginUserById(int id)
             => repositories.UserRepository.GetById(id).Login;
+
+        public List<DAL.Entities.Message> GetAllChats(string sender)
+        {
+            int idSender = repositories.UserRepository
+                            .Get(u => u.Login == sender)
+                            .First()
+                            .Id;
+            return repositories.MessageRepository
+                .Get(m => m.SenderId == idSender ||
+                 m.ReceiverId == idSender)
+                .ToList();
+        }
+
+        public List<int> GetNoChat(string login)
+        {
+            int idUser = repositories.UserRepository
+                            .Get(u => u.Login == login)
+                            .First()
+                            .Id;
+
+            List<DAL.Entities.Message> chat = GetAllChats(login);
+            List<int> contact = GetAllContact(login);
+
+            List<int> noChat = new List<int>();
+
+            if (chat.Count != 0)
+            {
+                foreach (var c in chat)
+                {
+                    foreach (var item in contact)
+                    {
+                        if (c.ReceiverId != item)
+                            noChat.Add(item);
+                    }
+                }
+                return noChat;
+            }
+            else
+                return contact;
+
+
+        }
+
+        public int GetId(string login)
+            => repositories.UserRepository.Get(u => u.Login == login).First().Id;
     }
 }

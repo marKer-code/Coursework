@@ -108,6 +108,9 @@
                         break;
                     }
             }
+
+            cb_contact.ItemsSource = Lists.noChat;
+            lb_chats.ItemsSource = Lists.chats;
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)

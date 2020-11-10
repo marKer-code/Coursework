@@ -108,6 +108,27 @@
                     .Add(programServiceClient
                     .GetLoginUserByIdAsync(request.ReceiverId)
                     .Result);
+
+            foreach (var noChat in programServiceClient.GetNoChat(login))
+                Lists.noChat
+                    .Add(programServiceClient
+                    .GetLoginUserByIdAsync(noChat)
+                    .Result);
+
+            int id = programServiceClient.GetId(login);
+            foreach (var chat in programServiceClient.GetAllChats(login))
+            {
+                if (chat.ReceiverId != id)
+                    Lists.chats
+                        .Add(programServiceClient
+                        .GetLoginUserByIdAsync(chat.ReceiverId)
+                        .Result);
+                else
+                    Lists.chats
+                        .Add(programServiceClient
+                        .GetLoginUserByIdAsync(chat.SenderId)
+                        .Result);
+            }
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)

@@ -25,5 +25,13 @@
 
         [OperationContract]
         string GetLoginUserById(int id);
+
+        [OperationContract]
+        List<int> GetNoChat(string login);
+
+        [OperationContract]
+        List<DAL.Entities.Message> GetAllChats(string sender);
+        [OperationContract]
+        int GetId(string login);
     }
 }

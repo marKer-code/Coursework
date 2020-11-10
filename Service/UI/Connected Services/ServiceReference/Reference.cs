@@ -106,6 +106,195 @@ namespace UI.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/DAL.Entities")]
+    [System.SerializableAttribute()]
+    public partial class Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] FileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ReadTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ReceiverIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SendTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SenderIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TextField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] File {
+            get {
+                return this.FileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileField, value) != true)) {
+                    this.FileField = value;
+                    this.RaisePropertyChanged("File");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageName {
+            get {
+                return this.ImageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageNameField, value) != true)) {
+                    this.ImageNameField = value;
+                    this.RaisePropertyChanged("ImageName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ReadTime {
+            get {
+                return this.ReadTimeField;
+            }
+            set {
+                if ((this.ReadTimeField.Equals(value) != true)) {
+                    this.ReadTimeField = value;
+                    this.RaisePropertyChanged("ReadTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ReceiverId {
+            get {
+                return this.ReceiverIdField;
+            }
+            set {
+                if ((this.ReceiverIdField.Equals(value) != true)) {
+                    this.ReceiverIdField = value;
+                    this.RaisePropertyChanged("ReceiverId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime SendTime {
+            get {
+                return this.SendTimeField;
+            }
+            set {
+                if ((this.SendTimeField.Equals(value) != true)) {
+                    this.SendTimeField = value;
+                    this.RaisePropertyChanged("SendTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SenderId {
+            get {
+                return this.SenderIdField;
+            }
+            set {
+                if ((this.SenderIdField.Equals(value) != true)) {
+                    this.SenderIdField = value;
+                    this.RaisePropertyChanged("SenderId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IProgramService", CallbackContract=typeof(UI.ServiceReference.IProgramServiceCallback))]
     public interface IProgramService {
@@ -145,6 +334,24 @@ namespace UI.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetLoginUserById", ReplyAction="http://tempuri.org/IProgramService/GetLoginUserByIdResponse")]
         System.Threading.Tasks.Task<string> GetLoginUserByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetNoChat", ReplyAction="http://tempuri.org/IProgramService/GetNoChatResponse")]
+        System.Collections.Generic.List<int> GetNoChat(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetNoChat", ReplyAction="http://tempuri.org/IProgramService/GetNoChatResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<int>> GetNoChatAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllChats", ReplyAction="http://tempuri.org/IProgramService/GetAllChatsResponse")]
+        System.Collections.Generic.List<UI.ServiceReference.Message> GetAllChats(string sender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetAllChats", ReplyAction="http://tempuri.org/IProgramService/GetAllChatsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<UI.ServiceReference.Message>> GetAllChatsAsync(string sender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetId", ReplyAction="http://tempuri.org/IProgramService/GetIdResponse")]
+        int GetId(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProgramService/GetId", ReplyAction="http://tempuri.org/IProgramService/GetIdResponse")]
+        System.Threading.Tasks.Task<int> GetIdAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AddUser")]
         void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline);
@@ -279,6 +486,30 @@ namespace UI.ServiceReference {
         
         public System.Threading.Tasks.Task<string> GetLoginUserByIdAsync(int id) {
             return base.Channel.GetLoginUserByIdAsync(id);
+        }
+        
+        public System.Collections.Generic.List<int> GetNoChat(string login) {
+            return base.Channel.GetNoChat(login);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<int>> GetNoChatAsync(string login) {
+            return base.Channel.GetNoChatAsync(login);
+        }
+        
+        public System.Collections.Generic.List<UI.ServiceReference.Message> GetAllChats(string sender) {
+            return base.Channel.GetAllChats(sender);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<UI.ServiceReference.Message>> GetAllChatsAsync(string sender) {
+            return base.Channel.GetAllChatsAsync(sender);
+        }
+        
+        public int GetId(string login) {
+            return base.Channel.GetId(login);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetIdAsync(string login) {
+            return base.Channel.GetIdAsync(login);
         }
         
         public void AddUser(string login, string nickname, string password, byte[] img, bool online, System.DateTime lastOnline) {
