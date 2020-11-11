@@ -17,12 +17,14 @@
         {
             l_login_r.Visibility = Visibility.Visible;
             l_nickname_r.Visibility = Visibility.Visible;
-            l_status_r.Visibility = Visibility.Visible;
+            //l_status_r.Visibility = Visibility.Visible;
+            l_status_r.Visibility = Visibility.Hidden;
+
             gr_chatInfo.Visibility = Visibility.Visible;
 
             login_ct.Visibility = Visibility.Visible;
             nickname_ct.Visibility = Visibility.Visible;
-            status_ct.Visibility = Visibility.Visible;
+            //status_ct.Visibility = Visibility.Visible;
             avatar_ct.Visibility = Visibility.Visible;
 
             if (lb_chats.SelectedItems != null)
@@ -39,10 +41,10 @@
                     return;
                 }
 
-                if (Encoding.Default.GetString(infoes[3]) == "true")
-                    status_ct.Text = Encoding.Default.GetString(infoes[3]);
-                else
-                    status_ct.Text = Encoding.Default.GetString(infoes[1]);
+                //if (Encoding.Default.GetString(infoes[3]) == "true")
+                //    status_ct.Text = Encoding.Default.GetString(infoes[3]);
+                //else
+                //    status_ct.Text = Encoding.Default.GetString(infoes[1]);
 
                 nickname_ct.Text = Encoding.Default.GetString(infoes[0]);
                 byte[] ph = infoes[2];
@@ -116,6 +118,8 @@
                 programServiceClient.AddChat(login_, cb_contact.SelectedItem.ToString());
                 Lists.chats.Add(cb_contact.SelectedItem.ToString());
                 Lists.noChat.Remove(cb_contact.SelectedItem.ToString());
+
+                flipper.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -177,6 +181,7 @@
                 chat_lb.Visibility = Visibility.Visible;
                 gr_chatInfo.Visibility = Visibility.Visible;
 
+                bt_remove_ct.Visibility = Visibility.Visible;
                 flipper.Visibility = Visibility.Collapsed;
 
                 ShowContactInfo();

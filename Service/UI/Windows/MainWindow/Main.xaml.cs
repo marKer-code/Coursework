@@ -150,6 +150,7 @@
                     .Result);
 
             foreach (var noChat in programServiceClient.GetNoChat(login))
+                if (!Lists.noChat.Contains( programServiceClient.GetLoginUserById(noChat)))
                 Lists.noChat
                     .Add(programServiceClient
                     .GetLoginUserByIdAsync(noChat)
@@ -161,6 +162,8 @@
 
             foreach (var message in messages)
             {
+                if (message.SenderId == id)
+                    continue;
                 if (message.ReceiverId != id &&
                     !Lists.chats.Contains(
                         programServiceClient.GetLoginUserById(message.ReceiverId)))
@@ -186,8 +189,6 @@
                         .Where(m => m.SenderId == programServiceClient.GetId(item) ||
                             m.ReceiverId == programServiceClient.GetId(item))
                         .ToList();
-                //.OrderByDescending(m => m.SendTime)
-                //.ToList();
 
                 foreach (var item2 in messages_)
                 {
@@ -196,9 +197,6 @@
                         item2.SenderId.ToString(),
                         item2.ReceiverId.ToString(),
                         item2.Text
-                        //Encoding.Default.GetString(item2.Image),
-                        //item2.ImageName
-                        //item2.
                     };
 
                     Lists.messages.Add(q, item);
