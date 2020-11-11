@@ -1,5 +1,6 @@
 ﻿namespace UI.Windows.MainWindow
 {
+    using DAL.Entities;
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceModel;
@@ -40,6 +41,7 @@
             callbackHandler.NewChatEvent += NewChat;
 
             callbackHandler.DeleteChatEvent += DeleteChat;
+            callbackHandler.DeleteChatEvent += SendMessage;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
@@ -52,8 +54,18 @@
             Task.Run(() => LoadInfo(login, password, nickname, photo));
         }
 
+        private void SendMessage(string sender)
+        {
+
+        }
+
         private void DeleteChat(string toDeleteLogin)
-           => Lists.chats.Remove(toDeleteLogin);
+        {
+            Lists.chats.Remove(toDeleteLogin);
+            foreach (var item in Lists.messages)
+                if (item.Value == toDeleteLogin)
+                    Lists.messages.Remove(item.Key);
+        }
 
         private void NewChat(string senderLogin)
         {
@@ -63,10 +75,16 @@
         }
 
         private void DeleteContact(string toDeleteLogin)
-            => Lists.contacts.Remove(toDeleteLogin);
+        {
+            Lists.contacts.Remove(toDeleteLogin);
+            Lists.chats.Remove(toDeleteLogin);
+            foreach (var item in Lists.messages)
+                if (item.Value == toDeleteLogin)
+                    Lists.messages.Remove(item.Key);
+        }
 
         private void RejectRequest_(string receiverLogin)
-            => Lists.sendRequests.Remove(receiverLogin);
+                => Lists.sendRequests.Remove(receiverLogin);
 
         private void NewContact(string contactLogin)
         {
@@ -161,6 +179,8 @@
                         .Where(m => m.SenderId == programServiceClient.GetId(item) ||
                             m.ReceiverId == programServiceClient.GetId(item))
                         .ToList();
+                        //.OrderByDescending(m => m.SendTime)
+                        //.ToList();
 
                 foreach (var item2 in messages_)
                 {
@@ -176,7 +196,7 @@
 
                     Lists.messages.Add(q, item);
                 }
-                
+
             }
         }
 

@@ -33,6 +33,7 @@
             callbackHandler.NewChatEvent += NewChat;
 
             callbackHandler.DeleteChatEvent += DeleteChat;
+            callbackHandler.DeleteChatEvent += SendMessage_;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
@@ -41,7 +42,17 @@
         }
 
         private void DeleteChat(string toDeleteLogin)
-           => Lists.chats.Remove(toDeleteLogin);
+        {
+            Lists.chats.Remove(toDeleteLogin);
+            foreach (var item in Lists.messages)
+                if (item.Value == toDeleteLogin)
+                    Lists.messages.Remove(item.Key);
+        }
+
+        private void SendMessage_(string sender)
+        {
+
+        }
 
         private void NewChat(string senderLogin)
         {
@@ -50,7 +61,13 @@
                 Lists.noChat.Remove(senderLogin);
         }
         private void DeleteContact(string toDeleteLogin)
-            => Lists.contacts.Remove(toDeleteLogin);
+        {
+            Lists.contacts.Remove(toDeleteLogin);
+            Lists.chats.Remove(toDeleteLogin);
+            foreach (var item in Lists.messages)
+                if (item.Value == toDeleteLogin)
+                    Lists.messages.Remove(item.Key);
+        }
 
         private void RejectRequest_(string receiverLogin)
             => Lists.sendRequests.Remove(receiverLogin);

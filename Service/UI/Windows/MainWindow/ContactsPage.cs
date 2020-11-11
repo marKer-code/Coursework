@@ -1,5 +1,6 @@
 ﻿namespace UI
 {
+    using DAL.Entities;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -55,6 +56,11 @@
             programServiceClient.RemoveContactAsync(login_, login.Text);
             Lists.contacts.Remove(login.Text);
             gr_contactInfo.Visibility = Visibility.Hidden;
+
+            foreach (var item in Lists.messages)
+                if(item.Value == login_)
+                    Lists.messages.Remove(item.Key);
+
             MessageBox.Show("< Removed >");
         }
     }

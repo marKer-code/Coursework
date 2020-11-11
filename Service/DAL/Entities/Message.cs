@@ -13,6 +13,6 @@
         public string FileName { get; set; }
         public byte[] File { get; set; }
         public DateTime SendTime { get; set; }
-        public DateTime ReadTime { get; set; }
+        public DateTime? ReadTime { get; set; }
     }
 }

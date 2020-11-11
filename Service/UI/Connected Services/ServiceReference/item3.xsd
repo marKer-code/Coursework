@@ -28,7 +28,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="ImageName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ReadTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReadTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ReceiverId" type="xs:int" />
       <xs:element minOccurs="0" name="SendTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SenderId" type="xs:int" />

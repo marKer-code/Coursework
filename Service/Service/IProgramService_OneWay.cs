@@ -27,7 +27,11 @@
 
         [OperationContract(IsOneWay = true)]
         void RemoveContact(string login, string otherLogin);
+
         [OperationContract(IsOneWay = true)]
         void AddChat(string senderLogin, string receiverLogin);
+
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(string sender, string receiver, string message);
     }
 }

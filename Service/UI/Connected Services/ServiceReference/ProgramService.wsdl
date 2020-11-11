@@ -747,6 +747,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SendMessage_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_ReceiveRequest_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -885,6 +908,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SendMessage__output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Service/AppService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -977,6 +1023,9 @@
   <wsdl:message name="IProgramService_AddChat_InputMessage">
     <wsdl:part name="parameters" element="tns:AddChat" />
   </wsdl:message>
+  <wsdl:message name="IProgramService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
   <wsdl:message name="IProgramService_ReceiveRequest_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveRequest" />
   </wsdl:message>
@@ -994,6 +1043,9 @@
   </wsdl:message>
   <wsdl:message name="IProgramService_DeleteChat_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DeleteChat" />
+  </wsdl:message>
+  <wsdl:message name="IProgramService_SendMessage__OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage_" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -1060,6 +1112,9 @@
     <wsdl:operation name="AddChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/AddChat" message="tns:IProgramService_AddChat_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProgramService/SendMessage" message="tns:IProgramService_SendMessage_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReceiveRequest">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/ReceiveRequest" message="tns:IProgramService_ReceiveRequest_OutputCallbackMessage" />
     </wsdl:operation>
@@ -1077,6 +1132,9 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteChat">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/DeleteChat" message="tns:IProgramService_DeleteChat_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage_">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/SendMessage_" message="tns:IProgramService_SendMessage__OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -1248,6 +1306,13 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/SendMessage" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SendMessage_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReceiveRequest">
       <soap12:operation soapAction="http://tempuri.org/IProgramService/ReceiveRequest" style="document" />
       <wsdl:output>
@@ -1287,6 +1352,13 @@
       <soap12:operation soapAction="http://tempuri.org/IProgramService/DeleteChat" style="document" />
       <wsdl:output>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_DeleteChat_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage_">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/SendMessage_" style="document" />
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SendMessage__output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -111,14 +111,15 @@
                 </ListBoxItem>
             </ListBox>
 
-            <Grid Grid.Column="2" x:Name="gr_chatInfo" Visibility="Hidden">
+            <Grid Grid.Column="2" x:Name="gr_chatInfo">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <DockPanel>
-                    <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" Visibility="Hidden">
+                    <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" MaxHeight="370">
+                       
                         <!--<ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel>
@@ -133,8 +134,10 @@
                             </DataTemplate>-->
                         <!--</ListBox.ItemTemplate>-->
                     </ListBox>
-                    <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" Foreground="White" Content="+" Click="bt_Plus_Click"/>
-                    <Button x:Name="bt_send" DockPanel.Dock="Right" Content="Send"  Foreground="White"/>
+                    <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" 
+                            Foreground="White" Content="+" Click="bt_Plus_Click"/>
+                    <Button x:Name="bt_send" DockPanel.Dock="Right" 
+                            Content="Send"  Foreground="White" Click="bt_send_Click"/>
                     <TextBox Margin="10" Name="tb_message" />
                 </DockPanel>
 

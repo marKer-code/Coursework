@@ -19,6 +19,8 @@
 
         [OperationContract(IsOneWay = true)]
         void DeleteChat(string senderLogin);
+        [OperationContract(IsOneWay = true)]
+        void SendMessage_(string message);
     }
     class UserMessage
     {

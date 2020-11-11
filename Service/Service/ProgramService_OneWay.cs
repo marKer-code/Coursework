@@ -223,6 +223,16 @@
 
             repositories.CoupleRepository.Delete(couple);
 
+            List<DAL.Entities.Message> messages = repositories.MessageRepository
+               .Get(m => m.SenderId == senderId &&
+               m.ReceiverId == receiverId ||
+               m.SenderId == receiverId &&
+               m.ReceiverId == senderId)
+               .ToList();
+
+            foreach (var item in messages)
+                repositories.MessageRepository.Delete(item);
+
             repositories.Save();
 
             foreach (var item in sub)
@@ -292,6 +302,40 @@
                 {
                     item.Value.Message = sender;
                     item.Value.Callback.DeleteChat(item.Value.Message);
+                    return;
+                }
+        }
+
+        public void SendMessage(string sender, string receiver, string message)
+        {
+            int senderId = repositories.UserRepository
+              .Get(u => u.Login == sender)
+              .First()
+              .Id;
+            int receiverId = repositories.UserRepository
+                .Get(u => u.Login == receiver)
+                .First()
+                .Id;
+
+            DAL.Entities.Message m = new DAL.Entities.Message()
+            {
+                SenderId = senderId,
+                ReceiverId = receiverId,
+                Text = message,
+                SendTime = DateTime.Now,
+            };
+
+            repositories.MessageRepository.Insert(m);
+            repositories.Save();
+
+            foreach (var item in sub)
+                if (item.Key == receiver)
+                {
+                    item.Value.Message =
+                        sender + " " +
+                        m.SenderId + " " +
+                        m.ReceiverId + " " + m.Text;
+                    item.Value.Callback.SendMessage_(item.Value.Message);
                     return;
                 }
         }

@@ -73,6 +73,8 @@
                 flipper_attachFile.IsEnabled = false;
                 flipper_attachFile.Visibility = Visibility.Collapsed;
 
+                chat_lb.Visibility = Visibility.Visible;
+
                 sp_chats.IsEnabled = true;
 
                 bt_remove_ct.IsEnabled = true;
@@ -83,6 +85,8 @@
             {
                 flipper_attachFile.IsEnabled = true;
                 flipper_attachFile.Visibility = Visibility.Visible;
+
+                chat_lb.Visibility = Visibility.Hidden;
 
                 sp_chats.IsEnabled = false;
 
@@ -106,6 +110,29 @@
             }
         }
 
+        private void bt_send_Click(object sender, RoutedEventArgs e)
+        {
+            if (tb_message != null)
+            {
+                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text);
+                Lists.messages.Add(new List<string>()
+                {
+                    programServiceClient.GetId(login_).ToString(),
+                    programServiceClient.GetId(login_ct.Text).ToString(),
+                    tb_message.Text
+                },
+                login_ct.Text);
+                chat_lb.Items.Clear();
+
+                foreach (var item in Lists.messages)
+                    if (item.Value == login_ct.Text)
+                    {
+                        List<string> r = item.Key;
+                        chat_lb.Items.Add(r[2]);
+                    }
+            }
+        }
+
         private void bt_remove_ct_Click(object sender, RoutedEventArgs e)
         {
             switch (login_ct.Text)
@@ -119,32 +146,36 @@
                     {
                         Lists.chats.Remove(login_ct.Text);
                         programServiceClient.RemoveChatAsync(login_, login_ct.Text);
+
+                        chat_lb.Visibility = Visibility.Hidden;
+
+                        foreach (var item in Lists.messages)
+                            if (item.Value == login_)
+                                Lists.messages.Remove(item.Key);
+
                         break;
                     }
             }
         }
-
-
-
 
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lb_chats.SelectedItem != null)
             {
                 chat_lb.Items.Clear();
-                gr_chatInfo.Visibility = Visibility.Visible;
                 chat_lb.Visibility = Visibility.Visible;
+                gr_chatInfo.Visibility = Visibility.Visible;
+
+                flipper.Visibility = Visibility.Collapsed;
 
                 ShowContactInfo();
 
                 foreach (var item in Lists.messages)
-                {
                     if (item.Value == lb_chats.SelectedItem.ToString())
                     {
                         List<string> r = item.Key;
                         chat_lb.Items.Add(r[2]);
                     }
-                }
                 lb_chats.SelectedItem = null;
             }
         }

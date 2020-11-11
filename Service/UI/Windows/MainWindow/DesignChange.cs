@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows;
 
     public static class Lists
@@ -11,8 +12,8 @@
         public static Collection<string> sendRequests = new ObservableCollection<string>();
         public static Collection<string> noChat = new ObservableCollection<string>();
         public static Collection<string> chats = new ObservableCollection<string>();
-        public static Dictionary<List<string>,string> messages = 
-            new Dictionary<List<string>,string>();
+        public static Dictionary<List<string>, string> messages =
+            new Dictionary<List<string>, string>();
     }
 
     public partial class Profile
