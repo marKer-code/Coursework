@@ -14,6 +14,7 @@
         public static Collection<string> chats = new ObservableCollection<string>();
         public static Dictionary<List<string>, string> messages =
             new Dictionary<List<string>, string>();
+        public static string chatOn;
     }
 
     public partial class Profile
@@ -147,16 +148,19 @@
                 case BUTTON.PROFILE:
                     {
                         insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
+                        Lists.chatOn = null;
                         break;
                     }
                 case BUTTON.ALLCONTACTS:
                     {
                         insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
+                        Lists.chatOn = null;
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
                     {
                         insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
+                        Lists.chatOn = null;
                         break;
                     }
                 default: break;

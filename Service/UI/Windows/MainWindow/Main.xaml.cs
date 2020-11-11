@@ -41,12 +41,10 @@
             callbackHandler.NewChatEvent += NewChat;
 
             callbackHandler.DeleteChatEvent += DeleteChat;
-            callbackHandler.DeleteChatEvent += SendMessage;
+            callbackHandler.ReceiveMessageEvent += CallbackHandler_ReceiveMessageEvent;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
-
-            programServiceClient.UpdateOnline(login, true);
 
             if (!programServiceClient.CheckLogin(login))
                 insomable.OpenWindow(new SignUp(), this);
@@ -54,8 +52,17 @@
             Task.Run(() => LoadInfo(login, password, nickname, photo));
         }
 
-        private void SendMessage(string sender)
+        private void CallbackHandler_ReceiveMessageEvent(string obj)
         {
+            MessageBox.Show(login_ + " " + obj+ "Main");
+            string[] mes = obj.Split(' ');
+            Lists.messages.Add(new List<string>()
+            {
+                mes[1],
+                mes[2],
+                mes[3]
+            },
+            mes[0]);
 
         }
 
@@ -97,7 +104,7 @@
             => Lists.receivedRequests.Add(senderLogin);
 
         private void Window_Closed(object sender, System.EventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, false);
+            => programServiceClient.UpdateOnline(login_, "Remove");
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
@@ -179,8 +186,8 @@
                         .Where(m => m.SenderId == programServiceClient.GetId(item) ||
                             m.ReceiverId == programServiceClient.GetId(item))
                         .ToList();
-                        //.OrderByDescending(m => m.SendTime)
-                        //.ToList();
+                //.OrderByDescending(m => m.SendTime)
+                //.ToList();
 
                 foreach (var item2 in messages_)
                 {

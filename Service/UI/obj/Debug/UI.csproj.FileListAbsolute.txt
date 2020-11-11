@@ -64,10 +64,15 @@ C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debu
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Contact.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Profile.baml
 C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\Windows\Requests.baml
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
 D:\Step\Coursework\Service\UI\bin\Debug\DAL.dll
 D:\Step\Coursework\Service\UI\bin\Debug\EntityFramework.dll
 D:\Step\Coursework\Service\UI\bin\Debug\DAL.pdb
 D:\Step\Coursework\Service\UI\bin\Debug\DAL.dll.config
 D:\Step\Coursework\Service\UI\bin\Debug\EntityFramework.xml
 D:\Step\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\DAL.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\EntityFramework.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\DAL.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\DAL.dll.config
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\bin\Debug\EntityFramework.xml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\UI\obj\Debug\UI.csprojAssemblyReference.cache

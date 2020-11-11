@@ -16,11 +16,12 @@
         [OperationContract(IsOneWay = true)]
         void NewChat_(string senderLogin);
 
-
         [OperationContract(IsOneWay = true)]
         void DeleteChat(string senderLogin);
+
         [OperationContract(IsOneWay = true)]
-        void SendMessage_(string message);
+        void ReciveMessage(string message);
+
     }
     class UserMessage
     {

@@ -16,17 +16,13 @@
         public event Action<string> RejectRequest_Event;
         public event Action<string> DeleteContactEvent;
         public event Action<string> NewChatEvent;
+        public event Action<string> ReceiveMessageEvent;
 
 
         public event Action<string> DeleteChatEvent;
-        public event Action<string> SendMessageEvent;
 
         public void DeleteChat(string toDeleteLogin)
             => DeleteChatEvent?.Invoke(toDeleteLogin);
-
-        public void SendMessage_(string senderLogin)
-            => SendMessageEvent?.Invoke(senderLogin);
-
 
         public void DeleteContact(string toDeleteLogin)
             => DeleteContactEvent?.Invoke(toDeleteLogin);
@@ -39,6 +35,9 @@
 
         public void ReceiveRequest(string senderLogin)
             => ReceiveRequestEvent?.Invoke(senderLogin);
+
+        public void ReciveMessage(string message)
+            => ReceiveMessageEvent?.Invoke(message);
 
         public void RejectRequest_(string receiverLogin)
             => RejectRequest_Event?.Invoke(receiverLogin);

@@ -59,7 +59,7 @@
 
         readonly static Dictionary<string, UserMessage> sub =
            new Dictionary<string, UserMessage>();
-        public void UpdateOnline(string login, bool loginIn)
+        public void UpdateOnline(string login, string @do)
         {
             UserInfo userInfo = repositories.UserInfoRepository
                                 .Get(u => u.User.Login == login)
@@ -67,39 +67,40 @@
 
             int idUser = userInfo.UserId;
 
-            userInfo.Online = loginIn;
-
-            switch (loginIn.ToString())
+            switch (@do)
             {
-                case "True":
+                case "NewCallback":
+                    userInfo.Online = true;
+                    UserMessage user = new UserMessage()
                     {
-                        UserMessage user = new UserMessage()
-                        {
-                            Message = "",
-                            Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
-                        };
-                        sub.Add(login, user);
-                        break;
-                    }
-                case "False":
+                        Message = "",
+                        Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
+                    };
+                    sub.Add(login, user);
+                    break;
+                case "ChangeCallback":
+                    try
                     {
-                        userInfo.LastOnline = DateTime.Now;
 
-                        //foreach (var item in sub.Keys)
-                        //{
-                        //    UserMessage um = new UserMessage()
-                        //    {
-                        //        Message = "pidor exit",
-                        //        Callback = sub[item].Callback
-                        //    };
-                        //    um.Callback.Message_(um.Message);
-                        //}
-
-                        sub.Remove(login);
-                        break;
+                        if (sub.Count != 0 && sub.ContainsKey(sub.First(s => s.Key == login).Key))
+                            sub.Remove(sub.First(s => s.Key == login).Key);
                     }
+                    catch
+                    {
+
+                    }
+                    UserMessage user_ = new UserMessage()
+                    {
+                        Message = "",
+                        Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
+                    };
+                    sub.Add(login, user_);
+                    break;
+                default:
+                    userInfo.LastOnline = DateTime.Now;
+                    sub.Remove(login);
+                    break;
             }
-
             repositories.Save();
         }
 
@@ -335,7 +336,7 @@
                         sender + " " +
                         m.SenderId + " " +
                         m.ReceiverId + " " + m.Text;
-                    item.Value.Callback.SendMessage_(item.Value.Message);
+                    item.Value.Callback.ReciveMessage(item.Value.Message);
                     return;
                 }
         }

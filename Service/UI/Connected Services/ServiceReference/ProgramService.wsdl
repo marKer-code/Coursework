@@ -908,7 +908,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_SendMessage__output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IProgramService_ReciveMessage_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -1044,8 +1044,8 @@
   <wsdl:message name="IProgramService_DeleteChat_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DeleteChat" />
   </wsdl:message>
-  <wsdl:message name="IProgramService_SendMessage__OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:SendMessage_" />
+  <wsdl:message name="IProgramService_ReciveMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveMessage" />
   </wsdl:message>
   <wsdl:portType name="IProgramService">
     <wsdl:operation name="CheckUser">
@@ -1133,8 +1133,8 @@
     <wsdl:operation name="DeleteChat">
       <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/DeleteChat" message="tns:IProgramService_DeleteChat_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendMessage_">
-      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/SendMessage_" message="tns:IProgramService_SendMessage__OutputCallbackMessage" />
+    <wsdl:operation name="ReciveMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IProgramService/ReciveMessage" message="tns:IProgramService_ReciveMessage_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IProgramService" type="tns:IProgramService">
@@ -1355,10 +1355,10 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SendMessage_">
-      <soap12:operation soapAction="http://tempuri.org/IProgramService/SendMessage_" style="document" />
+    <wsdl:operation name="ReciveMessage">
+      <soap12:operation soapAction="http://tempuri.org/IProgramService/ReciveMessage" style="document" />
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_SendMessage__output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IProgramService_ReciveMessage_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

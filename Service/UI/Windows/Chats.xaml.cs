@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.Text;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
@@ -35,7 +36,8 @@
 
 
             callbackHandler.DeleteChatEvent += DeleteChat;
-            callbackHandler.SendMessageEvent+= SendMessage_;
+            callbackHandler.ReceiveMessageEvent += CallbackHandler_ReceiveMessageEvent;
+
 
 
             programServiceClient = new ProgramServiceClient
@@ -44,6 +46,19 @@
             LoadInfo(login, password, nickname, photo);
         }
 
+        private void CallbackHandler_ReceiveMessageEvent(string obj)
+        {
+            string[] mes = obj.Split(' ');
+            Lists.messages.Add(new List<string>()
+            {
+                mes[1],
+                mes[2],
+                mes[3]
+            },
+            mes[0]);
+            if (Lists.chatOn == mes[0])
+                lb_chats.SelectedItem = mes[0];
+        }
 
         private void DeleteChat(string toDeleteLogin)
         {
@@ -53,20 +68,6 @@
                     Lists.messages.Remove(item.Key);
             MessageBox.Show(" ");
         }
-
-        private void SendMessage_(string mess)
-        {
-            string[] mes = mess.Split(' ');
-            Lists.messages.Add(new List<string>()
-            {
-                mes[1],
-                mes[2],
-                mes[3]
-            },
-            mes[0]);
-            MessageBox.Show("");
-        }
-
         private void NewChat(string senderLogin)
         {
             Lists.chats.Add(senderLogin);
@@ -97,21 +98,23 @@
             => Lists.receivedRequests.Add(senderLogin);
 
         private void Window_Closed(object sender, System.EventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, false);
+            => programServiceClient.UpdateOnline(login_, "Remove");
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, true);
+        { }
 
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
             login_ = login;
             password_ = password;
+            programServiceClient.UpdateOnline(login, "ChangeCallback");
 
             switch (nickname)
             {
                 case null:
                     {
+                        Thread.Sleep(100);
                         List<byte[]> infoes = programServiceClient.LoadUserInfo(login_);
 
                         nickname_ = Encoding.Default.GetString(infoes[0]);

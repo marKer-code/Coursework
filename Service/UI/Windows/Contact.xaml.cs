@@ -33,14 +33,25 @@
             callbackHandler.NewChatEvent += NewChat;
 
             callbackHandler.DeleteChatEvent += DeleteChat;
-            callbackHandler.DeleteChatEvent += SendMessage_;
+            callbackHandler.ReceiveMessageEvent += CallbackHandler_ReceiveMessageEvent;
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
             LoadInfo(login, password, nickname, photo);
         }
-
+        private void CallbackHandler_ReceiveMessageEvent(string obj)
+        {
+            MessageBox.Show(login_ + " " + obj + "Contact");
+            string[] mes = obj.Split(' ');
+            Lists.messages.Add(new List<string>()
+            {
+                mes[1],
+                mes[2],
+                mes[3]
+            },
+            mes[0]);
+        }
         private void DeleteChat(string toDeleteLogin)
         {
             Lists.chats.Remove(toDeleteLogin);
@@ -48,12 +59,6 @@
                 if (item.Value == toDeleteLogin)
                     Lists.messages.Remove(item.Key);
         }
-
-        private void SendMessage_(string sender)
-        {
-
-        }
-
         private void NewChat(string senderLogin)
         {
             Lists.chats.Add(senderLogin);
@@ -92,6 +97,7 @@
         {
             login_ = login;
             password_ = password;
+            programServiceClient.UpdateOnline(login, "ChangeCallback");
 
             switch (nickname)
             {
@@ -118,7 +124,7 @@
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            programServiceClient.UpdateOnlineAsync(login_, false);
+            programServiceClient.UpdateOnline(login_, "Remove");
             Close();
         }
     }

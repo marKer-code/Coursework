@@ -17,8 +17,7 @@
         void AddRequest(string sender, string receiver);
 
         [OperationContract(IsOneWay = true)]
-        void UpdateOnline(string login, bool loginIn);
-
+        void UpdateOnline(string login, string @do);
         [OperationContract(IsOneWay = true)]
         void AcceptRequest(string sender, string receiver);
 

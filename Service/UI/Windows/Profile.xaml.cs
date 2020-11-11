@@ -39,8 +39,8 @@
             callbackHandler.DeleteContactEvent += DeleteContact;
             callbackHandler.NewChatEvent += NewChat;
 
+            callbackHandler.ReceiveMessageEvent += CallbackHandler_ReceiveMessageEvent;
             callbackHandler.DeleteChatEvent += DeleteChat;
-            callbackHandler.SendMessageEvent += SendMessage_;
 
 
             programServiceClient = new ProgramServiceClient
@@ -48,18 +48,10 @@
 
             LoadInfo(login, password, nickname, photo);
         }
-
-        private void DeleteChat(string toDeleteLogin)
+        private void CallbackHandler_ReceiveMessageEvent(string obj)
         {
-            Lists.chats.Remove(toDeleteLogin);
-            foreach (var item in Lists.messages)
-                if (item.Value == toDeleteLogin)
-                    Lists.messages.Remove(item.Key);
-        }
-
-        private void SendMessage_(string mess)
-        {
-            string[] mes = mess.Split(' ');
+            MessageBox.Show(login_ + " " + obj + "Profile");
+            string[] mes = obj.Split(' ');
             Lists.messages.Add(new List<string>()
             {
                 mes[1],
@@ -67,7 +59,13 @@
                 mes[3]
             },
             mes[0]);
-            MessageBox.Show("");
+        }
+        private void DeleteChat(string toDeleteLogin)
+        {
+            Lists.chats.Remove(toDeleteLogin);
+            foreach (var item in Lists.messages)
+                if (item.Value == toDeleteLogin)
+                    Lists.messages.Remove(item.Key);
         }
 
         private void NewChat(string senderLogin)
@@ -99,12 +97,13 @@
             => Lists.receivedRequests.Add(senderLogin);
 
         private void Window_Closed(object sender, EventArgs e)
-            => programServiceClient.UpdateOnlineAsync(login_, false);
+            => programServiceClient.UpdateOnline(login_, "Remove");
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
             login_ = login;
             password_ = password;
+            programServiceClient.UpdateOnline(login, "ChangeCallback");
 
             switch (nickname)
             {

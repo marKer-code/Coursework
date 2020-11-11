@@ -94,10 +94,10 @@ namespace UI.ServiceReference {
         System.Threading.Tasks.Task AddRequestAsync(string sender, string receiver);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
-        void UpdateOnline(string login, bool loginIn);
+        void UpdateOnline(string login, string @do);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/UpdateOnline")]
-        System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn);
+        System.Threading.Tasks.Task UpdateOnlineAsync(string login, string @do);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/AcceptRequest")]
         void AcceptRequest(string sender, string receiver);
@@ -151,8 +151,8 @@ namespace UI.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/DeleteChat")]
         void DeleteChat(string senderLogin);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SendMessage_")]
-        void SendMessage_(string message);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/ReciveMessage")]
+        void ReciveMessage(string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -287,12 +287,12 @@ namespace UI.ServiceReference {
             return base.Channel.AddRequestAsync(sender, receiver);
         }
         
-        public void UpdateOnline(string login, bool loginIn) {
-            base.Channel.UpdateOnline(login, loginIn);
+        public void UpdateOnline(string login, string @do) {
+            base.Channel.UpdateOnline(login, @do);
         }
         
-        public System.Threading.Tasks.Task UpdateOnlineAsync(string login, bool loginIn) {
-            return base.Channel.UpdateOnlineAsync(login, loginIn);
+        public System.Threading.Tasks.Task UpdateOnlineAsync(string login, string @do) {
+            return base.Channel.UpdateOnlineAsync(login, @do);
         }
         
         public void AcceptRequest(string sender, string receiver) {

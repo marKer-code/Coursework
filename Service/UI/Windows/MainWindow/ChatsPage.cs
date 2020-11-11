@@ -6,6 +6,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
@@ -27,8 +28,16 @@
             if (lb_chats.SelectedItems != null)
             {
                 login_ct.Text = lb_chats.SelectedItem.ToString();
+                List<byte[]> infoes = new List<byte[]>();
 
-                List<byte[]> infoes = programServiceClient.LoadUserInfo(login_ct.Text);
+                try
+                {
+                    infoes = programServiceClient.LoadUserInfo(login_ct.Text);
+                }
+                catch
+                {
+                    return;
+                }
 
                 if (Encoding.Default.GetString(infoes[3]) == "true")
                     status_ct.Text = Encoding.Default.GetString(infoes[3]);
@@ -162,6 +171,8 @@
         {
             if (lb_chats.SelectedItem != null)
             {
+                Lists.chatOn = lb_chats.SelectedItem.ToString();
+
                 chat_lb.Items.Clear();
                 chat_lb.Visibility = Visibility.Visible;
                 gr_chatInfo.Visibility = Visibility.Visible;
@@ -177,7 +188,9 @@
                         chat_lb.Items.Add(r[2]);
                     }
                 lb_chats.SelectedItem = null;
+                return;
             }
+
         }
     }
 }

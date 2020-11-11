@@ -20,5 +20,5 @@ D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.dll
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.pdb
-C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\Step\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
