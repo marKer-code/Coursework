@@ -20,7 +20,6 @@
         </Grid.RowDefinitions>
 
 
-
         <Label Name="B_Close" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center"
                HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Stretch" Content="X" MouseDown="B_Close_MouseDown"/>
@@ -60,8 +59,7 @@
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -77,10 +75,6 @@
                             <Button x:Name="f_bt_removeAll" Content="Remove All" 
                             Foreground="White"/>
                         </StackPanel>
-
-                        <Button Grid.Row="4" x:Name="f_bt_Download" Content="Download" 
-                            Foreground="White" Margin="10,0"/>
-
                     </Grid>
                 </materialDesign:Flipper.FrontContent>
             </materialDesign:Flipper>
@@ -125,17 +119,19 @@
 
                 <DockPanel>
                     <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" Visibility="Hidden">
-                        <ListBox.ItemTemplate>
+                        <!--<ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Margin="10" Source="{Binding Photo}" DockPanel.Dock="Left"></Image>
+                                    -->
+                        <!--<Image Margin="10" Source="{Binding Photo}" DockPanel.Dock="Left"></Image>
                                     <TextBlock Margin="10,0" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Text="{Binding SendTime}"/>
-                                    <Image Margin="0,0,0,40" DockPanel.Dock="Right" Source="{Binding IsRead}"/>
-                                    <TextBlock Margin="10,5,0,5" DockPanel.Dock="Top" Text="{Binding Login}"/>
-                                    <TextBlock Margin="10,0" DockPanel.Dock="Bottom" Text="{Binding Message}"/>
+                                    <Image Margin="0,0,0,40" DockPanel.Dock="Right" Source="{Binding IsRead}"/>-->
+                        <!--
+                                    <TextBlock DockPanel.Dock="Top"/>
+                                    <TextBlock Margin="10,0" DockPanel.Dock="Bottom"/>
                                 </DockPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                            </DataTemplate>-->
+                        <!--</ListBox.ItemTemplate>-->
                     </ListBox>
                     <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" Foreground="White" Content="+" Click="bt_Plus_Click"/>
                     <Button x:Name="bt_send" DockPanel.Dock="Right" Content="Send"  Foreground="White"/>

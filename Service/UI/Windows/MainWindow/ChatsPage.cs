@@ -131,11 +131,20 @@
         {
             if (lb_chats.SelectedItem != null)
             {
+                chat_lb.Items.Clear();
                 gr_chatInfo.Visibility = Visibility.Visible;
                 chat_lb.Visibility = Visibility.Visible;
 
                 ShowContactInfo();
 
+                foreach (var item in Lists.messages)
+                {
+                    if (item.Value == lb_chats.SelectedItem.ToString())
+                    {
+                        List<string> r = item.Key;
+                        chat_lb.Items.Add(r[2]);
+                    }
+                }
                 lb_chats.SelectedItem = null;
             }
         }

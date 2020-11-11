@@ -130,22 +130,53 @@
                     .GetLoginUserByIdAsync(noChat)
                     .Result);
 
-            int id = programServiceClient.GetId(login);
-            foreach (var chat in programServiceClient.GetAllChats(login))
+            int id = programServiceClient.GetId(login_);
+
+            List<Message> messages = programServiceClient.GetAllChats(login);
+
+            foreach (var message in messages)
             {
-                if (chat.ReceiverId != id &&
+                if (message.ReceiverId != id &&
                     !Lists.chats.Contains(
-                        programServiceClient.GetLoginUserById(chat.ReceiverId)))
+                        programServiceClient.GetLoginUserById(message.ReceiverId)))
                     Lists.chats
                         .Add(programServiceClient
-                        .GetLoginUserByIdAsync(chat.ReceiverId)
+                        .GetLoginUserByIdAsync(message.ReceiverId)
                         .Result);
                 else if (!Lists.chats.Contains(
-                        programServiceClient.GetLoginUserById(chat.SenderId)))
+                        programServiceClient.GetLoginUserById(message.SenderId)))
                     Lists.chats
                         .Add(programServiceClient
-                        .GetLoginUserByIdAsync(chat.SenderId)
+                        .GetLoginUserByIdAsync(message.SenderId)
                         .Result);
+            }
+
+            foreach (var item in Lists.chats)
+            {
+                if (item == login_)
+                    continue;
+
+                List<Message> messages_ =
+                    messages
+                        .Where(m => m.SenderId == programServiceClient.GetId(item) ||
+                            m.ReceiverId == programServiceClient.GetId(item))
+                        .ToList();
+
+                foreach (var item2 in messages_)
+                {
+                    List<string> q = new List<string>()
+                    {
+                        item2.SenderId.ToString(),
+                        item2.ReceiverId.ToString(),
+                        item2.Text
+                        //Encoding.Default.GetString(item2.Image),
+                        //item2.ImageName
+                        //item2.
+                    };
+
+                    Lists.messages.Add(q, item);
+                }
+                
             }
         }
 

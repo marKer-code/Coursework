@@ -80,7 +80,7 @@
         private void Window_Loaded(object sender, RoutedEventArgs e)
             => programServiceClient.UpdateOnlineAsync(login_, true);
 
-       
+
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
             login_ = login;
