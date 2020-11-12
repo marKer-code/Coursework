@@ -30,17 +30,21 @@
 
                 l_login_r.Visibility = Visibility.Visible;
                 l_nickname_r.Visibility = Visibility.Visible;
-                l_status_r.Visibility = Visibility.Visible;
+                //l_status_r.Visibility = Visibility.Visible;
                 gr_chatInfo.Visibility = Visibility.Visible;
 
                 nickname_ct.Visibility = Visibility.Visible;
-                status_ct.Visibility = Visibility.Visible;
+                //status_ct.Visibility = Visibility.Visible;
+
+                status_ct.Visibility = Visibility.Hidden;
+                l_status_r.Visibility = Visibility.Hidden;
+
                 avatar_ct.Visibility = Visibility.Visible;
 
-                if (Encoding.Default.GetString(info[3]) == "true")
-                    status_ct.Text = Encoding.Default.GetString(info[3]);
-                else
-                    status_ct.Text = Encoding.Default.GetString(info[1]);
+                //if (Encoding.Default.GetString(info[3]) == "true")
+                //    status_ct.Text = Encoding.Default.GetString(info[3]);
+                //else
+                //    status_ct.Text = Encoding.Default.GetString(info[1]);
 
                 nickname_ct.Text = Encoding.Default.GetString(info[0]);
                 byte[] ph = info[2];
@@ -63,6 +67,31 @@
             {
                 flipper.IsEnabled = true;
                 flipper.Visibility = Visibility.Visible;
+
+                gr_chatInfo.Visibility = Visibility.Hidden;
+                avatar_ct.Visibility = Visibility.Hidden;
+                login_ct.Visibility = Visibility.Hidden;
+                nickname_ct.Visibility = Visibility.Hidden;
+                status_ct.Visibility = Visibility.Hidden;
+                bt_remove_ct.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void bt_add_gr_ct_Click(object sender, RoutedEventArgs e)
+        {
+            if (flipper_group.Visibility == Visibility.Visible)
+            {
+                flipper_group.IsEnabled = false;
+                flipper_group.Visibility = Visibility.Collapsed;
+
+            }
+            else
+            {
+                flipper_group.IsEnabled = true;
+                flipper_group.Visibility = Visibility.Visible;
+
+                tb_name_gr.Visibility = Visibility.Visible;
+                tb_name_gr.IsEnabled = true;
 
                 gr_chatInfo.Visibility = Visibility.Hidden;
                 avatar_ct.Visibility = Visibility.Hidden;
@@ -118,7 +147,7 @@
 
         private void Bt_send_Click(object sender, RoutedEventArgs e)
         {
-            if (tb_message != null)
+            if (!String.IsNullOrEmpty(tb_message.Text))
             {
                 programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text);
                 Lists.messages.Add(new List<string>()
@@ -135,8 +164,11 @@
                     {
                         List<string> r = item.Key;
                         chat_lb.Items.Add(r[2]);
+                        //chat_lb.Items.Add(programServiceClient.GetLoginUserByIdAsync(Convert.ToInt32(r[0])).Result + " > " + r[2]);
                     }
             }
+            else
+                MessageBox.Show("< Enter Message >");
         }
 
         private void Bt_remove_ct_Click(object sender, RoutedEventArgs e)
@@ -173,6 +205,8 @@
                 chat_lb.Items.Clear();
                 chat_lb.Visibility = Visibility.Visible;
                 gr_chatInfo.Visibility = Visibility.Visible;
+
+                bt_remove_ct.Visibility = Visibility.Visible;
 
                 flipper.Visibility = Visibility.Collapsed;
 

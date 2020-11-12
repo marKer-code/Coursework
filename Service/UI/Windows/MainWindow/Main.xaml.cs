@@ -98,11 +98,6 @@
                     .GetLoginUserByIdAsync(request.ReceiverId)
                     .Result);
 
-            foreach (var noChat in programServiceClient.GetNoChat(login))
-                Lists.noChat
-                    .Add(programServiceClient
-                    .GetLoginUserByIdAsync(noChat)
-                    .Result);
 
             int id = programServiceClient.GetId(login_);
 
@@ -110,9 +105,11 @@
 
             foreach (var message in messages)
             {
+                if (message.SenderId == id)
+                    continue;
                 if (message.ReceiverId != id &&
-                    !Lists.chats.Contains(
-                        programServiceClient.GetLoginUserById(message.ReceiverId)))
+                !Lists.chats.Contains(
+                    programServiceClient.GetLoginUserById(message.ReceiverId)))
                     Lists.chats
                         .Add(programServiceClient
                         .GetLoginUserByIdAsync(message.ReceiverId)
@@ -148,6 +145,14 @@
                     Lists.messages.Add(q, item);
                 }
             }
+
+            foreach (var noChat in programServiceClient.GetNoChat(login))
+                if (!Lists.noChat.Contains(programServiceClient.GetLoginUserById(noChat)))
+                    if (!Lists.chats.Contains(programServiceClient.GetLoginUserById(noChat)))
+                        Lists.noChat
+                        .Add(programServiceClient
+                        .GetLoginUserByIdAsync(noChat)
+                        .Result);
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)

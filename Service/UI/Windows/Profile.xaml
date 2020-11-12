@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
 
             <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
-            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+            Grid.ColumnSpan="3">
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>

@@ -62,6 +62,11 @@
         private void Window_Closed(object sender, System.EventArgs e)
             => programServiceClient.UpdateOnline(login_, "Remove");
 
+        private void f_bt_add_group_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
             login_ = login;

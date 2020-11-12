@@ -16,8 +16,10 @@
         {
             l_login_r.Visibility = Visibility.Visible;
             l_nickname_r.Visibility = Visibility.Visible;
-            l_status_r.Visibility = Visibility.Visible;
+            //l_status_r.Visibility = Visibility.Visible;
             gr_contactInfo.Visibility = Visibility.Visible;
+
+            l_status_r.Visibility = Visibility.Hidden;
 
             if (lb_contacts.SelectedItems != null)
             {
@@ -25,10 +27,10 @@
 
                 List<byte[]> info = programServiceClient.LoadUserInfo(login.Text);
 
-                if (Encoding.Default.GetString(info[3]) == "true")
-                    status.Text = Encoding.Default.GetString(info[3]);
-                else
-                    status.Text = Encoding.Default.GetString(info[1]);
+                //if (Encoding.Default.GetString(info[3]) == "true")
+                //    status.Text = Encoding.Default.GetString(info[3]);
+                //else
+                //    status.Text = Encoding.Default.GetString(info[1]);
 
                 nickname.Text = Encoding.Default.GetString(info[0]);
                 byte[] ph = info[2];

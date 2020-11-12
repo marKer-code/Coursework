@@ -67,11 +67,14 @@
 
             l_login_r.Visibility = Visibility.Visible;
             l_nickname_r.Visibility = Visibility.Visible;
-            l_status_r.Visibility = Visibility.Visible;
+            //l_status_r.Visibility = Visibility.Visible;
+
+            status_r.Visibility = Visibility.Hidden;
+            l_status_r.Visibility = Visibility.Hidden;
 
             nickname_r.Visibility = Visibility.Visible;
             login_r.Visibility = Visibility.Visible;
-            status_r.Visibility = Visibility.Visible;
+            //status_r.Visibility = Visibility.Visible;
 
             avatar_r.Visibility = Visibility.Visible;
             flipper.IsEnabled = false;
