@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
-namespace DAL.Interfaces
+﻿namespace DAL.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
     public interface IRepository<TEntity> where TEntity : class
     {
         TEntity GetById(int id);

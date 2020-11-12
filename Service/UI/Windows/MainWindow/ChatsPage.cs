@@ -6,7 +6,6 @@
     using System.Drawing;
     using System.Linq;
     using System.Text;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
@@ -15,37 +14,36 @@
     {
         private void ShowContactInfo()
         {
-            l_login_r.Visibility = Visibility.Visible;
-            l_nickname_r.Visibility = Visibility.Visible;
-            l_status_r.Visibility = Visibility.Visible;
-            gr_chatInfo.Visibility = Visibility.Visible;
-
-            login_ct.Visibility = Visibility.Visible;
-            nickname_ct.Visibility = Visibility.Visible;
-            status_ct.Visibility = Visibility.Visible;
-            avatar_ct.Visibility = Visibility.Visible;
 
             if (lb_chats.SelectedItems != null)
             {
+                login_ct.Visibility = Visibility.Visible;
+
                 login_ct.Text = lb_chats.SelectedItem.ToString();
-                List<byte[]> infoes = new List<byte[]>();
+                List<byte[]> info = new List<byte[]>();
 
                 try
                 {
-                    infoes = programServiceClient.LoadUserInfo(login_ct.Text);
+                    info = programServiceClient.LoadUserInfo(login_ct.Text);
                 }
-                catch
-                {
-                    return;
-                }
+                catch { return; }
 
-                if (Encoding.Default.GetString(infoes[3]) == "true")
-                    status_ct.Text = Encoding.Default.GetString(infoes[3]);
+                l_login_r.Visibility = Visibility.Visible;
+                l_nickname_r.Visibility = Visibility.Visible;
+                l_status_r.Visibility = Visibility.Visible;
+                gr_chatInfo.Visibility = Visibility.Visible;
+
+                nickname_ct.Visibility = Visibility.Visible;
+                status_ct.Visibility = Visibility.Visible;
+                avatar_ct.Visibility = Visibility.Visible;
+
+                if (Encoding.Default.GetString(info[3]) == "true")
+                    status_ct.Text = Encoding.Default.GetString(info[3]);
                 else
-                    status_ct.Text = Encoding.Default.GetString(infoes[1]);
+                    status_ct.Text = Encoding.Default.GetString(info[1]);
 
-                nickname_ct.Text = Encoding.Default.GetString(infoes[0]);
-                byte[] ph = infoes[2];
+                nickname_ct.Text = Encoding.Default.GetString(info[0]);
+                byte[] ph = info[2];
                 TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
                 Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
                 var handle = bitmap1.GetHbitmap();
@@ -54,7 +52,7 @@
             }
         }
 
-        private void bt_add_ct_Click(object sender, RoutedEventArgs e)
+        private void Bt_add_ct_Click(object sender, RoutedEventArgs e)
         {
             if (flipper.Visibility == Visibility.Visible)
             {
@@ -75,7 +73,7 @@
             }
         }
 
-        private void bt_Plus_Click(object sender, RoutedEventArgs e)
+        private void Bt_Plus_Click(object sender, RoutedEventArgs e)
         {
             if (flipper_attachFile.Visibility == Visibility.Visible)
             {
@@ -112,14 +110,13 @@
         {
             if (cb_contact.SelectedIndex != -1)
             {
-                MessageBox.Show(cb_contact.SelectedItem.ToString());
                 programServiceClient.AddChat(login_, cb_contact.SelectedItem.ToString());
                 Lists.chats.Add(cb_contact.SelectedItem.ToString());
                 Lists.noChat.Remove(cb_contact.SelectedItem.ToString());
             }
         }
 
-        private void bt_send_Click(object sender, RoutedEventArgs e)
+        private void Bt_send_Click(object sender, RoutedEventArgs e)
         {
             if (tb_message != null)
             {
@@ -142,7 +139,7 @@
             }
         }
 
-        private void bt_remove_ct_Click(object sender, RoutedEventArgs e)
+        private void Bt_remove_ct_Click(object sender, RoutedEventArgs e)
         {
             switch (login_ct.Text)
             {
@@ -190,7 +187,6 @@
                 lb_chats.SelectedItem = null;
                 return;
             }
-
         }
     }
 }

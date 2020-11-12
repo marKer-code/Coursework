@@ -9,6 +9,9 @@
 
     public partial class ProgramService
     {
+        readonly static Dictionary<string, UserMessage> sub =
+           new Dictionary<string, UserMessage>();
+
         public void AddUser(string login, string nickname,
             string password, byte[] img, bool online, DateTime lastOnline)
         {
@@ -56,9 +59,6 @@
             repositories.Save();
         }
 
-
-        readonly static Dictionary<string, UserMessage> sub =
-           new Dictionary<string, UserMessage>();
         public void UpdateOnline(string login, string @do)
         {
             UserInfo userInfo = repositories.UserInfoRepository
@@ -211,11 +211,13 @@
             int senderId = repositories.UserRepository
                 .Get(u => u.Login == sender)
                 .First()
-                .Id;
-            int receiverId = repositories.UserRepository
+                .Id,
+
+                receiverId = repositories.UserRepository
                 .Get(u => u.Login == receiver)
                 .First()
                 .Id;
+
             Couple couple = repositories.CoupleRepository
                             .Get(c => c.UserId1 == senderId &&
                                 c.UserId2 == receiverId ||
@@ -280,8 +282,9 @@
             int senderId = repositories.UserRepository
                .Get(u => u.Login == sender)
                .First()
-               .Id;
-            int receiverId = repositories.UserRepository
+               .Id,
+
+               receiverId = repositories.UserRepository
                 .Get(u => u.Login == receiver)
                 .First()
                 .Id;
@@ -312,8 +315,9 @@
             int senderId = repositories.UserRepository
               .Get(u => u.Login == sender)
               .First()
-              .Id;
-            int receiverId = repositories.UserRepository
+              .Id,
+
+            receiverId = repositories.UserRepository
                 .Get(u => u.Login == receiver)
                 .First()
                 .Id;

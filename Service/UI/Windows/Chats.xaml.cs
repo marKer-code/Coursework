@@ -1,9 +1,11 @@
 ﻿namespace UI
 {
+    using System;
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
@@ -12,6 +14,8 @@
 
     public partial class Chats : Window
     {
+        #region Fields
+
         private enum BUTTON { PROFILE = 0, CHATS = 1, ALLCONTACTS = 2, ADDFRIENDS = 3 };
 
         readonly ProgramServiceClient programServiceClient;
@@ -20,6 +24,8 @@
         string login_, password_, nickname_;
         byte[] photo_;
 
+        #endregion
+
         public Chats(string login, string password, string nickname, byte[] photo)
         {
             InitializeComponent();
@@ -27,82 +33,34 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
-            callbackHandler.ReceiveRequestEvent += ReceiveRequest;
-            callbackHandler.NewContactEvent += NewContact;
-            callbackHandler.RejectRequest_Event += RejectRequest_;
-            callbackHandler.DeleteContactEvent += DeleteContact;
-            callbackHandler.NewChatEvent += NewChat;
+            callbackHandler.ReceiveRequestEvent += new Events_CallbackHandler().ReceiveRequest;
+            callbackHandler.NewContactEvent += new Events_CallbackHandler().NewContact;
+            callbackHandler.RejectRequest_Event += new Events_CallbackHandler().RejectRequest_;
+            callbackHandler.DeleteContactEvent += new Events_CallbackHandler().DeleteContact;
+            callbackHandler.NewChatEvent += new Events_CallbackHandler().NewChat;
 
-
-
-            callbackHandler.DeleteChatEvent += DeleteChat;
+            callbackHandler.DeleteChatEvent += new Events_CallbackHandler().DeleteChat;
             callbackHandler.ReceiveMessageEvent += CallbackHandler_ReceiveMessageEvent;
-
-
 
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
 
-            LoadInfo(login, password, nickname, photo);
+            Task.Run(() => LoadInfo(login, password, nickname, photo));
         }
 
         private void CallbackHandler_ReceiveMessageEvent(string obj)
         {
             string[] mes = obj.Split(' ');
-            Lists.messages.Add(new List<string>()
-            {
-                mes[1],
-                mes[2],
-                mes[3]
-            },
-            mes[0]);
+            new Events_CallbackHandler().ReceiveMessage(obj);
             if (Lists.chatOn == mes[0])
-                lb_chats.SelectedItem = mes[0];
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    lb_chats.SelectedItem = mes[0];
+                }));
         }
-
-        private void DeleteChat(string toDeleteLogin)
-        {
-            Lists.chats.Remove(toDeleteLogin);
-            foreach (var item in Lists.messages)
-                if (item.Value == toDeleteLogin)
-                    Lists.messages.Remove(item.Key);
-            MessageBox.Show(" ");
-        }
-        private void NewChat(string senderLogin)
-        {
-            Lists.chats.Add(senderLogin);
-            if (Lists.noChat.Contains(senderLogin))
-                Lists.noChat.Remove(senderLogin);
-        }
-
-        private void DeleteContact(string toDeleteLogin)
-        {
-            Lists.contacts.Remove(toDeleteLogin);
-            Lists.chats.Remove(toDeleteLogin);
-            foreach (var item in Lists.messages)
-                if (item.Value == toDeleteLogin)
-                    Lists.messages.Remove(item.Key);
-        }
-
-        private void RejectRequest_(string receiverLogin)
-            => Lists.sendRequests.Remove(receiverLogin);
-
-        private void NewContact(string contactLogin)
-        {
-            Lists.sendRequests.Remove(contactLogin);
-            Lists.noChat.Add(contactLogin);
-            Lists.contacts.Add(contactLogin);
-        }
-
-        private void ReceiveRequest(string senderLogin)
-            => Lists.receivedRequests.Add(senderLogin);
 
         private void Window_Closed(object sender, System.EventArgs e)
             => programServiceClient.UpdateOnline(login_, "Remove");
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        { }
-
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {
@@ -130,9 +88,11 @@
                         break;
                     }
             }
-
-            cb_contact.ItemsSource = Lists.noChat;
-            lb_chats.ItemsSource = Lists.chats;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                cb_contact.ItemsSource = Lists.noChat;
+                lb_chats.ItemsSource = Lists.chats;
+            }));
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)

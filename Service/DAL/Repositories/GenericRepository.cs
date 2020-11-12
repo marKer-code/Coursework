@@ -1,6 +1,5 @@
 ﻿namespace DAL.Repositories
 {
-    using DAL.Entities;
     using DAL.Interfaces;
     using System;
     using System.Collections.Generic;
@@ -18,6 +17,7 @@
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
+
         public virtual TEntity GetById(int id)
             => dbSet.Find(id);
 

@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="InsomableMethods\IInsomableMethods.cs" />
     <Compile Include="InsomableMethods\InsomableMethods.cs" />
+    <Compile Include="Windows\Events_CallbackHandler.cs" />
     <Compile Include="Windows\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>

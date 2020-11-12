@@ -401,7 +401,7 @@ namespace UI {
             this.bt_Plus = ((System.Windows.Controls.Button)(target));
             
             #line 138 "..\..\..\Windows\Chats.xaml"
-            this.bt_Plus.Click += new System.Windows.RoutedEventHandler(this.bt_Plus_Click);
+            this.bt_Plus.Click += new System.Windows.RoutedEventHandler(this.Bt_Plus_Click);
             
             #line default
             #line hidden
@@ -410,7 +410,7 @@ namespace UI {
             this.bt_send = ((System.Windows.Controls.Button)(target));
             
             #line 140 "..\..\..\Windows\Chats.xaml"
-            this.bt_send.Click += new System.Windows.RoutedEventHandler(this.bt_send_Click);
+            this.bt_send.Click += new System.Windows.RoutedEventHandler(this.Bt_send_Click);
             
             #line default
             #line hidden
@@ -443,7 +443,7 @@ namespace UI {
             this.bt_remove_ct = ((System.Windows.Controls.Button)(target));
             
             #line 171 "..\..\..\Windows\Chats.xaml"
-            this.bt_remove_ct.Click += new System.Windows.RoutedEventHandler(this.bt_remove_ct_Click);
+            this.bt_remove_ct.Click += new System.Windows.RoutedEventHandler(this.Bt_remove_ct_Click);
             
             #line default
             #line hidden
@@ -464,7 +464,7 @@ namespace UI {
             this.bt_add_ct = ((System.Windows.Controls.Button)(target));
             
             #line 181 "..\..\..\Windows\Chats.xaml"
-            this.bt_add_ct.Click += new System.Windows.RoutedEventHandler(this.bt_add_ct_Click);
+            this.bt_add_ct.Click += new System.Windows.RoutedEventHandler(this.Bt_add_ct_Click);
             
             #line default
             #line hidden

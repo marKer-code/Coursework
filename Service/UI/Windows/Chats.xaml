@@ -135,9 +135,9 @@
                         <!--</ListBox.ItemTemplate>-->
                     </ListBox>
                     <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" 
-                            Foreground="White" Content="+" Click="bt_Plus_Click"/>
+                            Foreground="White" Content="+" Click="Bt_Plus_Click"/>
                     <Button x:Name="bt_send" DockPanel.Dock="Right" 
-                            Content="Send"  Foreground="White" Click="bt_send_Click"/>
+                            Content="Send"  Foreground="White" Click="Bt_send_Click"/>
                     <TextBox Margin="10" Name="tb_message" />
                 </DockPanel>
 
@@ -168,7 +168,7 @@
                     </StackPanel>
 
                     <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" 
-                        Content="Remove" Foreground="White" Click="bt_remove_ct_Click"/>
+                        Content="Remove" Foreground="White" Click="Bt_remove_ct_Click"/>
                 </Grid>
             </Grid>
 
@@ -178,7 +178,7 @@
                 <ListBox MinHeight="375" x:Name="lb_chats" SelectionChanged="Lb_chats_SelectionChanged" 
                          ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                 <Button Margin="10,0" x:Name="bt_add_ct" Content="Add Chat" 
-                        Click="bt_add_ct_Click"  Foreground="White"/>
+                        Click="Bt_add_ct_Click"  Foreground="White"/>
             </StackPanel>
 
 

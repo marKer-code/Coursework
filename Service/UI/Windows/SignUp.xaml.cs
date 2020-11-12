@@ -17,6 +17,8 @@
 
     public partial class SignUp : Window
     {
+        #region Fields
+
         readonly ProgramServiceClient programServiceClient;
 
         bool passwordBoxActive = true;
@@ -26,6 +28,8 @@
         string path = "../../Windows/Icons/Me.jpg";
         byte[] img;
         string loginToAdd, passwordToAdd, nicknameToAdd;
+
+        #endregion
 
         public SignUp()
         {
@@ -155,10 +159,7 @@
                             new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
                             Close();
                         }
-                        catch
-                        {
-                            MessageBox.Show("< Too big a photo >");
-                        }
+                        catch { MessageBox.Show("< Too big a photo >"); }
                         break;
                     }
             }

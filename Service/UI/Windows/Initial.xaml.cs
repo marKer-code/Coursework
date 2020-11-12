@@ -17,8 +17,6 @@
         public event Action<string> DeleteContactEvent;
         public event Action<string> NewChatEvent;
         public event Action<string> ReceiveMessageEvent;
-
-
         public event Action<string> DeleteChatEvent;
 
         public void DeleteChat(string toDeleteLogin)

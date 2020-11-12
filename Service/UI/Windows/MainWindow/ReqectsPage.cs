@@ -81,9 +81,9 @@
             {
                 login_r.Text = listBox.SelectedItem.ToString();
 
-                List<byte[]> infoes = programServiceClient.LoadUserInfo(login_r.Text);
+                List<byte[]> info = programServiceClient.LoadUserInfo(login_r.Text);
 
-                switch (Encoding.Default.GetString(infoes[3]))
+                switch (Encoding.Default.GetString(info[3]))
                 {
                     case "True":
                         {
@@ -92,13 +92,13 @@
                         }
                     default:
                         {
-                            status_r.Text = Encoding.Default.GetString(infoes[1]);
+                            status_r.Text = Encoding.Default.GetString(info[1]);
                             break;
                         }
                 }
 
-                nickname_r.Text = Encoding.Default.GetString(infoes[0]);
-                byte[] ph = infoes[2];
+                nickname_r.Text = Encoding.Default.GetString(info[0]);
+                byte[] ph = info[2];
                 TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
                 Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
                 var handle = bitmap1.GetHbitmap();

@@ -6,7 +6,7 @@
 
     public class UnitOfWork : IUnitOfWork
     {
-        private ProgramDatabaseModel context;
+        private readonly ProgramDatabaseModel context;
         private GenericRepository<Couple> coupleRepository;
         private GenericRepository<Group> groupRepository;
         private GenericRepository<Message> messageRepository;

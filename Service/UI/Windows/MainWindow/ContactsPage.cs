@@ -1,6 +1,5 @@
 ﻿namespace UI
 {
-    using DAL.Entities;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -24,15 +23,15 @@
             {
                 login.Text = lb_contacts.SelectedItem.ToString();
 
-                List<byte[]> infoes = programServiceClient.LoadUserInfo(login.Text);
+                List<byte[]> info = programServiceClient.LoadUserInfo(login.Text);
 
-                if (Encoding.Default.GetString(infoes[3]) == "true")
-                    status.Text = Encoding.Default.GetString(infoes[3]);
+                if (Encoding.Default.GetString(info[3]) == "true")
+                    status.Text = Encoding.Default.GetString(info[3]);
                 else
-                    status.Text = Encoding.Default.GetString(infoes[1]);
+                    status.Text = Encoding.Default.GetString(info[1]);
 
-                nickname.Text = Encoding.Default.GetString(infoes[0]);
-                byte[] ph = infoes[2];
+                nickname.Text = Encoding.Default.GetString(info[0]);
+                byte[] ph = info[2];
                 TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
                 Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
                 var handle = bitmap1.GetHbitmap();
@@ -58,7 +57,7 @@
             gr_contactInfo.Visibility = Visibility.Hidden;
 
             foreach (var item in Lists.messages)
-                if(item.Value == login_)
+                if (item.Value == login_)
                     Lists.messages.Remove(item.Key);
 
             MessageBox.Show("< Removed >");
