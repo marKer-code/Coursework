@@ -1,0 +1,192 @@
+﻿namespace UI
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Interop;
+    using System.Windows.Media.Imaging;
+
+    public partial class Chats
+    {
+        private void ShowContactInfo()
+        {
+
+            if (lb_chats.SelectedItems != null)
+            {
+                login_ct.Visibility = Visibility.Visible;
+
+                login_ct.Text = lb_chats.SelectedItem.ToString();
+                List<byte[]> info = new List<byte[]>();
+
+                try
+                {
+                    info = programServiceClient.LoadUserInfo(login_ct.Text);
+                }
+                catch { return; }
+
+                l_login_r.Visibility = Visibility.Visible;
+                l_nickname_r.Visibility = Visibility.Visible;
+                l_status_r.Visibility = Visibility.Visible;
+                gr_chatInfo.Visibility = Visibility.Visible;
+
+                nickname_ct.Visibility = Visibility.Visible;
+                status_ct.Visibility = Visibility.Visible;
+                avatar_ct.Visibility = Visibility.Visible;
+
+                if (Encoding.Default.GetString(info[3]) == "true")
+                    status_ct.Text = Encoding.Default.GetString(info[3]);
+                else
+                    status_ct.Text = Encoding.Default.GetString(info[1]);
+
+                nickname_ct.Text = Encoding.Default.GetString(info[0]);
+                byte[] ph = info[2];
+                TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+                Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(ph.ToArray());
+                var handle = bitmap1.GetHbitmap();
+                avatar_ct.Source = Imaging.CreateBitmapSourceFromHBitmap(handle,
+                IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            }
+        }
+
+        private void Bt_add_ct_Click(object sender, RoutedEventArgs e)
+        {
+            if (flipper.Visibility == Visibility.Visible)
+            {
+                flipper.IsEnabled = false;
+                flipper.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                flipper.IsEnabled = true;
+                flipper.Visibility = Visibility.Visible;
+
+                gr_chatInfo.Visibility = Visibility.Hidden;
+                avatar_ct.Visibility = Visibility.Hidden;
+                login_ct.Visibility = Visibility.Hidden;
+                nickname_ct.Visibility = Visibility.Hidden;
+                status_ct.Visibility = Visibility.Hidden;
+                bt_remove_ct.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Bt_Plus_Click(object sender, RoutedEventArgs e)
+        {
+            if (flipper_attachFile.Visibility == Visibility.Visible)
+            {
+                flipper_attachFile.IsEnabled = false;
+                flipper_attachFile.Visibility = Visibility.Collapsed;
+
+                chat_lb.Visibility = Visibility.Visible;
+
+                sp_chats.IsEnabled = true;
+
+                bt_remove_ct.IsEnabled = true;
+                bt_send.IsEnabled = true;
+                tb_message.IsEnabled = true;
+            }
+            else
+            {
+                flipper_attachFile.IsEnabled = true;
+                flipper_attachFile.Visibility = Visibility.Visible;
+
+                chat_lb.Visibility = Visibility.Hidden;
+
+                sp_chats.IsEnabled = false;
+
+                bt_remove_ct.IsEnabled = false;
+                bt_send.IsEnabled = false;
+                tb_message.IsEnabled = false;
+
+                flipper.IsEnabled = false;
+                flipper.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Flipper_b_Click(object sender, RoutedEventArgs e)
+        {
+            if (cb_contact.SelectedIndex != -1)
+            {
+                programServiceClient.AddChat(login_, cb_contact.SelectedItem.ToString());
+                Lists.chats.Add(cb_contact.SelectedItem.ToString());
+                Lists.noChat.Remove(cb_contact.SelectedItem.ToString());
+            }
+        }
+
+        private void Bt_send_Click(object sender, RoutedEventArgs e)
+        {
+            if (tb_message != null)
+            {
+                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text);
+                Lists.messages.Add(new List<string>()
+                {
+                    programServiceClient.GetId(login_).ToString(),
+                    programServiceClient.GetId(login_ct.Text).ToString(),
+                    tb_message.Text
+                },
+                login_ct.Text);
+                chat_lb.Items.Clear();
+
+                foreach (var item in Lists.messages)
+                    if (item.Value == login_ct.Text)
+                    {
+                        List<string> r = item.Key;
+                        chat_lb.Items.Add(r[2]);
+                    }
+            }
+        }
+
+        private void Bt_remove_ct_Click(object sender, RoutedEventArgs e)
+        {
+            switch (login_ct.Text)
+            {
+                case null:
+                    {
+                        MessageBox.Show("< Select Request >");
+                        break;
+                    }
+                default:
+                    {
+                        Lists.chats.Remove(login_ct.Text);
+                        programServiceClient.RemoveChatAsync(login_, login_ct.Text);
+
+                        chat_lb.Visibility = Visibility.Hidden;
+
+                        foreach (var item in Lists.messages)
+                            if (item.Value == login_)
+                                Lists.messages.Remove(item.Key);
+
+                        break;
+                    }
+            }
+        }
+
+        private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (lb_chats.SelectedItem != null)
+            {
+                Lists.chatOn = lb_chats.SelectedItem.ToString();
+
+                chat_lb.Items.Clear();
+                chat_lb.Visibility = Visibility.Visible;
+                gr_chatInfo.Visibility = Visibility.Visible;
+
+                flipper.Visibility = Visibility.Collapsed;
+
+                ShowContactInfo();
+
+                foreach (var item in Lists.messages)
+                    if (item.Value == lb_chats.SelectedItem.ToString())
+                    {
+                        List<string> r = item.Key;
+                        chat_lb.Items.Add(r[2]);
+                    }
+                lb_chats.SelectedItem = null;
+                return;
+            }
+        }
+    }
+}

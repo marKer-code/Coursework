@@ -1,8 +1,11 @@
 ﻿namespace DAL.Repositories
 {
     using DAL.Interfaces;
+    using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
@@ -14,6 +17,7 @@
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
+
         public virtual TEntity GetById(int id)
             => dbSet.Find(id);
 
@@ -40,16 +44,23 @@
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        public bool CheckUser(string login, string password)
-            => context.Users.FirstOrDefault
-                (u => u.Login == login && u.HashPassword == password) == null ?
-                false : true;
-        public bool CheckLogin(string login)
-            => context.Users.FirstOrDefault
-                (u => u.Login == login) == null ?
-                false : true;
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "")
+        {
+            IQueryable<TEntity> query = dbSet;
 
-        public int GetUserId(string login)
-            => context.Users.First(u => u.Login == login).Id;
+            if (filter != null)
+                query = query.Where(filter);
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries))
+                query = query.Include(includeProperty);
+
+            if (orderBy != null)
+                return orderBy(query).ToList();
+            else
+                return query.ToList();
+        }
     }
 }

@@ -6,23 +6,30 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.ServiceModel;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
-    using System.ServiceModel;
     using UI.InsomableMethods_;
     using UI.ServiceReference;
+    using UI.Windows.MainWindow;
+
     public partial class SignUp : Window
     {
-        ProgramServiceClient programServiceClient;
+        #region Fields
+
+        readonly ProgramServiceClient programServiceClient;
 
         bool passwordBoxActive = true;
-        IInsomableMethods insomable;
+        readonly IInsomableMethods insomable;
 
         bool ing = false;
         string path = "../../Windows/Icons/Me.jpg";
         byte[] img;
+        string loginToAdd, passwordToAdd, nicknameToAdd;
+
+        #endregion
 
         public SignUp()
         {
@@ -33,27 +40,9 @@
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
-            callbackHandler.UserExistEvent += UserExist;
-            callbackHandler.LoginExistEvent += LoginExist;
-
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
         }
-
-        string loginToAdd, passwordToAdd, nicknameToAdd;
-        private void LoginExist(string exists)
-        {
-            if (!Convert.ToBoolean(exists))
-            {
-                programServiceClient.AddUserAsync(loginToAdd,
-                    nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
-                // the main window open
-                MessageBox.Show("Login up");
-            }
-            else MessageBox.Show("< Login already busy >");
-        }
-
-        private void UserExist(string obj) { }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
             => insomable.OpenWindow(new Initial(), this);
@@ -113,10 +102,21 @@
                 MessageBox.Show("< Short login >");
                 return;
             }
-            if (passwordBoxActive)
-                passwordToAdd = Pb_Password.Password;
-            else
-                passwordToAdd = Tb_Password.Text;
+
+            switch (passwordBoxActive.ToString())
+            {
+                case "True":
+                    {
+                        passwordToAdd = Pb_Password.Password;
+                        break;
+                    }
+                default:
+                    {
+                        passwordToAdd = Tb_Password.Text;
+                        break;
+                    }
+            }
+
             if (passwordToAdd.Length < 8)
             {
                 MessageBox.Show("< Short password >");
@@ -129,29 +129,39 @@
                 return;
             }
 
-            if (!String.IsNullOrWhiteSpace(Tb_Login.Text) &&
-                !String.IsNullOrWhiteSpace(Tb_Nickname.Text) &&
-                !String.IsNullOrWhiteSpace(passwordToAdd))
-            {
-                loginToAdd = Tb_Login.Text;
-                nicknameToAdd = Tb_Nickname.Text;
+            loginToAdd = Tb_Login.Text;
+            nicknameToAdd = Tb_Nickname.Text;
 
+            if (!ing) img = File.ReadAllBytes(path);
+
+            byte[] fileData;
+            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
                 if (!ing) img = File.ReadAllBytes(path);
 
-                byte[] fileData;
-                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    if (!ing) img = File.ReadAllBytes(path);
-
-                    fileData = new byte[fs.Length];
-                    fs.Read(fileData, 0, fileData.Length);
-                }
-                programServiceClient.CheckLoginAsync(loginToAdd);
+                fileData = new byte[fs.Length];
+                fs.Read(fileData, 0, fileData.Length);
             }
-            else
+
+            switch (programServiceClient.CheckLogin(loginToAdd).ToString())
             {
-                MessageBox.Show("< Enter all data >");
-                passwordToAdd = null;
+                case "True":
+                    {
+                        MessageBox.Show("< Login already busy >");
+                        break;
+                    }
+                default:
+                    {
+                        try
+                        {
+                            programServiceClient.AddUser(loginToAdd,
+                                nicknameToAdd, passwordToAdd, img, true, DateTime.Now);
+                            new Main(loginToAdd, passwordToAdd, nicknameToAdd, img).Show();
+                            Close();
+                        }
+                        catch { MessageBox.Show("< Too big a photo >"); }
+                        break;
+                    }
             }
         }
     }

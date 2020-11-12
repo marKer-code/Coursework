@@ -2,61 +2,65 @@
 {
     using System;
     using System.ServiceModel;
+    using System.Text;
     using System.Windows;
     using System.Windows.Input;
     using UI.InsomableMethods_;
     using UI.ServiceReference;
+    using UI.Windows.MainWindow;
 
     public class CallbackHandler : IProgramServiceCallback
     {
-        public event Action<string> UserExistEvent;
-        public event Action<string> LoginExistEvent;
+        public event Action<string> ReceiveRequestEvent;
+        public event Action<string> NewContactEvent;
+        public event Action<string> RejectRequest_Event;
+        public event Action<string> DeleteContactEvent;
+        public event Action<string> NewChatEvent;
+        public event Action<string> ReceiveMessageEvent;
+        public event Action<string> DeleteChatEvent;
 
-        public void LoginExist(string exists)
-            => LoginExistEvent?.Invoke(exists);
+        public void DeleteChat(string toDeleteLogin)
+            => DeleteChatEvent?.Invoke(toDeleteLogin);
 
-        public void UserExist(string exists)
-            => UserExistEvent?.Invoke(exists);
+        public void DeleteContact(string toDeleteLogin)
+            => DeleteContactEvent?.Invoke(toDeleteLogin);
+
+        public void NewChat_(string senderLogin)
+            => NewChatEvent.Invoke(senderLogin);
+
+        public void NewContact(string contactLogin)
+            => NewContactEvent?.Invoke(contactLogin);
+
+        public void ReceiveRequest(string senderLogin)
+            => ReceiveRequestEvent?.Invoke(senderLogin);
+
+        public void ReciveMessage(string message)
+            => ReceiveMessageEvent?.Invoke(message);
+
+        public void RejectRequest_(string receiverLogin)
+            => RejectRequest_Event?.Invoke(receiverLogin);
     }
 
     public partial class Initial : Window
     {
-        ProgramServiceClient programServiceClient;
+        readonly ProgramServiceClient programServiceClient;
+        readonly IInsomableMethods insomable;
 
         bool passwordBoxActive = true;
-        IInsomableMethods insomable;
+        string wantedLogin, wantedPassword;
 
         public Initial()
         {
             InitializeComponent();
 
             insomable = new InsomableMethods();
-            Tb_Password.Visibility = Visibility.Hidden;
 
             CallbackHandler callbackHandler = new CallbackHandler();
 
-            callbackHandler.UserExistEvent += UserExist;
-            callbackHandler.LoginExistEvent += LoginExist;
-
             programServiceClient = new ProgramServiceClient
                 (new InstanceContext(callbackHandler));
-        }
-        string wantedLogin, wantedPassword;
-        private void LoginExist(string exists)
-        {
-            if (Convert.ToBoolean(exists))
-                programServiceClient.CheckUserAsync(wantedLogin, wantedPassword);
-            else MessageBox.Show("< No user with such login >");
-        }
 
-        private void UserExist(string exists)
-        {
-            if (Convert.ToBoolean(exists))
-            {
-                // the main window open
-                MessageBox.Show("< Bingo >");
-            }
-            else MessageBox.Show("< Uncorrect password >");
+            Tb_Password.Visibility = Visibility.Hidden;
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
@@ -68,13 +72,50 @@
         private void B_SignIn_Click(object sender, RoutedEventArgs e)
         {
             wantedLogin = Tb_Login.Text;
-            if (passwordBoxActive)
-                wantedPassword = Pb_Password.Password;
-            else wantedPassword = Tb_Password.Text;
+
+            switch (passwordBoxActive.ToString())
+            {
+                case "True":
+                    {
+                        wantedPassword = Pb_Password.Password;
+                        break;
+                    }
+                case "False":
+                    {
+                        wantedPassword = Tb_Password.Text;
+                        break;
+                    }
+            }
 
             if (!String.IsNullOrWhiteSpace(wantedLogin) &&
                 !String.IsNullOrWhiteSpace(wantedPassword))
-                programServiceClient.CheckLogin(wantedLogin);
+                switch (programServiceClient.CheckLogin(wantedLogin).ToString())
+                {
+                    case "True":
+                        {
+                            switch (programServiceClient.CheckUser(wantedLogin, wantedPassword).ToString())
+                            {
+                                case "True":
+                                    {
+                                        insomable.OpenWindow(
+                                            new Main(wantedLogin, wantedPassword,
+                                            null, Encoding.Default.GetBytes("0")), this);
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        MessageBox.Show("< Uncorrect password >");
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show("< No user with such login >");
+                            break;
+                        }
+                }
             else MessageBox.Show("< Enter all data >");
         }
 

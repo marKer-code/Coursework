@@ -1,36 +1,41 @@
 ﻿namespace Service
 {
-    using System;
+    using DAL.Entities;
+    using System.Collections.Generic;
     using System.ServiceModel;
 
     [ServiceContract(CallbackContract = typeof(ICallback))]
-    public interface IProgramService
+    public partial interface IProgramService
     {
-        [OperationContract(IsOneWay = true)]
-        void CheckUser(string login, string password);
-        [OperationContract(IsOneWay = true)]
-        void CheckLogin(string login);
-        [OperationContract(IsOneWay = true)]
-        void AddUser(string login, string nickname,
-            string password, byte[] img,
-            bool online, DateTime lastOnline);
-    }
-    public interface ICallback
-    {
-        [OperationContract(IsOneWay = true)]
-        void UserExist(string exists);
-        [OperationContract(IsOneWay = true)]
-        void LoginExist(string exists);
-    }
+        [OperationContract]
+        bool CheckUser(string login, string password);
 
-    class UserMessage
-    {
-        public string Message { get; set; }
-        public ICallback Callback { get; set; }
-    }
+        [OperationContract]
+        bool CheckLogin(string login);
 
-    class Message
-    {
-        public UserMessage UserMessage { get; set; }
+        [OperationContract]
+        List<byte[]> LoadUserInfo(string login);
+
+        [OperationContract]
+        List<int> GetAllContact(string login);
+
+        [OperationContract]
+        List<Request> GetAllRequests
+            (string login, bool isSend);
+
+        [OperationContract]
+        string GetLoginUserById(int id);
+
+        [OperationContract]
+        List<int> GetNoChat(string login);
+
+        [OperationContract]
+        List<DAL.Entities.Message> GetAllChats(string sender);
+
+        [OperationContract]
+        int GetId(string login);
+
+        [OperationContract]
+        void RemoveChat(string sender, string receiver);
     }
 }

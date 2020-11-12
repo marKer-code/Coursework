@@ -4,59 +4,135 @@
     using DAL.Entities;
     using DAL.Interfaces;
     using DAL.Repositories;
-    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.ServiceModel;
+    using System.Text;
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class ProgramService : IProgramService
+    public partial class ProgramService : IProgramService
     {
         private readonly IUnitOfWork repositories;
-        private Message message;
 
         public ProgramService()
+            => repositories =
+               new UnitOfWork(new ProgramDatabaseModel());
+
+        public bool CheckUser(string login, string password)
         {
-            message = new Message();
-            repositories = new UnitOfWork(new DAL.ProgramDatabaseModel());
+            string pass = new Utils().ComputeSha256Hash(password);
+            return repositories.UserRepository
+                             .Get(u => u.Login == login &&
+                              u.HashPassword == pass)
+                             .FirstOrDefault() != null;
         }
 
-        public void CheckUser(string login, string password)
+        public bool CheckLogin(string login)
+            => repositories.UserRepository
+                           .Get(u => u.Login == login)
+                           .FirstOrDefault() != null;
+
+        public List<byte[]> LoadUserInfo(string login)
         {
-            message.UserMessage = new UserMessage()
+            int id = repositories.UserRepository
+                                 .Get(u => u.Login == login)
+                                 .First()
+                                 .Id;
+
+            List<UserInfo> userInfo = repositories
+                           .UserInfoRepository
+                           .Get(ui => ui.UserId == id)
+                           .ToList();
+
+            return new List<byte[]>
             {
-                Message = repositories.UserRepository.CheckUser(login, new Utils().ComputeSha256Hash(password)).ToString(),
-                Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
+                Encoding.Default.GetBytes(userInfo.First().Nickname),
+                Encoding.Default.GetBytes(userInfo.First().LastOnline.ToString()),
+                userInfo.First().Photo,
+                Encoding.Default.GetBytes(userInfo.First().Online.ToString())
             };
-            message.UserMessage.Callback.UserExist(message.UserMessage.Message);
         }
 
-        public void CheckLogin(string login)
+        public List<int> GetAllContact(string login)
         {
-            message.UserMessage = new UserMessage()
+            int idUser = repositories.UserRepository
+                         .Get(u => u.Login == login)
+                         .First()
+                         .Id;
+
+            List<int> users = new List<int>();
+
+            foreach (var c in repositories
+                              .CoupleRepository
+                              .Get(c => c.UserId1 == idUser ||
+                               c.UserId2 == idUser)
+                              .ToList())
             {
-                Message = repositories.UserRepository.CheckLogin(login).ToString(),
-                Callback = OperationContext.Current.GetCallbackChannel<ICallback>()
-            };
-            message.UserMessage.Callback.LoginExist(message.UserMessage.Message);
+                if (c.UserId1 != idUser)
+                    users.Add(c.UserId1);
+                if (c.UserId2 != idUser)
+                    users.Add(c.UserId2);
+            }
+
+            return users;
         }
 
-        public void AddUser(string login, string nickname,
-            string password, byte[] img, bool online, DateTime lastOnline)
+        public List<Request> GetAllRequests(string login, bool isSend)
         {
-            repositories.UserRepository.Insert(new User()
-            {
-                Login = login,
-                HashPassword = new Utils().ComputeSha256Hash(password)
-            });
-            repositories.Save();
-            repositories.UserInfoRepository.Insert(new UserInfo()
-            {
-                Nickname = nickname,
-                LastOnline = lastOnline,
-                Online = online,
-                Photo = img,
-                UserId = repositories.UserRepository.GetUserId(login)
-            });
-            repositories.Save();
+            int idResiver = repositories.UserRepository
+                            .Get(u => u.Login == login)
+                            .First()
+                            .Id;
+
+            return isSend == true ?
+                repositories.RequestRepository.Get(r => r.SenderId == idResiver).ToList() :
+                repositories.RequestRepository.Get(r => r.ReceiverId == idResiver).ToList();
         }
+
+        public string GetLoginUserById(int id)
+            => repositories.UserRepository.GetById(id).Login;
+
+        public List<DAL.Entities.Message> GetAllChats(string sender)
+        {
+            int idSender = repositories.UserRepository
+                            .Get(u => u.Login == sender)
+                            .First()
+                            .Id;
+            return repositories.MessageRepository
+                .Get(m => m.SenderId == idSender ||
+                 m.ReceiverId == idSender)
+                .ToList();
+        }
+
+        public List<int> GetNoChat(string login)
+        {
+            int idUser = repositories.UserRepository
+                            .Get(u => u.Login == login)
+                            .First()
+                            .Id;
+
+            List<DAL.Entities.Message> chat = GetAllChats(login);
+            List<int> contact = GetAllContact(login);
+
+            List<int> noChat = new List<int>();
+
+            if (chat.Count != 0)
+            {
+                foreach (var c in chat)
+                {
+                    foreach (var item in contact)
+                    {
+                        if (c.ReceiverId != item)
+                            noChat.Add(item);
+                    }
+                }
+                return noChat;
+            }
+            else
+                return contact;
+        }
+
+        public int GetId(string login)
+            => repositories.UserRepository.Get(u => u.Login == login).First().Id;
     }
 }
