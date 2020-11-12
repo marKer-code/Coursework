@@ -17,8 +17,7 @@
         {
             l_login_r.Visibility = Visibility.Visible;
             l_nickname_r.Visibility = Visibility.Visible;
-            //l_status_r.Visibility = Visibility.Visible;
-            l_status_r.Visibility = Visibility.Hidden;
+            l_status_r.Visibility = Visibility.Visible;
             gr_contactInfo.Visibility = Visibility.Visible;
 
             if (lb_contacts.SelectedItems != null)
@@ -27,10 +26,10 @@
 
                 List<byte[]> infoes = programServiceClient.LoadUserInfo(login.Text);
 
-                //if (Encoding.Default.GetString(infoes[3]) == "true")
-                //    status.Text = Encoding.Default.GetString(infoes[3]);
-                //else
-                //    status.Text = Encoding.Default.GetString(infoes[1]);
+                if (Encoding.Default.GetString(infoes[3]) == "true")
+                    status.Text = Encoding.Default.GetString(infoes[3]);
+                else
+                    status.Text = Encoding.Default.GetString(infoes[1]);
 
                 nickname.Text = Encoding.Default.GetString(infoes[0]);
                 byte[] ph = infoes[2];
@@ -57,9 +56,6 @@
             programServiceClient.RemoveContactAsync(login_, login.Text);
             Lists.contacts.Remove(login.Text);
             gr_contactInfo.Visibility = Visibility.Hidden;
-
-            Lists.chats.Remove(login.Text);
-            programServiceClient.RemoveChatAsync(login_, login.Text);
 
             foreach (var item in Lists.messages)
                 if(item.Value == login_)
