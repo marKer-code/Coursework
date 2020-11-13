@@ -159,6 +159,6 @@
         }
 
         private void B_Close_MouseDown(object sender, MouseButtonEventArgs e)
-            => Close();
+            => Parallel.Invoke(() => this.Close());
     }
 }

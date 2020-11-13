@@ -1,7 +1,10 @@
-﻿namespace UI
+﻿using System.Threading.Tasks;
+
+namespace UI
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using System.Windows;
 
     public static class Lists
@@ -23,17 +26,17 @@
             {
                 case BUTTON.CHATS:
                     {
-                        insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ALLCONTACTS:
                     {
-                        insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
                     {
-                        insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 default:
@@ -65,17 +68,17 @@
             {
                 case BUTTON.PROFILE:
                     {
-                        insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.CHATS:
                     {
-                        insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ALLCONTACTS:
                     {
-                        insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 default:
@@ -119,17 +122,17 @@
             {
                 case BUTTON.PROFILE:
                     {
-                        insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.CHATS:
                     {
-                        insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
                     {
-                        insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 default: break;
@@ -145,19 +148,19 @@
             {
                 case BUTTON.PROFILE:
                     {
-                        insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this));
                         Lists.chatOn = null;
                         break;
                     }
                 case BUTTON.ALLCONTACTS:
                     {
-                        insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this));
                         Lists.chatOn = null;
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
                     {
-                        insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this));
                         Lists.chatOn = null;
                         break;
                     }
@@ -176,22 +179,22 @@ namespace UI.Windows.MainWindow
             {
                 case BUTTON.PROFILE:
                     {
-                        insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Profile(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.CHATS:
                     {
-                        insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Chats(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ALLCONTACTS:
                     {
-                        insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Contact(login_, password_, nickname_, photo_), this));
                         break;
                     }
                 case BUTTON.ADDFRIENDS:
                     {
-                        insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this);
+                        Parallel.Invoke(() => insomable.OpenWindow(new Requests(login_, password_, nickname_, photo_), this));
                         break;
                     }
             }

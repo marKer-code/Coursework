@@ -1,0 +1,12 @@
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\DAL.dll.config
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\DAL.dll
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\DAL.pdb
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\EntityFramework.dll
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\EntityFramework.xml
+D:\Step\Coursework\Coursework – копія\Service\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Step\Coursework\Coursework – копія\Service\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\Step\Coursework\Coursework – копія\Service\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Step\Coursework\Coursework – копія\Service\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Step\Coursework\Coursework – копія\Service\DAL\obj\Debug\DAL.dll
+D:\Step\Coursework\Coursework – копія\Service\DAL\obj\Debug\DAL.pdb

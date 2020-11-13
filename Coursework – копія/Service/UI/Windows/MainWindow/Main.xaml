@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         FontFamily="OCR A" ResizeMode="NoResize" 
         WindowStyle="None" FontSize="18"
-        Height="450" Width="800" Foreground="#FFF44336">
+        Height="450" Width="800" Foreground="#FFF44336" Closed="Window_Closed">
     <!--="#FF303030">-->
     <!--="#FFA81F15">-->
     <Grid>

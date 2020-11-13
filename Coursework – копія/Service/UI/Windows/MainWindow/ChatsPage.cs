@@ -30,21 +30,18 @@
 
                 l_login_r.Visibility = Visibility.Visible;
                 l_nickname_r.Visibility = Visibility.Visible;
-                //l_status_r.Visibility = Visibility.Visible;
+                l_status_r.Visibility = Visibility.Visible;
                 gr_chatInfo.Visibility = Visibility.Visible;
 
                 nickname_ct.Visibility = Visibility.Visible;
-                //status_ct.Visibility = Visibility.Visible;
-
-                status_ct.Visibility = Visibility.Hidden;
-                l_status_r.Visibility = Visibility.Hidden;
+                status_ct.Visibility = Visibility.Visible;
 
                 avatar_ct.Visibility = Visibility.Visible;
 
-                //if (Encoding.Default.GetString(info[3]) == "true")
-                //    status_ct.Text = Encoding.Default.GetString(info[3]);
-                //else
-                //    status_ct.Text = Encoding.Default.GetString(info[1]);
+                if (Encoding.Default.GetString(info[3]) == "True")
+                    status_ct.Text = "Online";
+                else
+                    status_ct.Text = Encoding.Default.GetString(info[1]);
 
                 nickname_ct.Text = Encoding.Default.GetString(info[0]);
                 byte[] ph = info[2];

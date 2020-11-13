@@ -81,7 +81,7 @@
                 case "ChangeCallback":
                     try
                     {
-
+                        userInfo.Online = true;
                         if (sub.Count != 0 && sub.ContainsKey(sub.First(s => s.Key == login).Key))
                             sub.Remove(sub.First(s => s.Key == login).Key);
                     }
@@ -97,6 +97,7 @@
                     sub.Add(login, user_);
                     break;
                 default:
+                    userInfo.Online = false;
                     userInfo.LastOnline = DateTime.Now;
                     sub.Remove(login);
                     break;

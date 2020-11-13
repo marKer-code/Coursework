@@ -7,8 +7,8 @@
     {
         public void OpenWindow(Window toOpen, Window toClose)
         {
-            toOpen.Show();
             toClose.Close();
+            toOpen.Show();
         }
 
         public void PasswordAppearance(TextBox textBox, PasswordBox passwordBox, ref bool passwordBoxActive)

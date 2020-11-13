@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         FontFamily="OCR A"
         WindowStyle="None" FontSize="18"
-        Height="450" Width="800" Foreground="#FFF44336">
+        Height="450" Width="800" Foreground="#FFF44336" Closed="Window_Closed">
     <Grid>
 
         <Grid.RowDefinitions>
