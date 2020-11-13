@@ -1,0 +1,53 @@
+﻿<Window x:Class="UI.Windows.Initial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        xmlns:local="clr-namespace:UI.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="OCR A" ResizeMode="NoResize" 
+        WindowStyle="None" FontSize="18"
+        Height="450" Width="800" Foreground="#FFF44336">
+    <Grid>
+        <Label x:Name="B_Close" Margin="10" HorizontalAlignment="Right" 
+               VerticalAlignment="Top" Content="X" MouseDown="B_Close_MouseDown"/>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+              Height="280">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Login &gt; " HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+            <TextBox x:Name="Tb_Login" Grid.Column="1" Height="35" Margin="10"/>
+            <Label Content="Password &gt; " Grid.Row="1"
+                   VerticalContentAlignment="Center" 
+                   HorizontalContentAlignment="Center"/>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="B_Ruby" Source="../Windows/Icons/Ruby.jpg"
+                       Width="50" MouseDown="B_Ruby_MouseDown" Grid.Column="1"/>
+                <PasswordBox x:Name="Pb_Password" Margin="10" Height="35" TabIndex="3"/>
+                <TextBox x:Name="Tb_Password" Margin="10" Height="35" TabIndex="3"/>
+            </Grid>
+            <Button x:Name="B_SignIn" Content="Sign in" Foreground="White"
+                    Grid.Row="3" Grid.ColumnSpan="2" FontSize="18" Click="B_SignIn_Click"/>
+            <Button x:Name="B_SignUp" Content="Sign up" Foreground="White"
+                    Grid.Row="4" Grid.ColumnSpan="2" FontSize="18" Click="B_SignUp_Click"/>
+        </Grid>
+    </Grid>
+</Window>
