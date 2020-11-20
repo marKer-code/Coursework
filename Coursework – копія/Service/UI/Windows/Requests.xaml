@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="3*" MinWidth="400"/>
             </Grid.ColumnDefinitions>
 
-            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
-            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300" Grid.Column="1"
+            Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False">
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>

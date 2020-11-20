@@ -311,7 +311,7 @@
                 }
         }
 
-        public void SendMessage(string sender, string receiver, string message)
+        public void SendMessage(string sender, string receiver, string message, string fileName, byte[] file)
         {
             int senderId = repositories.UserRepository
               .Get(u => u.Login == sender)
@@ -322,16 +322,31 @@
                 .Get(u => u.Login == receiver)
                 .First()
                 .Id;
-
-            DAL.Entities.Message m = new DAL.Entities.Message()
+            DAL.Entities.Message m;
+            if (file == null)
             {
-                SenderId = senderId,
-                ReceiverId = receiverId,
-                Text = message,
-                SendTime = DateTime.Now,
-            };
-
-            repositories.MessageRepository.Insert(m);
+                m = new DAL.Entities.Message()
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId,
+                    Text = message,
+                    SendTime = DateTime.Now,
+                };
+                repositories.MessageRepository.Insert(m);
+            }
+            else
+            {
+                m = new DAL.Entities.Message()
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId,
+                    Text = fileName,
+                    File = file,
+                    FileName = fileName,
+                    SendTime = DateTime.Now,
+                };
+                repositories.MessageRepository.Insert(m);
+            }
             repositories.Save();
 
             foreach (var item in sub)

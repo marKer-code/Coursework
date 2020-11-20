@@ -1,7 +1,12 @@
 ﻿namespace UI
 {
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
     using System.ServiceModel;
     using System.Text;
     using System.Threading;
@@ -124,6 +129,9 @@
 
         private void Window_Closed(object sender, System.EventArgs e)
             => programServiceClient.UpdateOnline(login_, "Remove");
+
+        string fName = null;
+
 
         private void LoadInfo(string login, string password, string nickname, byte[] photo)
         {

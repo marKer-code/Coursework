@@ -1,15 +1,16 @@
 ﻿namespace UI
 {
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Windows;
     using System.Windows.Interop;
     using System.Windows.Media.Imaging;
-
     public partial class Chats
     {
         private void ShowContactInfo()
@@ -80,10 +81,12 @@
             {
                 flipper_attachFile.IsEnabled = false;
                 flipper_attachFile.Visibility = Visibility.Collapsed;
-
+                
                 chat_lb.Visibility = Visibility.Visible;
 
                 sp_chats.IsEnabled = true;
+
+                lb_attachFile.Items.Clear();
 
                 bt_remove_ct.IsEnabled = true;
                 bt_send.IsEnabled = true;
@@ -101,6 +104,8 @@
                 bt_remove_ct.IsEnabled = false;
                 bt_send.IsEnabled = false;
                 tb_message.IsEnabled = false;
+
+                f_bt_add.IsEnabled = true;
 
                 flipper.IsEnabled = false;
                 flipper.Visibility = Visibility.Collapsed;
@@ -121,7 +126,7 @@
         {
             if (tb_message != null)
             {
-                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text);
+                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text,null,null);
                 Lists.messages.Add(new List<string>()
                 {
                     programServiceClient.GetId(login_).ToString(),
@@ -165,6 +170,15 @@
             }
         }
 
+        private void chat_lb_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var res = MessageBox.Show("Download File", " ", MessageBoxButton.OKCancel);
+            if (res == MessageBoxResult.OK)
+            {
+                
+            }
+        }
+
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lb_chats.SelectedItem != null)
@@ -188,6 +202,68 @@
                 lb_chats.SelectedItem = null;
                 return;
             }
+        }
+        private void f_bt_add_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                InitialDirectory = @"D:\",
+                //Title = "Browse photo",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                //DefaultExt = "jpg",
+                //Filter = "jpg (*.jpg)|*.jpg|png (*.png)|*.png",
+                //FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (ofd.ShowDialog() == true)
+            {
+                fName = Path.GetFileName(ofd.FileName);
+                lb_attachFile.Items.Add(Path.GetFileName(ofd.FileName));
+                SetFile(ofd);
+                f_bt_add.IsEnabled = false;
+            }
+        }
+
+        byte[] file = null;
+
+        private void SetFile(OpenFileDialog ofd)
+        {
+            file = File.ReadAllBytes(ofd.FileName);
+            TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+            Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(photo_.ToArray());
+            //var handle = bitmap1.GetHbitmap();
+        }
+
+        private void f_bt_send_Click(object sender, RoutedEventArgs e)
+        {
+            programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text, fName, file);
+            foreach (var item in lb_attachFile.Items)
+            {
+                Lists.messages.Add(new List<string>()
+                    {
+                    programServiceClient.GetId(login_).ToString(),
+                    programServiceClient.GetId(login_ct.Text).ToString(),
+                    item.ToString()
+                    }, login_ct.Text);
+            }
+            chat_lb.Items.Clear();
+
+            foreach (var item in Lists.messages)
+                if (item.Value == login_ct.Text)
+                {
+                    List<string> r = item.Key;
+                    chat_lb.Items.Add(r[2]);
+                }
+            lb_attachFile.Items.Clear();
+            //flipper_attachFile.Visibility = Visibility.Collapsed;
+            Bt_Plus_Click(sender, e);
         }
     }
 }

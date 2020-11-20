@@ -124,10 +124,10 @@ namespace UI.ServiceReference {
         System.Threading.Tasks.Task AddChatAsync(string senderLogin, string receiverLogin);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SendMessage")]
-        void SendMessage(string sender, string receiver, string message);
+        void SendMessage(string sender, string receiver, string message, string fileName, byte[] file);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IProgramService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(string sender, string receiver, string message);
+        System.Threading.Tasks.Task SendMessageAsync(string sender, string receiver, string message, string fileName, byte[] file);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -327,12 +327,12 @@ namespace UI.ServiceReference {
             return base.Channel.AddChatAsync(senderLogin, receiverLogin);
         }
         
-        public void SendMessage(string sender, string receiver, string message) {
-            base.Channel.SendMessage(sender, receiver, message);
+        public void SendMessage(string sender, string receiver, string message, string fileName, byte[] file) {
+            base.Channel.SendMessage(sender, receiver, message, fileName, file);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string sender, string receiver, string message) {
-            return base.Channel.SendMessageAsync(sender, receiver, message);
+        public System.Threading.Tasks.Task SendMessageAsync(string sender, string receiver, string message, string fileName, byte[] file) {
+            return base.Channel.SendMessageAsync(sender, receiver, message, fileName, file);
         }
     }
 }

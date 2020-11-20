@@ -31,6 +31,6 @@
         void AddChat(string senderLogin, string receiverLogin);
 
         [OperationContract(IsOneWay = true)]
-        void SendMessage(string sender, string receiver, string message);
+        void SendMessage(string sender, string receiver, string message, string fileName, byte[] file);
     }
 }

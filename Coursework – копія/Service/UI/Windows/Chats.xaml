@@ -30,8 +30,8 @@
                 <ColumnDefinition Width="3*" MinWidth="400"/>
             </Grid.ColumnDefinitions>
 
-            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300"
-            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+            <materialDesign:Flipper x:Name="flipper" Height="300" Width="300" Grid.Column="1"
+            Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False">
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>
@@ -53,9 +53,8 @@
                 </materialDesign:Flipper.FrontContent>
             </materialDesign:Flipper>
 
-
-            <materialDesign:Flipper x:Name="flipper_attachFile" Height="300" Width="300"
-            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+            <materialDesign:Flipper x:Name="flipper_attachFile" Height="300" Width="300" Grid.Column="1"
+            Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False">
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>
@@ -65,22 +64,18 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <ListBox x:Name="lb_attachFile" Grid.Row="2" Grid.RowSpan="3"/>
+                        <ListBox x:Name="lb_attachFile" Grid.Row="0" Grid.RowSpan="2"/>
 
-                        <StackPanel Grid.Row="3" Orientation="Horizontal">
-                            <Button x:Name="f_bt_add" Content="Add" 
-                            Foreground="White" Margin="10,0"/>
-                            <Button x:Name="f_bt_remove" Content="Remove" 
-                            Foreground="White" Margin="0,0,10,0"/>
-                            <Button x:Name="f_bt_removeAll" Content="Remove All" 
-                            Foreground="White"/>
-                        </StackPanel>
+                        <Button Grid.Row="2" x:Name="f_bt_add" Content="Add" 
+                            Foreground="White" Margin="10,0" Click="f_bt_add_Click"/>
+                        <Button Margin="10,0" Grid.Row="3" x:Name="f_bt_send" Content="Send" 
+                            Foreground="White" Click="f_bt_send_Click"/>
                     </Grid>
                 </materialDesign:Flipper.FrontContent>
             </materialDesign:Flipper>
 
-            <materialDesign:Flipper x:Name="flipper_group" Height="300" Width="300"
-            Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False">
+            <materialDesign:Flipper x:Name="flipper_group" Height="300" Width="300" Grid.Column="1"
+            Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False">
                 <materialDesign:Flipper.FrontContent>
                     <Grid Height="300" Background="#FF232323">
                         <Grid.RowDefinitions>
@@ -144,7 +139,7 @@
                 </Grid.ColumnDefinitions>
 
                 <DockPanel>
-                    <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" MaxHeight="370">
+                    <ListBox MinHeight="370" DockPanel.Dock="Top" x:Name="chat_lb" Margin="10" MaxHeight="370" SelectionChanged="chat_lb_SelectionChanged">
 
                         <!--<ListBox.ItemTemplate>
                             <DataTemplate>
@@ -161,7 +156,7 @@
                         <!--</ListBox.ItemTemplate>-->
                     </ListBox>
                     <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" 
-                            Foreground="White" Content="+" Click="Bt_Plus_Click" IsEnabled="False"/>
+                            Foreground="White" Content="+" Click="Bt_Plus_Click"/>
                     <Button x:Name="bt_send" DockPanel.Dock="Right" 
                             Content="Send"  Foreground="White" Click="Bt_send_Click"/>
                     <TextBox Margin="10" Name="tb_message" />

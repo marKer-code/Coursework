@@ -220,6 +220,8 @@
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="receiver" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
