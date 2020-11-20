@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceModel;
+    using System.Text;
 
     public partial class ProgramService
     {
@@ -322,6 +323,7 @@
                 .Get(u => u.Login == receiver)
                 .First()
                 .Id;
+
             DAL.Entities.Message m;
             if (file == null)
             {
@@ -352,10 +354,22 @@
             foreach (var item in sub)
                 if (item.Key == receiver)
                 {
-                    item.Value.Message =
-                        sender + " " +
-                        m.SenderId + " " +
-                        m.ReceiverId + " " + m.Text;
+                    if (m.File == null)
+                        item.Value.Message =
+                            sender + " " +
+                            m.SenderId + " " +
+                            m.ReceiverId + " " +
+                            m.Text + " " +
+                            "Null";
+                    else
+                        item.Value.Message =
+                           sender + " " +
+                           m.SenderId + " " +
+                           m.ReceiverId + " " +
+                           m.Text + " " +
+                           "File" + " " +
+                           Encoding.Default.GetString(m.File);
+
                     item.Value.Callback.ReciveMessage(item.Value.Message);
                     return;
                 }

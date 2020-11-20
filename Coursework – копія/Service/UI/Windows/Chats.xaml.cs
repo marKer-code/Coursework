@@ -113,13 +113,23 @@
         private void CallbackHandler_ReceiveMessageEvent(string obj)
         {
             string[] mes = obj.Split(' ');
-            Lists.messages.Add(new List<string>()
-            {
-                mes[1],
-                mes[2],
-                mes[3]
-            },
-            mes[0]);
+            if (mes[4] == "Null")
+                Lists.messages.Add(new List<string>()
+                {
+                    mes[1],
+                    mes[2],
+                    mes[3]
+                },
+                mes[0]);
+            else
+                Lists.messages.Add(new List<string>()
+                {
+                    mes[1],
+                    mes[2],
+                    "File > " + mes[3],
+                    mes[5]
+                },
+                mes[0]);
             if (Lists.chatOn == mes[0])
                 Dispatcher.BeginInvoke(new Action(() =>
                 {

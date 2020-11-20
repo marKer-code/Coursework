@@ -81,7 +81,7 @@
             {
                 flipper_attachFile.IsEnabled = false;
                 flipper_attachFile.Visibility = Visibility.Collapsed;
-                
+
                 chat_lb.Visibility = Visibility.Visible;
 
                 sp_chats.IsEnabled = true;
@@ -126,12 +126,12 @@
         {
             if (tb_message != null)
             {
-                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text,null,null);
+                programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text, null, null);
                 Lists.messages.Add(new List<string>()
                 {
                     programServiceClient.GetId(login_).ToString(),
                     programServiceClient.GetId(login_ct.Text).ToString(),
-                    tb_message.Text
+                    "File > " + tb_message.Text
                 },
                 login_ct.Text);
                 chat_lb.Items.Clear();
@@ -172,13 +172,33 @@
 
         private void chat_lb_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            var res = MessageBox.Show("Download File", " ", MessageBoxButton.OKCancel);
-            if (res == MessageBoxResult.OK)
+            try
             {
-                
+                if (chat_lb.SelectedItem.ToString().Contains(">"))
+                {
+                    var res = MessageBox.Show("Download File", " ", MessageBoxButton.OKCancel);
+                    if (res == MessageBoxResult.OK)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                        string q = chat_lb.SelectedItem.ToString().Split(' ').Last();
+                        foreach (var item in Lists.messages)
+                        {
+                            if (item.Value == Lists.chatOn &&
+                                item.Key[2] == chat_lb.SelectedItem.ToString())
+                            {
+                                MessageBox.Show(item.Key[3]);
+                                using (FileStream fs = new FileStream(dir + "\\" + q, FileMode.Create))
+                                    fs.Write(Encoding.Default.GetBytes(item.Key[3]), 0, Encoding.Default.GetBytes(item.Key[3]).Length);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lb_chats.SelectedItem != null)

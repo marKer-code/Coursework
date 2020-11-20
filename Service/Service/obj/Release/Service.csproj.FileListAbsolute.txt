@@ -1,0 +1,15 @@
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\Service.dll.config
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\Service.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\Service.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\DAL.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\EntityFramework.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\DAL.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\DAL.dll.config
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\EntityFramework.xml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\obj\Release\Service.csprojAssemblyReference.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\obj\Release\Service.csproj.CoreCompileInputs.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\obj\Release\Service.csproj.CopyComplete
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\obj\Release\Service.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\Service\obj\Release\Service.pdb

@@ -1,0 +1,12 @@
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\DAL.dll.config
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\DAL.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\DAL.pdb
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\EntityFramework.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\EntityFramework.xml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Release\DAL.csprojAssemblyReference.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Release\DAL.dll
+C:\Users\krpsr\OneDrive\Документи\GitHub\Coursework\Service\DAL\obj\Release\DAL.pdb

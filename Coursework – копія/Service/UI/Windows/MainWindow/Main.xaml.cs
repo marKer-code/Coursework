@@ -180,6 +180,7 @@
             {
                 if (message.SenderId == id)
                     continue;
+
                 if (message.ReceiverId != id &&
                 !Lists.chats.Contains(
                     programServiceClient.GetLoginUserById(message.ReceiverId)))
@@ -208,14 +209,26 @@
 
                 foreach (var item2 in messages_)
                 {
-                    List<string> q = new List<string>()
+                    if (item2.FileName == null)
                     {
-                        item2.SenderId.ToString(),
-                        item2.ReceiverId.ToString(),
-                        item2.Text
-                    };
-
-                    Lists.messages.Add(q, item);
+                        List<string> q = new List<string>()
+                        {
+                            item2.SenderId.ToString(),
+                            item2.ReceiverId.ToString(),
+                            item2.Text
+                        };
+                        Lists.messages.Add(q, item);
+                    }
+                    else
+                    {
+                        List<string> q = new List<string>()
+                        {
+                            item2.SenderId.ToString(),
+                            item2.ReceiverId.ToString(),
+                            "File > " + item2.Text
+                        };
+                        Lists.messages.Add(q, item);
+                    }
                 }
             }
 
