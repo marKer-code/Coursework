@@ -156,8 +156,8 @@
                         <!--</ListBox.ItemTemplate>-->
                     </ListBox>
                     <Button x:Name="bt_Plus" Margin="5,0,0,0" DockPanel.Dock="Right" 
-                            Foreground="White" Content="+" Click="Bt_Plus_Click"/>
-                    <Button x:Name="bt_send" DockPanel.Dock="Right" 
+                            Foreground="White" Content="+" Click="Bt_Plus_Click" IsEnabled="False"/>
+                    <Button x:Name="bt_send" DockPanel.Dock="Right" IsEnabled="False"
                             Content="Send"  Foreground="White" Click="Bt_send_Click"/>
                     <TextBox Margin="10" Name="tb_message" />
                 </DockPanel>
@@ -188,7 +188,7 @@
                         <TextBlock x:Name="status_ct" Margin="0,10" Grid.Row="3"/>
                     </StackPanel>
 
-                    <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" 
+                    <Button x:Name="bt_remove_ct" Margin="10" Grid.Row="5" IsEnabled="False"
                         Content="Remove" Foreground="White" Click="Bt_remove_ct_Click"/>
                 </Grid>
             </Grid>

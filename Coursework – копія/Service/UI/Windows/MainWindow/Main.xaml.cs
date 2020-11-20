@@ -209,7 +209,7 @@
 
                 foreach (var item2 in messages_)
                 {
-                    if (item2.FileName == null)
+                    if (item2.File == null)
                     {
                         List<string> q = new List<string>()
                         {

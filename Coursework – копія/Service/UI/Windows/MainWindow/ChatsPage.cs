@@ -124,14 +124,14 @@
 
         private void Bt_send_Click(object sender, RoutedEventArgs e)
         {
-            if (tb_message != null)
+            if (!String.IsNullOrEmpty(tb_message.Text))
             {
                 programServiceClient.SendMessageAsync(login_, login_ct.Text, tb_message.Text, null, null);
                 Lists.messages.Add(new List<string>()
                 {
                     programServiceClient.GetId(login_).ToString(),
                     programServiceClient.GetId(login_ct.Text).ToString(),
-                    "File > " + tb_message.Text
+                    tb_message.Text
                 },
                 login_ct.Text);
                 chat_lb.Items.Clear();
@@ -143,6 +143,7 @@
                         chat_lb.Items.Add(r[2]);
                     }
             }
+            else MessageBox.Show("< Enter Message >");
         }
 
         private void Bt_remove_ct_Click(object sender, RoutedEventArgs e)
@@ -174,30 +175,32 @@
         {
             try
             {
-                if (chat_lb.SelectedItem.ToString().Contains(">"))
-                {
-                    var res = MessageBox.Show("Download File", " ", MessageBoxButton.OKCancel);
-                    if (res == MessageBoxResult.OK)
+                if (chat_lb.SelectedItem != null)
+                    if (chat_lb.SelectedItem.ToString().Contains(">"))
                     {
-                        DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-                        string q = chat_lb.SelectedItem.ToString().Split(' ').Last();
-                        foreach (var item in Lists.messages)
+                        var res = MessageBox.Show("Download File", " ", MessageBoxButton.OKCancel);
+                        if (res == MessageBoxResult.OK)
                         {
-                            if (item.Value == Lists.chatOn &&
-                                item.Key[2] == chat_lb.SelectedItem.ToString())
+                            DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                            string q = chat_lb.SelectedItem.ToString().Split(' ').Last();
+                            foreach (var item in Lists.messages)
                             {
-                                MessageBox.Show(item.Key[3]);
-                                using (FileStream fs = new FileStream(dir + "\\" + q, FileMode.Create))
-                                    fs.Write(Encoding.Default.GetBytes(item.Key[3]), 0, Encoding.Default.GetBytes(item.Key[3]).Length);
+                                if (item.Value == Lists.chatOn &&
+                                    item.Key[2] == chat_lb.SelectedItem.ToString())
+                                {
+                                    MessageBox.Show(item.Key[3]);
+                                    using (FileStream fs = new FileStream(dir + "\\" + q, FileMode.Create))
+                                        fs.Write(Encoding.Default.GetBytes(item.Key[3]), 0, Encoding.Default.GetBytes(item.Key[3]).Length);
+                                }
                             }
                         }
                     }
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            chat_lb.SelectedItem = null;
         }
         private void Lb_chats_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -210,6 +213,12 @@
                 gr_chatInfo.Visibility = Visibility.Visible;
 
                 flipper.Visibility = Visibility.Collapsed;
+
+                bt_remove_ct.Visibility = Visibility.Visible;
+
+                bt_remove_ct.IsEnabled = true;
+                bt_Plus.IsEnabled = true;
+                bt_send.IsEnabled = true;
 
                 ShowContactInfo();
 
@@ -270,7 +279,7 @@
                     {
                     programServiceClient.GetId(login_).ToString(),
                     programServiceClient.GetId(login_ct.Text).ToString(),
-                    item.ToString()
+                    "File > " + item.ToString()
                     }, login_ct.Text);
             }
             chat_lb.Items.Clear();
@@ -282,7 +291,7 @@
                     chat_lb.Items.Add(r[2]);
                 }
             lb_attachFile.Items.Clear();
-            //flipper_attachFile.Visibility = Visibility.Collapsed;
+            flipper_attachFile.Visibility = Visibility.Collapsed;
             Bt_Plus_Click(sender, e);
         }
     }
